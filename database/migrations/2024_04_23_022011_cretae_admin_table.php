@@ -11,7 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+        Schema::create('admin', function (Blueprint $table) {
+            $table->id();
+            $table->string('nama');
+            $table->enum('jenkel', ['L', 'P'])->nullable();
+            $table->string('telepon');
+            $table->string('alamat');
+        });
     }
 
     /**
