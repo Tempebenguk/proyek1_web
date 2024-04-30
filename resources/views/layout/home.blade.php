@@ -44,18 +44,7 @@
       border: 3px solid #BA7237;
     }
 
-    .kategori{
-      margin-top: 15px; 
-      margin-left: 5px; 
-      width: 100px; 
-      font-size: 12px; 
-      border-radius: 50px;
-      font-weight: bold;
-      background-color: #0000;
-      border-color: #00E432;
-    }
-
-    .btn{
+    .btn-input{
       background-color: #00E432;
       width: 135px;
       border-color: #00E432;
@@ -183,7 +172,7 @@
         <div class="card-body">
           <h5 class="card-title" style="font-size: 10pt; color: #BA7237; ">Kopi Good Day</h5>
           <p class="card-text" style="font-size: 15pt; font-weight: bold; color: #7C2B18;">Rp 5.000</p>
-          <a href="#" class="btn btn-primary">TAMBAH</a>
+          <a href="#" class="btn btn-input btn-primary">TAMBAH</a>
         </div>
       </div>
     </div>
@@ -193,7 +182,7 @@
         <div class="card-body">
           <h5 class="card-title" style="font-size: 10pt; color: #BA7237;">Pop Mie Besar</h5>
           <p class="card-text" style="font-size: 15pt; font-weight: bold; color: #7C2B18;">Rp 7.000</p>
-          <a href="#" class="btn btn-primary">TAMBAH</a>
+          <a href="#" class="btn btn-input btn-primary">TAMBAH</a>
         </div>
       </div>
     </div>
@@ -203,7 +192,7 @@
         <div class="card-body">
           <h5 class="card-title" style="font-size: 10pt; color: #BA7237; ">Teh Panas/Dingin</h5>
           <p class="card-text" style="font-size: 15pt; font-weight: bold; color: #7C2B18;">Rp 4.000</p>
-          <a href="#" class="btn btn-primary">TAMBAH</a>
+          <a href="#" class="btn btn-input btn-primary">TAMBAH</a>
         </div>
       </div>
     </div>
@@ -213,7 +202,7 @@
         <div class="card-body">
           <h5 class="card-title" style="font-size: 10pt; color: #BA7237;">Chocolatos Drink</h5>
           <p class="card-text" style="font-size: 15pt; font-weight: bold; color: #7C2B18;">Rp 5.000</p>
-          <a href="#" class="btn btn-primary">TAMBAH</a>
+          <a href="#" class="btn btn-input btn-primary">TAMBAH</a>
         </div>
       </div>
     </div>
@@ -223,7 +212,7 @@
         <div class="card-body">
           <h5 class="card-title" style="font-size: 10pt; color: #BA7237; ">Beng Beng Panas/Dingin</h5>
           <p class="card-text" style="font-size: 15pt; font-weight: bold; color: #7C2B18;">Rp 5.000</p>
-          <a href="#" class="btn btn-primary">TAMBAH</a>
+          <a href="#" class="btn btn-input btn-primary">TAMBAH</a>
         </div>
       </div>
     </div>
@@ -233,7 +222,7 @@
         <div class="card-body">
           <h5 class="card-title" style="font-size: 10pt; color: #BA7237;">Kopi Hitam</h5>
           <p class="card-text" style="font-size: 15pt; font-weight: bold; color: #7C2B18;">Rp 4.000</p>
-          <a href="#" class="btn btn-primary">TAMBAH</a>
+          <a href="#" class="btn btn-input btn-primary">TAMBAH</a>
         </div>
       </div>
     </div>
