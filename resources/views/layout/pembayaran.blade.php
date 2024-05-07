@@ -32,16 +32,37 @@
       margin: 200px 20px 20px 45px;
       position: absolute;
     }
+    .column{
+      float: left;
+      width: 50%;
+      justify-content: center;
+      margin-left: 8%;
+    }
+    .card{
+      margin-top: 25px;
+      margin-left: 5px;
+      height: auto;
+      border-radius: 9px;
+      border: 3px solid #BA7237;
+      position: absolute
+    }
     </style>
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom mb-3">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">PEMBAYARAN</a>
         </div>
     </nav>
-</head>
-<body>
+    <div class="text-below-navbar" style="font-size: 11pt; font-weight: bold; color: #BA7237; padding-left: 40px;">
+        <p>Silahkan selesaikan pembayaran anda</p>
+    </div>
     <div class="logo">
         <img src="{{ asset('starling.png')}}" width="70%" height="70%">
+    </div>
+</head>
+<body>
+    <div class="column">
+        <div class="card" style="margin-top: 20px; width: 330px; height: 50px; text-align: left; padding-left: 13px; line-height: 45px;">
+        </div>
     </div>
 </body>
 </html>

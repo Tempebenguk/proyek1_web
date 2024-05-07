@@ -32,6 +32,20 @@
       margin: 200px 20px 20px 45px;
       position: absolute;
     }
+    .column{
+      float: left;
+      width: 50%;
+      justify-content: center;
+      margin-left: 8%;
+    }
+    .card{
+      margin-top: 25px;
+      margin-left: 5px;
+      height: auto;
+      border-radius: 9px;
+      border: 3px solid #BA7237;
+      position: absolute
+    }
     </style>
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom mb-3">
         <div class="container-fluid">
@@ -42,6 +56,19 @@
 <body>
     <div class="logo">
         <img src="{{ asset('starling.png')}}" width="70%" height="70%">
+    </div>
+    <div class="column">
+        <div class="card" style="margin-top: 25px; width: 330px; height: 100px;">
+        </div>
+    </div>
+    <div class="column">
+        <div class="card" style="margin-top: 180px; width: 330px; height: 100px;">
+        </div>
+    </div>
+    <div class="column">
+        <div class="card" style="margin-top: 310px; width: 330px; height: 50px; text-align: left; padding-left: 13px; line-height: 45px;">
+            <p class="card-text" style="font-size: 11pt; font-weight: bold; color: #BA7237;">Total Pesanan Anda</p>
+        </div>
     </div>
 </body>
 </html>
