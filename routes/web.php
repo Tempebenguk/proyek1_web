@@ -13,7 +13,8 @@ use App\Http\Controllers\LatihanController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-Route::get('/', [LatihanController::class,'home']);
+Route::get('/', [LatihanController::class, 'home']);
+Route::get('/pemesanan', [LatihanController::class, 'pemesanan']);
+Route::get('/metode', [LatihanController::class, 'metode']);
+Route::get('/pembayaran', [LatihanController::class, 'pembayaran']);
+
