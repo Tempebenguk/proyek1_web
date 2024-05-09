@@ -46,13 +46,25 @@
       border: 3px solid #BA7237;
       position: absolute
     }
+    .btn-pesan{
+        border-radius: 23px;
+        padding: 0;
+        margin-top: 500px;
+        width: 330px;
+        height: 40px;
+        position: absolute;
+        left: 120px;
+        transform: translateX(-50%);
+        background-color: #00E432;
+        border: none;
+    }
     </style>
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom mb-3">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">PEMBAYARAN</a>
         </div>
     </nav>
-    <div class="text-below-navbar" style="font-size: 11pt; font-weight: bold; color: #BA7237; padding-left: 40px;">
+    <div class="text-below-navbar" style="font-size: 11pt; font-weight: bold; color: #BA7237; padding-left: 40px; margin-top: 20px;">
         <p>Silahkan selesaikan pembayaran anda</p>
     </div>
     <div class="logo">
@@ -61,7 +73,14 @@
 </head>
 <body>
     <div class="column">
-        <div class="card" style="margin-top: 20px; width: 330px; height: 50px; text-align: left; padding-left: 13px; line-height: 45px;">
+        <div class="card" style="margin-top: 5px; width: 330px; height: 50px; text-align: left; padding-left: 13px; line-height: 45px; box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);">
+            <img src="dana.png" style="width: 85px; height: 25px; margin-left: 5px; opacity: 3;">
+            <span class="card-text" style="font-size: 12pt; font-weight: bold; color: #BA7237;  position: absolute; left: 40%; ">Dana</span>
+        </div>
+        <div class="card" style="margin-top: 70px; width: 330px; height: 300px; text-align: left; padding-left: 13px; line-height: 45px; box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);">
+        </div>
+        <div class="d-grid gap-2 col-6 mx-auto" style="position: relative;">
+            <button class="btn btn-primary btn-pesan" type="button" style="font-size: 9pt; font-weight: bold;">SELESAI</button>
         </div>
     </div>
 </body>

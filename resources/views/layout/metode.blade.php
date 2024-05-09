@@ -52,7 +52,7 @@
           <a class="navbar-brand" href="#">METODE PEMBAYARAN</a>
         </div>
     </nav>
-    <div class="text-below-navbar" style="font-size: 11pt; font-weight: bold; color: #BA7237; padding-left: 40px">
+    <div class="text-below-navbar" style="font-size: 11pt; font-weight: bold; color: #BA7237; padding-left: 40px; margin-top: 20px;">
         <p>Silahkan pilih metode pembayaran yang tersedia</p>
     </div>
     <div class="logo">
@@ -61,19 +61,27 @@
 </head>
 <body>
     <div class="column">
-        <div class="card" style="margin-top: 20px; width: 330px; height: 50px; text-align: left; padding-left: 13px; line-height: 45px;">
+        <div class="card" style="margin-top: 10px; width: 330px; height: 50px; text-align: left; padding-left: 13px; line-height: 45px; box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);">
+          <img src="dana.png" style="width: 85px; height: 25px; margin-left: 5px; opacity: 3;">
+          <span class="card-text" style="font-size: 12pt; font-weight: bold; color: #BA7237;  position: absolute; left: 40%; ">Dana</span>
         </div>
     </div>
     <div class="column">
-        <div class="card" style="margin-top: 95px; width: 330px; height: 50px; text-align: left; padding-left: 13px; line-height: 45px;">
+        <div class="card" style="margin-top: 85px; width: 330px; height: 50px; text-align: left; padding-left: 13px; line-height: 45px; box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);">
+            <img src="ovo.png" style="width: 82px; height: 23px; margin-left: 5px; opacity: 3;">
+            <span class="card-text" style="font-size: 12pt; font-weight: bold; color: #BA7237;  position: absolute; left: 40%; ">OVO</span>
         </div>
     </div>
     <div class="column">
-        <div class="card" style="margin-top: 170px; width: 330px; height: 50px; text-align: left; padding-left: 13px; line-height: 45px;">
+        <div class="card" style="margin-top: 160px; width: 330px; height: 50px; text-align: left; padding-left: 13px; line-height: 45px; box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);">
+            <img src="gopay.png" style="width: 85px; height: 23px; margin-left: 5px; opacity: 3;">
+            <span class="card-text" style="font-size: 12pt; font-weight: bold; color: #BA7237;  position: absolute; left: 40%; ">Gopay</span>
         </div>
     </div>
     <div class="column">
-        <div class="card" style="margin-top: 243px; width: 330px; height: 50px; text-align: left; padding-left: 13px; line-height: 45px;">
+        <div class="card" style="margin-top: 233px; width: 330px; height: 50px; text-align: left; padding-left: 13px; line-height: 45px; box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);">
+            <img src="shopee.png" style="width: 85px; height: 23px; margin-left: 5px; opacity: 3;">
+            <span class="card-text" style="font-size: 12pt; font-weight: bold; color: #BA7237;  position: absolute; left: 40%; ">Shopeepay</span>
         </div>
     </div>
 </body>
