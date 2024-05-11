@@ -46,12 +46,13 @@
       border: 3px solid #BA7237;
       position: absolute
     }
+    /* Button Tambah */
     .btn-tambah{
         border-radius: 23px;
         padding: 0;
-        margin-top: 135px;
-        width: 130px;
-        height: 35px;
+        margin-top: 140px;
+        width: 115px;
+        height: 30px;
         position: absolute;
         right: 35px;
         background-color: #00E432;
@@ -69,6 +70,64 @@
         background-color: #00E432;
         border: none;
     }
+    /* Check Box */
+    .form-check-input[type="checkbox"] {
+        border: 2px solid #BA7237;
+        border-radius: 5px;
+    }
+    .form-check-input[type="checkbox"]:hover {
+        box-shadow: 0 0 5px #BA7237;
+    }
+    .form-check-input[type="checkbox"]:active {
+        box-shadow: inset 0 0 5px #BA7237;
+    }
+    .minus, .plus {
+    cursor: pointer;
+    padding: 3px 10px;
+    background-color: #00E432;
+    color: #fff;
+    border-radius: 50%;
+    font-weight: bold;
+    width: 25px;
+    height: 25px;
+    padding-left: 10px;
+    }
+
+    .number {
+    margin: 0 10px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #BA7237;
+    }
+    /* styles.css */
+    .input-group {
+        display: flex;
+        align-items: center;
+        padding-left: 10px;
+        margin-top: -20px;
+    }
+
+    #decrement, #increment {
+        padding: 1px 7px;
+        background-color: #00E432;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: 900;
+        border-radius: 50%;
+    }
+
+    #input {
+        padding: 5px;
+        width: 20px;
+        text-align: center;
+        border: none;
+        border-radius: none;
+        margin: 0 10px;
+        color: #BA7237;
+        font-weight: bold;
+    }
     </style>
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom mb-3">
         <div class="container-fluid">
@@ -81,19 +140,77 @@
         <img src="{{ asset('starling.png')}}" width="70%" height="70%">
     </div>
     <div class="column">
-        <div class="card" style="margin-top: 25px; width: 330px; height: 100px;">
+        <div class="card" style="margin-top: 10px; width: 330px; height: 120px; box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);">
+            <p class="card-text" style="font-size: 10pt; font-weight: 800; color: #BA7237; padding-left: 13px; margin-top: 5px; margin-bottom: -3px;">Kopi Good Day</p>
+            <span class="card-text" style="font-size: 13pt; font-weight: 900; color: #7C2B18; padding-left: 13px; margin-top: 3px;">Rp 5.000</span>
+            <div class="mb-3 form-check d-flex ">
+                <div class="form-check" style="margin-left: -20px; display: flex; padding-left: 10px; margin-top: 4px;">
+                    <label class="form-check-label" for="exampleCheck1" style="font-size: 8pt; font-weight: 800; color: #BA7237; margin-top: 3px;">Panas</label>
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1" style="margin-left: 5px;">
+                </div>
+                <div class="form-check" style="margin-left: -10px; display: flex; margin-top: 4px;">
+                    <label class="form-check-label" for="exampleCheck2" style="font-size: 8pt; font-weight: 800; color: #BA7237; margin-top: 3px;">Dingin</label>
+                    <input type="checkbox" class="form-check-input" id="exampleCheck2" style="margin-left: 5px;">
+                </div>
+            </div>
+            <div style="margin-top: -90px;">
+                <img src="kopi.png" style="width: 120px; height: 90px; margin-right: 15px; opacity: 4;">
+            </div>
+            <div class="input-group">
+                <button id="decrement">-</button>
+                <input type="number" id="input" value="0" readonly>
+                <button id="increment">+</button>
+            </div>
+            <script>
+                let counter = 0;
+
+                function increment() {
+                    counter++;
+                }
+
+                function decrement() {
+                    counter--;
+                }
+
+                function get() {
+                    return counter;
+                }
+
+                const inc = document.getElementById("increment");
+                const input = document.getElementById("input");
+                const dec = document.getElementById("decrement");
+
+                inc.addEventListener("click", () => {
+                    increment();
+                    input.value = get();
+                });
+
+                dec.addEventListener("click", () => {
+                    if (input.value > 0) {
+                        decrement();
+                    }
+                    input.value = get();
+                });
+            </script>
+            {{-- <div class="button-container d-flex ">
+                <button class="cart-qty-plus" type="button" value="+">+</button>
+                <input type="text" name="qty" min="0" class="qty form-control" value="0"/>
+                <button class="cart-qty-minus" type="button" value="-">-</button>
+            </div> --}}
         </div>
     </div>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <button class="btn btn-primary btn-tambah" type="button" style="font-size: 9pt; font-weight: bold;">TAMBAH</button>
+        <p style="padding-left: 40px; margin-top: 138px; color: #BA7237; font-weight: 800; font-size: 10pt;">Ada Tambahan?</p>
+        <p style="padding-left: 40px; margin-top: -25px; color: #BA7237; opacity: 1; font-size: 7pt;">Anda masih bisa memesan menu lainnya</p>
+        <button class="btn btn-primary btn-tambah" type="button" style="font-size: 8pt; font-weight: bold;">TAMBAH</button>
     </div>
     <div class="column">
-        <div class="card" style="margin-top: 180px; width: 330px; height: 100px;">
+        <div class="card" style="margin-top: 0px; width: 330px; height: 100px; box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);">
             <p class="card-text" style="font-size: 10pt;  margin-left: 10px; color: #BA7237; opacity: 0.8; margin-top: 5px;">Catatan...</p>
         </div>
     </div>
     <div class="column">
-        <div class="card" style="margin-top: 300px; width: 330px; height: 50px; text-align: left; padding-left: 13px; line-height: 45px;">
+        <div class="card" style="margin-top: 115px; width: 330px; height: 50px; text-align: left; padding-left: 13px; line-height: 45px; box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);">
             <p class="card-text" style="font-size: 10pt; font-weight: bold; color: #BA7237;">Total Pesanan Anda</p>
             <span class="card-text" style="font-size: 11pt; font-weight: bold; color: #00E432; position: absolute; right: 13px; top: 50%; transform: translateY(-50%);">Rp 5.000</span>
         </div>
