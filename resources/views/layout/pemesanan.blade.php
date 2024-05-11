@@ -50,7 +50,7 @@
     .btn-tambah{
         border-radius: 23px;
         padding: 0;
-        margin-top: 140px;
+        margin-top: 148px;
         width: 115px;
         height: 30px;
         position: absolute;
@@ -74,6 +74,7 @@
     .form-check-input[type="checkbox"] {
         border: 2px solid #BA7237;
         border-radius: 5px;
+        z-index: 1;
     }
     .form-check-input[type="checkbox"]:hover {
         box-shadow: 0 0 5px #BA7237;
@@ -100,7 +101,7 @@
     color: #BA7237;
     }
     /* styles.css */
-    .input-group {
+    .input-group-quantity {
         display: flex;
         align-items: center;
         padding-left: 10px;
@@ -119,7 +120,7 @@
     }
 
     #input {
-        padding: 5px;
+        padding: 3px;
         width: 20px;
         text-align: center;
         border: none;
@@ -140,7 +141,7 @@
         <img src="{{ asset('starling.png')}}" width="70%" height="70%">
     </div>
     <div class="column">
-        <div class="card" style="margin-top: 10px; width: 330px; height: 120px; box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);">
+        <div class="card" style="margin-top: 10px; width: 330px; height: 130px; box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);">
             <p class="card-text" style="font-size: 10pt; font-weight: 800; color: #BA7237; padding-left: 13px; margin-top: 5px; margin-bottom: -3px;">Kopi Good Day</p>
             <span class="card-text" style="font-size: 13pt; font-weight: 900; color: #7C2B18; padding-left: 13px; margin-top: 3px;">Rp 5.000</span>
             <div class="mb-3 form-check d-flex ">
@@ -153,54 +154,49 @@
                     <input type="checkbox" class="form-check-input" id="exampleCheck2" style="margin-left: 5px;">
                 </div>
             </div>
-            <div style="margin-top: -90px;">
-                <img src="kopi.png" style="width: 120px; height: 90px; margin-right: 15px; opacity: 4;">
+            <div style="margin-top: -80px;">
+                <img src="kopi.png" style="width: 130px; height: 90px; margin-right: 15px; opacity: 4;">
             </div>
-            <div class="input-group">
+            <div class="input-group input-group-quantity">
                 <button id="decrement">-</button>
                 <input type="number" id="input" value="0" readonly>
                 <button id="increment">+</button>
-            </div>
-            <script>
-                let counter = 0;
+                <script>
+                    let counter = 0;
 
-                function increment() {
-                    counter++;
-                }
-
-                function decrement() {
-                    counter--;
-                }
-
-                function get() {
-                    return counter;
-                }
-
-                const inc = document.getElementById("increment");
-                const input = document.getElementById("input");
-                const dec = document.getElementById("decrement");
-
-                inc.addEventListener("click", () => {
-                    increment();
-                    input.value = get();
-                });
-
-                dec.addEventListener("click", () => {
-                    if (input.value > 0) {
-                        decrement();
+                    function increment() {
+                        counter++;
                     }
-                    input.value = get();
-                });
-            </script>
-            {{-- <div class="button-container d-flex ">
-                <button class="cart-qty-plus" type="button" value="+">+</button>
-                <input type="text" name="qty" min="0" class="qty form-control" value="0"/>
-                <button class="cart-qty-minus" type="button" value="-">-</button>
-            </div> --}}
+
+                    function decrement() {
+                        counter--;
+                    }
+
+                    function get() {
+                        return counter;
+                    }
+
+                    const inc = document.getElementById("increment");
+                    const input = document.getElementById("input");
+                    const dec = document.getElementById("decrement");
+
+                    inc.addEventListener("click", () => {
+                        increment();
+                        input.value = get();
+                    });
+
+                    dec.addEventListener("click", () => {
+                        if (input.value > 0) {
+                            decrement();
+                        }
+                        input.value = get();
+                    });
+                </script>
+            </div>
         </div>
     </div>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <p style="padding-left: 40px; margin-top: 138px; color: #BA7237; font-weight: 800; font-size: 10pt;">Ada Tambahan?</p>
+        <p style="padding-left: 40px; margin-top: 145px; color: #BA7237; font-weight: 800; font-size: 10pt;">Ada Tambahan?</p>
         <p style="padding-left: 40px; margin-top: -25px; color: #BA7237; opacity: 1; font-size: 7pt;">Anda masih bisa memesan menu lainnya</p>
         <button class="btn btn-primary btn-tambah" type="button" style="font-size: 8pt; font-weight: bold;">TAMBAH</button>
     </div>
