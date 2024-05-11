@@ -50,7 +50,7 @@
     .btn-tambah{
         border-radius: 23px;
         padding: 0;
-        margin-top: 148px;
+        margin-top: 153px;
         width: 115px;
         height: 30px;
         position: absolute;
@@ -196,7 +196,7 @@
         </div>
     </div>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <p style="padding-left: 40px; margin-top: 145px; color: #BA7237; font-weight: 800; font-size: 10pt;">Ada Tambahan?</p>
+        <p style="padding-left: 40px; margin-top: 150px; color: #BA7237; font-weight: 800; font-size: 10pt;">Ada Tambahan?</p>
         <p style="padding-left: 40px; margin-top: -25px; color: #BA7237; opacity: 1; font-size: 7pt;">Anda masih bisa memesan menu lainnya</p>
         <button class="btn btn-primary btn-tambah" type="button" style="font-size: 8pt; font-weight: bold;">TAMBAH</button>
     </div>
