@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('transaksi', function (Blueprint $table) {
+        Schema::create('menu', function (Blueprint $table) {
             $table->id();
-            $table->dateTime('tanggal_transaksi');
-            $table->string('detail_transaksi');
-            $table->integer('jumlah');
-            $table->decimal('total', 10, 2)->default(0);
+            $table->string('Nama_menu');
+            $table->decimal('Harga', 20, 3);
+            $table->integer('Stock');
             $table->timestamps();
         });
     }
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('menu');
     }
 };
