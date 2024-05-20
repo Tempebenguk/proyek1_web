@@ -10,100 +10,125 @@
     <style>
         .navbar-custom {
             background-color: #ba7237;
-            /* Change background color */
+            /* Ubah warna latar belakang */
         }
 
         .navbar-brand {
             color: #fff;
-            /* Change text color */
+            /* Ubah warna teks */
             font-weight: bold;
             font-family: 'Franklin Gothic Medium';
         }
 
-        img {
-            display: block;
-            align-items: center;
-            opacity: 0.4;
-            margin: auto;
-        }
-
-        .image {
-            margin-top: 10px;
-            width: auto;
-            height: 100px;
-            opacity: 1;
-        }
-
         .logo {
-            display: flex;
-            justify-content: center;
-            margin: 200px 20px 20px 45px;
             position: absolute;
-        }
-
-        .column {
-            float: left;
-            width: 50%;
-            justify-content: center;
-            margin-left: 8%;
+            top: 150px;
+            /* Sesuaikan jika diperlukan */
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0.1;
+            z-index: -1;
+            width: 70%;
         }
 
         .card {
             margin-top: 25px;
-            margin-left: 5px;
             height: auto;
             border-radius: 9px;
             border: 3px solid #BA7237;
-            position: absolute
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 1;
+            padding: 20px;
+            /* Menambahkan padding agar lebih terlihat */
+        }
+
+        .card-text {
+            font-size: 12pt;
+            font-weight: bold;
+            color: #BA7237;
+        }
+
+        .container {
+            position: relative;
+        }
+
+        .card-link {
+            text-decoration: none;
+            /* Hilangkan garis bawah */
+            color: inherit;
+            /* Warisi warna dari induknya */
+            display: block;
+            /* Menjadikan tautan sebagai blok */
+        }
+
+        .card-link:hover {
+            text-decoration: none;
+            /* Hilangkan garis bawah saat dihover */
         }
     </style>
+</head>
+
+<body>
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom mb-3">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">METODE PEMBAYARAN</a>
         </div>
     </nav>
-    <div class="text-below-navbar"
-        style="font-size: 11pt; font-weight: bold; color: #BA7237; padding-left: 40px; margin-top: 20px;">
-        <p>Silahkan pilih metode pembayaran yang tersedia</p>
-    </div>
-    <div class="logo">
-        <img src="{{ asset('starling.png')}}" width="70%" height="70%">
-    </div>
-</head>
-
-<body>
-    <div class="column">
-        <div class="card"
-            style="margin-top: 10px; width: 330px; height: 50px; text-align: left; padding-left: 13px; line-height: 45px; box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);">
-            <img src="dana.png" style="width: 85px; height: 25px; margin-left: 5px; opacity: 3;">
-            <span class="card-text"
-                style="font-size: 12pt; font-weight: bold; color: #BA7237;  position: absolute; left: 40%; ">Dana</span>
+    <div class="container">
+        <div class="text-below-navbar"
+            style="font-size: 11pt; font-weight: bold; color: #BA7237; margin-top: 20px; text-align: center;">
+            <p>Silahkan pilih metode pembayaran yang tersedia</p>
+        </div>
+        <div class="logo">
+            <img src="{{ asset('starling.png')}}" class="img-fluid" alt="Logo">
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-4">
+                <div class="card">
+                    <a href="#" class="card-link">
+                        <div class="d-flex align-items-center">
+                            <img src="dana.png" style="width: 85px; height: 25px; margin-left: 5px;">
+                            <span class="card-text ms-3">Dana</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="card">
+                    <a href="#" class="card-link">
+                        <div class="d-flex align-items-center">
+                            <img src="ovo.png" style="width: 82px; height: 23px; margin-left: 5px;">
+                            <span class="card-text ms-3">OVO</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="card">
+                    <a href="#" class="card-link">
+                        <div class="d-flex align-items-center">
+                            <img src="gopay.png" style="width: 85px; height: 23px; margin-left: 5px;">
+                            <span class="card-text ms-3">Gopay</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="card">
+                    <a href="#" class="card-link">
+                        <div class="d-flex align-items-center">
+                            <img src="shopee.png" style="width: 85px; height: 23px; margin-left: 5px;">
+                            <span class="card-text ms-3">Shopeepay</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="column">
-        <div class="card"
-            style="margin-top: 85px; width: 330px; height: 50px; text-align: left; padding-left: 13px; line-height: 45px; box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);">
-            <img src="ovo.png" style="width: 82px; height: 23px; margin-left: 5px; opacity: 3;">
-            <span class="card-text"
-                style="font-size: 12pt; font-weight: bold; color: #BA7237;  position: absolute; left: 40%; ">OVO</span>
-        </div>
-    </div>
-    <div class="column">
-        <div class="card"
-            style="margin-top: 160px; width: 330px; height: 50px; text-align: left; padding-left: 13px; line-height: 45px; box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);">
-            <img src="gopay.png" style="width: 85px; height: 23px; margin-left: 5px; opacity: 3;">
-            <span class="card-text"
-                style="font-size: 12pt; font-weight: bold; color: #BA7237;  position: absolute; left: 40%; ">Gopay</span>
-        </div>
-    </div>
-    <div class="column">
-        <div class="card"
-            style="margin-top: 233px; width: 330px; height: 50px; text-align: left; padding-left: 13px; line-height: 45px; box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);">
-            <img src="shopee.png" style="width: 85px; height: 23px; margin-left: 5px; opacity: 3;">
-            <span class="card-text"
-                style="font-size: 12pt; font-weight: bold; color: #BA7237;  position: absolute; left: 40%; ">Shopeepay</span>
-        </div>
-    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2wY+XniB9jsSFFj3LVHj6hFhIl2rBgG3tvkSwpQf5q2xRM9E3UbELz0d5xz"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>
