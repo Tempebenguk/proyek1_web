@@ -7,6 +7,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
+
     <style>
         .navbar-custom {
             background-color: #ba7237;
@@ -15,9 +19,8 @@
 
         .navbar-brand {
             color: #fff;
-            /* Ubah warna teks */
+            font-family: 'Fredoka', sans-serif;
             font-weight: bold;
-            font-family: 'Franklin Gothic Medium';
         }
 
         .logo {
@@ -36,6 +39,7 @@
             height: auto;
             border-radius: 9px;
             border: 3px solid #BA7237;
+            font-family: 'Fredoka', sans-serif;
             box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
             position: relative;
             z-index: 1;
@@ -47,6 +51,7 @@
             font-size: 12pt;
             font-weight: bold;
             color: #BA7237;
+            font-family: 'Fredoka', sans-serif;
         }
 
         .container {
@@ -77,9 +82,10 @@
     </nav>
     <div class="container">
         <div class="text-below-navbar"
-            style="font-size: 11pt; font-weight: bold; color: #BA7237; margin-top: 20px; text-align: center;">
+            style="font-size: 11pt; font-weight: bold; color: #BA7237; margin-top: 20px; text-align: center; font-family: 'Fredoka', sans-serif;">
             <p>Silahkan pilih metode pembayaran yang tersedia</p>
         </div>
+
         <div class="logo">
             <img src="{{ asset('starling.png')}}" class="img-fluid" alt="Logo">
         </div>
