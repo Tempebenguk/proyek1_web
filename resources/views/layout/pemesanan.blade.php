@@ -81,6 +81,7 @@
         }
 
         .btn-pesan {
+            margin-bottom: 20px;
             padding: 10px;
             color: #fff;
             border-radius: 23px;
