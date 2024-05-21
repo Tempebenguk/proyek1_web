@@ -6,19 +6,28 @@ use Illuminate\Http\Request;
 
 class LatihanController extends Controller
 {
-    public function home() {
+    public function home()
+    {
         return view('layout.home');
     }
 
-    public function pemesanan() {
+    public function pemesanan()
+    {
         return view('layout.pemesanan');
     }
 
-    public function metode() {
+    public function metode()
+    {
         return view('layout.metode');
     }
 
-    public function pembayaran() {
+    public function pembayaran()
+    {
         return view('layout.pembayaran');
+    }
+
+    public function menu()
+    {
+        return view('layout.menu');
     }
 }

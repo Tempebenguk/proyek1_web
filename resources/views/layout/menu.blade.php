@@ -10,7 +10,6 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <style>
-        /* Custom CSS */
         img {
             display: block;
             margin: auto;
@@ -38,7 +37,6 @@
         }
 
         .card {
-            max-width: 150px;
             margin-top: 25px;
             border-radius: 9px;
             border: 3px solid #BA7237;
@@ -46,7 +44,7 @@
 
         .btn-input {
             background-color: #00E432;
-            max-width: 150px;
+            width: 135px;
             border-color: #00E432;
             border-radius: 3px;
             font-weight: bold;
@@ -100,7 +98,6 @@
             width: max-content; */
             display: flex;
             align-items: center;
-            padding: var(--padding);
             border-radius: 30px;
             background: #fff;
             border: 2px solid #BA7237;
@@ -118,11 +115,6 @@
 
         .search-input::placeholder {
             color: #BA7237;
-        }
-
-        head,
-        body {
-            overflow-x: hidden;
         }
     </style>
 </head>
@@ -161,83 +153,7 @@
         </div>
     </div>
 
-    <div class="logo">
-        <img src="{{ asset('starling.png') }}" class="img-fluid" alt="Logo">
-    </div>
 
-    <div class="container">
-        <div class="row">
-            <!-- Card 1 -->
-            <div class="col-6">
-                <div class="card">
-                    <img src="image_1.png" class="image img-fluid" alt="Kopi Good Day">
-                    <div class="card-body">
-                        <h5 class="card-title" style="font-size: 10pt; color: #BA7237;">Kopi Good Day</h5>
-                        <p class="card-text" style="font-size: 15pt; font-weight: bold; color: #7C2B18;">Rp 5.000</p>
-                        <a href="#" class="btn btn-input btn-primary">TAMBAH</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Card 2 -->
-            <div class="col-6">
-                <div class="card">
-                    <img src="image_4.png" class="image img-fluid" alt="Teh Panas/Dingin">
-                    <div class="card-body">
-                        <h5 class="card-title" style="font-size: 10pt; color: #BA7237;">Teh Panas/Dingin</h5>
-                        <p class="card-text" style="font-size: 15pt; font-weight: bold; color: #7C2B18;">Rp 4.000</p>
-                        <a href="#" class="btn btn-input btn-primary">TAMBAH</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="card">
-                    <img src="image_2.png" class="image img-fluid" alt="Chocolatos Drink">
-                    <div class="card-body">
-                        <h5 class="card-title" style="font-size: 10pt; color: #BA7237;">Chocolatos Drink</h5>
-                        <p class="card-text" style="font-size: 15pt; font-weight: bold; color: #7C2B18;">Rp 5.000</p>
-                        <a href="#" class="btn btn-input btn-primary">TAMBAH</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Card 2 -->
-            <div class="col-6">
-                <div class="card">
-                    <img src="image_3.png" class="image img-fluid" alt="Pop Mie Besar">
-                    <div class="card-body">
-                        <h5 class="card-title" style="font-size: 10pt; color: #BA7237;">Pop Mie Besar</h5>
-                        <p class="card-text" style="font-size: 15pt; font-weight: bold; color: #7C2B18;">Rp 7.000</p>
-                        <a href="#" class="btn btn-input btn-primary">TAMBAH</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="card">
-                    <img src="image_6.png" class="image img-fluid" alt="Beng Beng Panas/Dingin">
-                    <div class="card-body">
-                        <h5 class="card-title" style="font-size: 10pt; color: #BA7237;">Beng Beng Panas/Dingin</h5>
-                        <p class="card-text" style="font-size: 15pt; font-weight: bold; color: #7C2B18;">Rp 5.000</p>
-                        <a href="#" class="btn btn-input btn-primary">TAMBAH</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Card 6 -->
-            <div class="col-6">
-                <div class="card">
-                    <img src="image_5.png" class="image img-fluid" alt="Kopi Hitam">
-                    <div class="card-body">
-                        <h5 class="card-title" style="font-size: 10pt; color: #BA7237;">Kopi Hitam</h5>
-                        <p class="card-text" style="font-size: 15pt; font-weight: bold; color: #7C2B18;">Rp 4.000</p>
-                        <a href="#" class="btn btn-input btn-primary">TAMBAH</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Ulangi pola ini untuk setiap pasangan kartu -->
-        </div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq"></script>
 </body>
-
 
 </html>

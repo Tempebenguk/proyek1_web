@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LatihanController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,4 +18,5 @@ Route::get('/', [LatihanController::class, 'home']);
 Route::get('/pemesanan', [LatihanController::class, 'pemesanan']);
 Route::get('/metode', [LatihanController::class, 'metode']);
 Route::get('/pembayaran', [LatihanController::class, 'pembayaran']);
+Route::get('/menu', [LatihanController::class, 'menu']);
 
