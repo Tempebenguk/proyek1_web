@@ -299,7 +299,9 @@
                 <div class="grid-container">
                     <div class="text1">ada tambahan?</div>
                     <div class="text2">kamu masih bisa menambah pesanan lo</div>
-                    <button class="button" href="#">Tambah+</button>
+                    <a href="">
+                        <button class="button" href="#">Tambah+</button>
+                    </a>
                 </div>
 
                 <div class="col-md-6 col-lg-5">
@@ -331,8 +333,10 @@
         <div class="row mt-4">
             <div class="col-12">
                 <div>
-                    <button class="btn btn-pesan" style="font-family: 'Fredoka', sans-serif; ">BAYAR PESANAN
-                        ANDA</button>
+                    <a href="">
+                        <button class="btn btn-pesan" style="font-family: 'Fredoka', sans-serif;">BAYAR PESANAN
+                            ANDA</button>
+                    </a>
                 </div>
             </div>
         </div>

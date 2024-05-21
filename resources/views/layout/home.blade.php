@@ -38,6 +38,7 @@
         }
 
         .card {
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
             max-width: 150px;
             margin-top: 25px;
             border-radius: 9px;
@@ -45,11 +46,18 @@
         }
 
         .btn-input {
+            display: flex;
+            align-items: center;
             background-color: #00E432;
-            max-width: 150px;
+            max-width: 100%;
             border-color: #00E432;
             border-radius: 3px;
             font-weight: bold;
+        }
+
+        .btn-flex {
+            display: flex;
+            justify-content: center;
         }
 
         .navbar-custom {
@@ -64,10 +72,10 @@
         }
 
         .dropdown .btn {
-            padding: 9px;
+            padding: 9px 25px;
             color: #BA7237;
             border: 2px solid #BA7237;
-            border-radius: 20px;
+            border-radius: 50px;
         }
 
         .dropdown-menu {
@@ -95,9 +103,8 @@
         }
 
         .search {
+
             --padding: 8px;
-            /* max-width: 100px;
-            width: max-content; */
             display: flex;
             align-items: center;
             padding: var(--padding);
@@ -113,7 +120,7 @@
             outline: none;
             border: none;
             background: transparent;
-            width: 235px;
+            max-width: 175px;
         }
 
         .search-input::placeholder {
@@ -170,11 +177,11 @@
             <!-- Card 1 -->
             <div class="col-6">
                 <div class="card">
-                    <img src="image_1.png" class="image img-fluid" alt="Kopi Good Day">
+                    <img src="img/image1.png" class="image img-fluid" alt="Kopi Good Day">
                     <div class="card-body">
                         <h5 class="card-title" style="font-size: 10pt; color: #BA7237;">Kopi Good Day</h5>
                         <p class="card-text" style="font-size: 15pt; font-weight: bold; color: #7C2B18;">Rp 5.000</p>
-                        <a href="#" class="btn btn-input btn-primary">TAMBAH</a>
+                        <a href="#" class="btn btn-input btn-primary btn-flex">TAMBAH</a>
                     </div>
                 </div>
             </div>
@@ -185,7 +192,7 @@
                     <div class="card-body">
                         <h5 class="card-title" style="font-size: 10pt; color: #BA7237;">Teh Panas/Dingin</h5>
                         <p class="card-text" style="font-size: 15pt; font-weight: bold; color: #7C2B18;">Rp 4.000</p>
-                        <a href="#" class="btn btn-input btn-primary">TAMBAH</a>
+                        <a href="#" class="btn btn-input btn-primary btn-flex">TAMBAH</a>
                     </div>
                 </div>
             </div>
@@ -195,7 +202,7 @@
                     <div class="card-body">
                         <h5 class="card-title" style="font-size: 10pt; color: #BA7237;">Chocolatos Drink</h5>
                         <p class="card-text" style="font-size: 15pt; font-weight: bold; color: #7C2B18;">Rp 5.000</p>
-                        <a href="#" class="btn btn-input btn-primary">TAMBAH</a>
+                        <a href="#" class="btn btn-input btn-primary btn-flex">TAMBAH</a>
                     </div>
                 </div>
             </div>
@@ -206,7 +213,7 @@
                     <div class="card-body">
                         <h5 class="card-title" style="font-size: 10pt; color: #BA7237;">Pop Mie Besar</h5>
                         <p class="card-text" style="font-size: 15pt; font-weight: bold; color: #7C2B18;">Rp 7.000</p>
-                        <a href="#" class="btn btn-input btn-primary">TAMBAH</a>
+                        <a href="#" class="btn btn-input btn-primary btn-flex">TAMBAH</a>
                     </div>
                 </div>
             </div>
@@ -214,9 +221,9 @@
                 <div class="card">
                     <img src="image_6.png" class="image img-fluid" alt="Beng Beng Panas/Dingin">
                     <div class="card-body">
-                        <h5 class="card-title" style="font-size: 10pt; color: #BA7237;">Beng Beng Panas/Dingin</h5>
+                        <h5 class="card-title" style="font-size: 10pt; color: #BA7237;">Beng Beng</h5>
                         <p class="card-text" style="font-size: 15pt; font-weight: bold; color: #7C2B18;">Rp 5.000</p>
-                        <a href="#" class="btn btn-input btn-primary">TAMBAH</a>
+                        <a href="#" class="btn btn-input btn-primary btn-flex">TAMBAH</a>
                     </div>
                 </div>
             </div>
@@ -227,17 +234,16 @@
                     <div class="card-body">
                         <h5 class="card-title" style="font-size: 10pt; color: #BA7237;">Kopi Hitam</h5>
                         <p class="card-text" style="font-size: 15pt; font-weight: bold; color: #7C2B18;">Rp 4.000</p>
-                        <a href="#" class="btn btn-input btn-primary">TAMBAH</a>
+                        <a href="#" class="btn btn-input btn-primary btn-flex">TAMBAH</a>
                     </div>
                 </div>
             </div>
-            <!-- Ulangi pola ini untuk setiap pasangan kartu -->
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq"></script>
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq">
+        </script>
 </body>
-
 
 </html>
