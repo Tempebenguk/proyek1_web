@@ -30,12 +30,18 @@
 
         .logo {
             position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: -1;
-            opacity: 0.2;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* z-index: -1; */
+            opacity: 0.25;
         }
+
+
 
         .card {
             box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
@@ -61,8 +67,8 @@
         }
 
         .navbar-custom {
-            max-width: 100%;
             background-color: #ba7237;
+
         }
 
         .navbar-brand {
@@ -71,39 +77,16 @@
             font-family: 'Franklin Gothic Medium';
         }
 
-        .dropdown .btn {
-            padding: 9px 25px;
-            color: #BA7237;
+        .dropdown {
+            appearance: none;
+            border: none;
+            padding: 9px 15px;
+            color: #fff;
             border: 2px solid #BA7237;
             border-radius: 50px;
         }
 
-        .dropdown-menu {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-            z-index: 1;
-        }
-
-        .dropdown:hover .dropdown-menu {
-            display: block;
-        }
-
-        .dropdown-item {
-            display: block;
-            padding: 10px;
-            text-decoration: none;
-            background-color: #ffffff;
-        }
-
-        .dropdown-item:hover {
-            background-color: #ddd;
-        }
-
         .search {
-
             --padding: 8px;
             display: flex;
             align-items: center;
@@ -140,21 +123,23 @@
             <a class="navbar-brand" href="#">OUR MENU</a>
         </div>
     </nav>
+
+    <div class="logo">
+        <img src="{{ asset('starling.png') }}" alt="Logo">
+    </div>
+
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md-12">
                 <div class="d-flex justify-content-between">
                     <!-- Kategori -->
                     <div class="dropdown">
-                        <button class="btn btn-light dropdown-togglex" type="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Kategori
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Makanan</a></li>
-                            <li><a class="dropdown-item" href="#">Minuman</a></li>
-                            <li><a class="dropdown-item" href="#">Snack</a></li>
-                        </ul>
+                        <select for="kategori"
+                            style="border: none; appearance: none; color: #BA7237; background-color: #fff; outline: none; justify;">
+                            <option value="makanan">Makanan</option>
+                            <option value="minuman">Minuman</option>
+                            <option value="snack">Snack</option>
+                        </select>
                     </div>
                     <!-- Pencarian -->
                     <form>
@@ -166,10 +151,6 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <div class="logo">
-        <img src="{{ asset('starling.png') }}" class="img-fluid" alt="Logo">
     </div>
 
     <div class="container">

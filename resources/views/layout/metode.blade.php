@@ -32,7 +32,10 @@
             opacity: 0.1;
             z-index: -1;
             width: 70%;
+
         }
+
+
 
         .card {
             margin-top: 25px;

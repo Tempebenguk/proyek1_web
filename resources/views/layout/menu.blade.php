@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="utf-8">
@@ -7,152 +7,83 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
+
     <style>
-        img {
-            display: block;
-            margin: auto;
+        body {
+            margin: 0;
         }
 
-        .image {
-            margin-top: 10px;
-            width: auto;
-            height: 100px;
-            opacity: 1;
-        }
-
-        .container {
-            max-width: 100%;
-            height: auto;
-        }
-
-        .logo {
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
             position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: -1;
-            opacity: 0.2;
+            top: 0;
+            width: 100%;
         }
 
-        .card {
-            margin-top: 25px;
-            border-radius: 9px;
-            border: 3px solid #BA7237;
+        li {
+            float: left;
         }
 
-        .btn-input {
-            background-color: #00E432;
-            width: 135px;
-            border-color: #00E432;
-            border-radius: 3px;
-            font-weight: bold;
-        }
-
-        .navbar-custom {
-            max-width: 100%;
-            background-color: #ba7237;
-        }
-
-        .navbar-brand {
-            color: #fff;
-            font-weight: bold;
-            font-family: 'Franklin Gothic Medium';
-        }
-
-        .dropdown .btn {
-            padding: 9px;
-            color: #BA7237;
-            border: 2px solid #BA7237;
-            border-radius: 20px;
-        }
-
-        .dropdown-menu {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-            z-index: 1;
-        }
-
-        .dropdown:hover .dropdown-menu {
+        li a {
             display: block;
-        }
-
-        .dropdown-item {
-            display: block;
-            padding: 10px;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
             text-decoration: none;
-            background-color: #ffffff;
         }
 
-        .dropdown-item:hover {
-            background-color: #ddd;
+        li a:hover:not(.active) {
+            background-color: #111;
         }
 
-        .search {
-            --padding: 8px;
-            /* max-width: 100px;
-            width: max-content; */
-            display: flex;
-            align-items: center;
-            border-radius: 30px;
-            background: #fff;
-            border: 2px solid #BA7237;
-        }
-
-        .search-input {
-            font-size: 16px;
-            color: #333333;
-            margin-left: 14px;
-            outline: none;
-            border: none;
-            background: transparent;
-            width: 235px;
-        }
-
-        .search-input::placeholder {
-            color: #BA7237;
-        }
+        /* .active {
+            background-color: #04AA6D;
+        } */
     </style>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom mb-3">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">OUR MENU</a>
-        </div>
-    </nav>
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-md-12">
-                <div class="d-flex justify-content-between">
-                    <!-- Kategori -->
-                    <div class="dropdown">
-                        <button class="btn btn-light dropdown-togglex" type="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Kategori
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Makanan</a></li>
-                            <li><a class="dropdown-item" href="#">Minuman</a></li>
-                            <li><a class="dropdown-item" href="#">Snack</a></li>
-                        </ul>
-                    </div>
-                    <!-- Pencarian -->
-                    <form>
-                        <div class="search">
-                            <input class="search-input" type="search" placeholder="Search">
 
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+    <ul>
+        <li><a class="active" href="#home">Home</a></li>
+        <li><a href="#news">News</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#about">About</a></li>
+    </ul>
+
+    <div style="padding:20px;margin-top:30px;background-color:#1abc9c;height:1500px;">
+        <h1>Fixed Top Navigation Bar</h1>
+        <h2>Scroll this page to see the effect</h2>
+        <h2>The navigation bar will stay at the top of the page while scrolling</h2>
+
+        <p>Some text some text some text some text..</p>
+        <p>Some text some text some text some text..</p>
+        <p>Some text some text some text some text..</p>
+        <p>Some text some text some text some text..</p>
+        <p>Some text some text some text some text..</p>
+        <p>Some text some text some text some text..</p>
+        <p>Some text some text some text some text..</p>
+        <p>Some text some text some text some text..</p>
+        <p>Some text some text some text some text..</p>
+        <p>Some text some text some text some text..</p>
+        <p>Some text some text some text some text..</p>
+        <p>Some text some text some text some text..</p>
+        <p>Some text some text some text some text..</p>
+        <p>Some text some text some text some text..</p>
+        <p>Some text some text some text some text..</p>
+        <p>Some text some text some text some text..</p>
+        <p>Some text some text some text some text..</p>
+        <p>Some text some text some text some text..</p>
+        <p>Some text some text some text some text..</p>
+        <p>Some text some text some text some text..</p>
     </div>
-
 
 </body>
 

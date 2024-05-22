@@ -334,7 +334,7 @@
         <div class="row mt-4">
             <div class="col-12">
                 <div>
-                    <a href="">
+                    <a href="#">
                         <button class="btn btn-pesan" style="font-family: 'Fredoka', sans-serif;">BAYAR PESANAN
                             ANDA</button>
                     </a>
