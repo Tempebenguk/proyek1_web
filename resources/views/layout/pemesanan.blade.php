@@ -230,6 +230,7 @@
             justify-self: end;
             align-self: center;
             margin-left: auto;
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
         }
 
         .btn-pesan:active,
@@ -320,40 +321,40 @@
                     </a>
                 </div>
 
-                <div class="col-md-6 col-lg-5"></div>
-                <div>
+                <div class="col-md-6 col-lg-5">
                     <div>
-                        <textarea placeholder="Catatan, misalnya : gulanya sedikit dll..." required></textarea>
-                    </div>
-                    <!-- JavaScript untuk menyesuaikan ketinggian textarea -->
-                    <script>
-                        const textarea = document.querySelector("textarea");
+                        <div>
+                            <textarea placeholder="Catatan, misalnya : gulanya sedikit dll..." required></textarea>
+                        </div>
+                        <!-- JavaScript untuk menyesuaikan ketinggian textarea -->
+                        <script>
+                            const textarea = document.querySelector("textarea");
 
-                        textarea.addEventListener("input", () => {
-                            textarea.style.height = "auto";
-                            textarea.style.height = `${textarea.scrollHeight}px`;
-                        });
-                    </script>
+                            textarea.addEventListener("input", () => {
+                                textarea.style.height = "auto";
+                                textarea.style.height = `${textarea.scrollHeight}px`;
+                            });
+                        </script>
+                    </div>
                 </div>
-            </div>
-            <div class="card mt-3 total-card">
-                <div class="card-body">
-                    <p class="card-text" style="font-size: 10pt; font-weight: bold; color: #BA7237;">Total
-                        Pesanan Anda</p>
-                    <span class="card-text" style="font-size: 11pt; font-weight: bold; color: #00E432;">Rp
-                        5.000</span>
+                <div class="card mt-3 total-card">
+                    <div class="card-body">
+                        <p class="card-text" style="font-size: 10pt; font-weight: bold; color: #BA7237;">Total
+                            Pesanan Anda</p>
+                        <span class="card-text" style="font-size: 11pt; font-weight: bold; color: #00E432;">Rp
+                            5.000</span>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row mt-4">
-        <div class="col-12">
-            <a href="{{ route('metode') }}">
-                <button class="btn btn-pesan" style="font-family: 'Fredoka', sans-serif;">BAYAR PESANAN
-                    ANDA</button>
-            </a>
+        <div class="row mt-4">
+            <div class="col-12">
+                <a href="{{ route('metode') }}">
+                    <button class="btn btn-pesan" style="font-family: 'Fredoka', sans-serif;">BAYAR PESANAN
+                        ANDA</button>
+                </a>
+            </div>
         </div>
-    </div>
     </div>
 
     <script>

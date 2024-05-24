@@ -23,3 +23,7 @@ Route::get('/menu', [LatihanController::class, 'menu']);
 Route::get('/metode', function () {
     return view('layout.metode');
 })->name('metode');
+
+Route::get('/pemesanan', function () {
+    return view('layout.pemesanan');
+})->name('pemesanan');

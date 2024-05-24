@@ -7,10 +7,17 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
+
     <style>
         /* Custom CSS */
+
+        body {
+            font-family: "Fredoka", sans-serif;
+        }
+
         img {
             display: block;
             margin: auto;
@@ -60,6 +67,19 @@
             border-color: #00E432;
             border-radius: 3px;
             font-weight: bold;
+        }
+
+        .btn-pesan {
+            background-color: #00E432;
+            /* Tambahkan warna latar belakang untuk pseudo-class :active dan :focus */
+            outline: none;
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+            border: 2px solid #BA7237;
+            border-color: #7C2B18;
+            color: #fff;
+            padding: 5px 15px;
+            border-radius: 50px;
+            width: 250px;
         }
 
         .btn-flex {
@@ -122,13 +142,24 @@
         body {
             overflow-x: hidden;
         }
+
+        .fixed-btn-container {
+            position: fixed;
+            bottom: 20px;
+            /* Jarak dari bawah */
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            /* Pastikan tombol berada di atas konten lainnya */
+            display: none;
+        }
     </style>
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom mb-3">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">OUR MENU</a>
+            <a class="navbar-brand" href="#" style="font-family: Fredoka, sans-serif;">OUR MENU</a>
         </div>
     </nav>
 
@@ -229,10 +260,32 @@
             </div>
         </div>
     </div>
+    <div class="fixed-btn-container">
+        <a href="{{ route('pemesanan') }}">
+            <button class="btn btn-pesan"
+                style="font-family: 'Fredoka', sans-serif; font-weight: bold; max-width: 1000px;">
+                TAMBAH PESANAN
+            </button>
+        </a>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq">
+
         </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const addButtonElements = document.querySelectorAll('.btn-input');
+            const orderButtonContainer = document.querySelector('.fixed-btn-container');
+
+            addButtonElements.forEach(button => {
+                button.addEventListener('click', function () {
+                    orderButtonContainer.style.display = 'block';
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>
