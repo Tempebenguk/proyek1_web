@@ -316,8 +316,8 @@
                 <div class="grid-container">
                     <div class="text1">ada tambahan?</div>
                     <div class="text2">kamu masih bisa menambah pesanan lo</div>
-                    <a href="">
-                        <button class="button" href="#">Tambah+</button>
+                    <a href="{{ route('home') }}">
+                        <button class="button">Tambah</button>
                     </a>
                 </div>
 

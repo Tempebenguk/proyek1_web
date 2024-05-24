@@ -12,8 +12,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
 
     <style>
-        /* Custom CSS */
-
         body {
             font-family: "Fredoka", sans-serif;
         }
@@ -74,7 +72,7 @@
             /* Tambahkan warna latar belakang untuk pseudo-class :active dan :focus */
             outline: none;
             box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
-            border: 2px solid #BA7237;
+            shado border: 1.5px solid #BA7237;
             border-color: #7C2B18;
             color: #fff;
             padding: 5px 15px;

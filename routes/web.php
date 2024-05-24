@@ -14,7 +14,7 @@ use App\Http\Controllers\LatihanController;
 |
 */
 
-Route::get('/', [LatihanController::class, 'home']);
+Route::get('/home', [LatihanController::class, 'home']);
 Route::get('/pemesanan', [LatihanController::class, 'pemesanan']);
 Route::get('/metode', [LatihanController::class, 'metode']);
 Route::get('/pembayaran', [LatihanController::class, 'pembayaran']);
@@ -27,3 +27,7 @@ Route::get('/metode', function () {
 Route::get('/pemesanan', function () {
     return view('layout.pemesanan');
 })->name('pemesanan');
+
+Route::get('/home', function () {
+    return view('layout.home');
+})->name('home');
