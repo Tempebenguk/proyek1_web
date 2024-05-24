@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
 
     <style>
-        s body,
+        body,
         .navbar-brand,
         .card-text,
         .form-check-label,
@@ -90,6 +90,13 @@
             border: none;
             font-size: 9pt;
             font-weight: bold;
+        }
+
+        .btn-pesan:active,
+        .btn-pesan:focus {
+            background-color: #00E432;
+            outline: none;
+            box-shadow: none;
         }
 
         .mb-3.form-check {
@@ -225,6 +232,14 @@
             margin-left: auto;
         }
 
+        .btn-pesan:active,
+        .btn-pesan:focus {
+            background-color: #00E432;
+            /* Tambahkan warna latar belakang untuk pseudo-class :active dan :focus */
+            outline: none;
+            box-shadow: none;
+        }
+
         .total-card .card-body {
             display: flex;
             justify-content: space-between;
@@ -305,42 +320,40 @@
                     </a>
                 </div>
 
-                <div class="col-md-6 col-lg-5">
-                    <div>
-                        <div>
-                            <textarea placeholder="Catatan, misalnya : gulanya sedikit dll..." required></textarea>
-                        </div>
-                        <!-- JavaScript untuk menyesuaikan ketinggian textarea -->
-                        <script>
-                            const textarea = document.querySelector("textarea");
-
-                            textarea.addEventListener("input", () => {
-                                textarea.style.height = "auto";
-                                textarea.style.height = `${textarea.scrollHeight}px`;
-                            });
-                        </script>
-                    </div>
-                </div>
-                <div class="card mt-3 total-card">
-                    <div class="card-body">
-                        <p class="card-text" style="font-size: 10pt; font-weight: bold; color: #BA7237;">Total
-                            Pesanan Anda</p>
-                        <span class="card-text" style="font-size: 11pt; font-weight: bold; color: #00E432;">Rp
-                            5.000</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row mt-4">
-            <div class="col-12">
+                <div class="col-md-6 col-lg-5"></div>
                 <div>
-                    <a href="#">
-                        <button class="btn btn-pesan" style="font-family: 'Fredoka', sans-serif;">BAYAR PESANAN
-                            ANDA</button>
-                    </a>
+                    <div>
+                        <textarea placeholder="Catatan, misalnya : gulanya sedikit dll..." required></textarea>
+                    </div>
+                    <!-- JavaScript untuk menyesuaikan ketinggian textarea -->
+                    <script>
+                        const textarea = document.querySelector("textarea");
+
+                        textarea.addEventListener("input", () => {
+                            textarea.style.height = "auto";
+                            textarea.style.height = `${textarea.scrollHeight}px`;
+                        });
+                    </script>
+                </div>
+            </div>
+            <div class="card mt-3 total-card">
+                <div class="card-body">
+                    <p class="card-text" style="font-size: 10pt; font-weight: bold; color: #BA7237;">Total
+                        Pesanan Anda</p>
+                    <span class="card-text" style="font-size: 11pt; font-weight: bold; color: #00E432;">Rp
+                        5.000</span>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-12">
+            <a href="{{ route('metode') }}">
+                <button class="btn btn-pesan" style="font-family: 'Fredoka', sans-serif;">BAYAR PESANAN
+                    ANDA</button>
+            </a>
+        </div>
+    </div>
     </div>
 
     <script>
@@ -351,7 +364,9 @@
         }
 
         function decrement() {
-            counter--;
+            if (counter > 0) {
+                counter--;
+            }
         }
 
         function get() {
@@ -368,9 +383,7 @@
         });
 
         dec.addEventListener("click", () => {
-            if (input.value > 0) {
-                decrement();
-            }
+            decrement();
             input.value = get();
         });
     </script>

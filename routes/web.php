@@ -20,3 +20,6 @@ Route::get('/metode', [LatihanController::class, 'metode']);
 Route::get('/pembayaran', [LatihanController::class, 'pembayaran']);
 Route::get('/menu', [LatihanController::class, 'menu']);
 
+Route::get('/metode', function () {
+    return view('layout.metode');
+})->name('metode');

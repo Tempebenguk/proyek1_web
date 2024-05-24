@@ -39,6 +39,7 @@
             align-items: center;
             /* z-index: -1; */
             opacity: 0.25;
+            pointer-events: none;
         }
 
 
@@ -103,11 +104,18 @@
             outline: none;
             border: none;
             background: transparent;
-            max-width: 175px;
+            max-width: 125px;
         }
 
         .search-input::placeholder {
             color: #BA7237;
+        }
+
+        .search-button {
+            color: #BA7237;
+            border: none;
+            background-color: #fff;
+            outline: none;
         }
 
         head,
@@ -142,12 +150,12 @@
                         </select>
                     </div>
                     <!-- Pencarian -->
-                    <form>
+                    <div class="cari">
                         <div class="search">
-                            <input class="search-input" type="search" placeholder="Search">
-
+                            <input class="search-input" type="search" placeholder="cari">
+                            <button class="search-button"><i class="fas fa-search"></i></button>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>

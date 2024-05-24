@@ -35,8 +35,6 @@
 
         }
 
-
-
         .card {
             margin-top: 25px;
             height: auto;
