@@ -42,12 +42,9 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            /* z-index: -1; */
             opacity: 0.25;
             pointer-events: none;
         }
-
-
 
         .card {
             box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
@@ -69,10 +66,9 @@
 
         .btn-pesan {
             background-color: #00E432;
-            /* Tambahkan warna latar belakang untuk pseudo-class :active dan :focus */
             outline: none;
             box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
-            shado border: 1.5px solid #BA7237;
+            border: 1.5px solid #BA7237;
             border-color: #7C2B18;
             color: #fff;
             padding: 5px 15px;
@@ -87,7 +83,6 @@
 
         .navbar-custom {
             background-color: #ba7237;
-
         }
 
         .navbar-brand {
@@ -144,11 +139,9 @@
         .fixed-btn-container {
             position: fixed;
             bottom: 20px;
-            /* Jarak dari bawah */
             left: 50%;
             transform: translateX(-50%);
             z-index: 1000;
-            /* Pastikan tombol berada di atas konten lainnya */
             display: none;
         }
     </style>
@@ -162,7 +155,7 @@
     </nav>
 
     <div class="logo">
-        <img src="{{ asset('starling.png') }}" alt="Logo">
+        <img src="starling.png" alt="Logo">
     </div>
 
     <div class="container">
@@ -236,7 +229,7 @@
                 </div>
             </div>
             <div class="col-6">
-                <div class="card">
+                <div class="card" data-selected="false">
                     <img src="image_6.png" class="image img-fluid" alt="Beng Beng Panas/Dingin">
                     <div class="card-body">
                         <h5 class="card-title" style="font-size: 10pt; color: #BA7237;">Beng Beng</h5>
@@ -258,6 +251,15 @@
             </div>
         </div>
     </div>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <h5>Pesanan Anda</h5>
+                <div id="card-container"></div>
+            </div>
+        </div>
+    </div>
+
     <div class="fixed-btn-container">
         <a href="{{ route('pemesanan') }}">
             <button class="btn btn-pesan"
@@ -269,21 +271,62 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq">
-
         </script>
 
     <script>
+        function addOrderCard(title, price, imageSrc) {
+            const cardContainer = document.getElementById('card-container');
+            const newCard = document.createElement('div');
+            newCard.classList.add('card', 'mb-3');
+            newCard.innerHTML = `
+            <div class="card-body d-flex justify-content-between align-items-center">
+                <div class="text-container">
+                    <p class="card-title" style="font-size: 10pt; color: #BA7237;">${title}</p>
+                    <span class="card-text" style="font-size: 13pt; font-weight: 900; color: #7C2B18; margin-top: 5px;">Rp ${price}</span>
+                    <div class="input-group input-group-quantity">
+                        <button class="decrement btn btn-secondary btn-sm">-</button>
+                        <input type="number" class="input form-control" value="1" readonly>
+                        <button class="increment btn btn-secondary btn-sm">+</button>
+                    </div>
+                </div>
+                <img src="${imageSrc}" class="img-fluid" style="max-width: 100px; height: auto; opacity: 1;">
+            </div>
+        `;
+            cardContainer.appendChild(newCard);
+
+            // Add event listeners to the new increment and decrement buttons
+            const newIncrementBtn = newCard.querySelector('.increment');
+            const newDecrementBtn = newCard.querySelector('.decrement');
+            const newInput = newCard.querySelector('.input');
+
+            newIncrementBtn.addEventListener('click', () => {
+                newInput.value = parseInt(newInput.value) + 1;
+            });
+            newDecrementBtn.addEventListener('click', () => {
+                if (newInput.value > 0) {
+                    newInput.value = parseInt(newInput.value) - 1;
+                }
+            });
+        }
+
         document.addEventListener('DOMContentLoaded', function () {
             const addButtonElements = document.querySelectorAll('.btn-input');
             const orderButtonContainer = document.querySelector('.fixed-btn-container');
 
             addButtonElements.forEach(button => {
-                button.addEventListener('click', function () {
+                button.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    const card = button.closest('.card');
+                    const title = card.querySelector('.card-title').innerText;
+                    const price = card.querySelector('.card-text').innerText.replace('Rp ', '');
+                    const imageSrc = card.querySelector('img').src;
+                    addOrderCard(title, price, imageSrc);
                     orderButtonContainer.style.display = 'block';
                 });
             });
         });
     </script>
+
 </body>
 
 </html>

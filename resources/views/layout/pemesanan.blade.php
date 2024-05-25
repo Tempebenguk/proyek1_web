@@ -284,6 +284,8 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6 col-lg-4">
+
+                <!-- Bagian card -->
                 <div class="card">
                     <div class="card-body d-flex justify-content-between align-items-center">
                         <div class="text-container">
@@ -313,6 +315,9 @@
                         <img src="kopi.png" class="img-fluid" style="max-width: 130px; height: auto; opacity: 1;">
                     </div>
                 </div>
+
+
+                <!-- bagian tambah pesanan -->
                 <div class="grid-container">
                     <div class="text1">ada tambahan?</div>
                     <div class="text2">kamu masih bisa menambah pesanan lo</div>
@@ -321,6 +326,8 @@
                     </a>
                 </div>
 
+
+                <!-- Bagian catatan -->
                 <div class="col-md-6 col-lg-5">
                     <div>
                         <div>
@@ -337,6 +344,8 @@
                         </script>
                     </div>
                 </div>
+
+                <!-- Bagian total pesanan -->
                 <div class="card mt-3 total-card">
                     <div class="card-body">
                         <p class="card-text" style="font-size: 10pt; font-weight: bold; color: #BA7237;">Total
@@ -347,6 +356,8 @@
                 </div>
             </div>
         </div>
+
+        <!-- bagian button pembayaran -->
         <div class="row mt-4">
             <div class="col-12">
                 <a href="{{ route('metode') }}">
