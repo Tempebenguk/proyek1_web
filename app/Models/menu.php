@@ -10,4 +10,7 @@ class menu extends Model
     use HasFactory;
     protected $table = 'menu';
     protected $primaryKey = 'id';
+
+    protected $categories = 'kategori';
+
 }

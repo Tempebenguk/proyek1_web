@@ -31,4 +31,11 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'firebase' => [
+        'api_key' => 'AIzaSyAd8Fwod_tsmsLBSBdpMIAH-ge0PqSmhEs',
+        'auth_domain' => 'starling-79d8b.firebaseapp.com',
+        'database_url' => 'https://starling-79d8b-default-rtdb.firebaseio.com',
+        'storage_bucket' => 'starling-79d8b.appspot.com',
+    ],
+
 ];

@@ -3,31 +3,30 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Kreait\Firebase\Factory;
+use Kreait\Firebase\ServiceAccount;
 
 class LatihanController extends Controller
 {
-    public function home()
+
+    protected $database;
+
+    public function index()
     {
-        return view('layout.home');
+        $reference = $this->database->getReference('kategori');
+        $snapshot = $reference->getSnapshot();
+        $value = $snapshot->getValue();
+
+        return view('firebase.index', compact('value'));
     }
 
-    public function pemesanan()
+    public function create()
     {
-        return view('layout.pemesanan');
+
     }
 
-    public function metode()
+    public function store()
     {
-        return view('layout.metode');
-    }
 
-    public function pembayaran()
-    {
-        return view('layout.pembayaran');
-    }
-
-    public function menu()
-    {
-        return view('layout.menu');
     }
 }

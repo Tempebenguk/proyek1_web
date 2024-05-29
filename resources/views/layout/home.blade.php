@@ -164,11 +164,8 @@
                 <div class="d-flex justify-content-between">
                     <!-- Kategori -->
                     <div class="dropdown">
-                        <select for="kategori"
-                            style="border: none; appearance: none; color: #BA7237; background-color: #fff; outline: none; justify;">
-                            <option value="makanan">Makanan</option>
-                            <option value="minuman">Minuman</option>
-                            <option value="snack">Snack</option>
+                        <select id="kategori-dropdown"
+                            style="border: none; appearance: none; color: #BA7237; background-color: #fff; outline: none;">
                         </select>
                     </div>
                     <!-- Pencarian -->
@@ -273,6 +270,8 @@
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq">
         </script>
 
+    <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase.js"></script>
     <script>
         function addOrderCard(title, price, imageSrc) {
             const cardContainer = document.getElementById('card-container');
@@ -325,8 +324,31 @@
                 });
             });
         });
-    </script>
 
+        // Initialize Firebase
+        var config = {
+            apiKey: "{{ config('services.firebase.api_key') }}",
+            authDomain: "{{ config('services.firebase.auth_domain') }}",
+            databaseURL: "{{ config('services.firebase.database_url') }}",
+            storageBucket: "{{ config('services.firebase.storage_bucket') }}",
+        };
+        firebase.initializeApp(config);
+        var database = firebase.database();
+
+        // Get Data
+        firebase.database().ref('kategori/').on('value', function (snapshot) {
+            var value = snapshot.val();
+            var kategoriDropdown = $('#kategori-dropdown');
+            kategoriDropdown.empty(); // Clear the dropdown
+
+            $.each(value, function (index, value) {
+                if (value) {
+                    kategoriDropdown.append('<option value="' + index + '">' + value.nama_kategori + '</option>');
+                }
+            });
+        });
+
+    </script>
 </body>
 
 </html>
