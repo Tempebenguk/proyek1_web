@@ -49,9 +49,9 @@
         .card {
             box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
             max-width: 150px;
-            margin-top: 25px;
             border-radius: 9px;
             border: 3px solid #BA7237;
+            margin: 10%;
         }
 
         .btn-input {
@@ -100,6 +100,22 @@
             border-radius: 50px;
         }
 
+        .d-flex {
+            display: flex;
+        }
+
+        .align-items-center {
+            align-items: center;
+        }
+
+        .flex-wrap {
+            flex-wrap: wrap;
+        }
+
+        .ms-auto {
+            margin-left: auto;
+        }
+
         .search {
             --padding: 8px;
             display: flex;
@@ -108,6 +124,7 @@
             border-radius: 30px;
             background: #fff;
             border: 2px solid #BA7237;
+            margin-right: -8px;
         }
 
         .search-input {
@@ -117,7 +134,7 @@
             outline: none;
             border: none;
             background: transparent;
-            max-width: 125px;
+            max-width: 120px;
         }
 
         .search-input::placeholder {
@@ -144,6 +161,16 @@
             z-index: 1000;
             display: none;
         }
+
+        .row {
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        .col-6 {
+            padding-left: 0;
+            padding-right: 0;
+        }
     </style>
 </head>
 
@@ -169,7 +196,7 @@
                         </select>
                     </div>
                     <!-- Pencarian -->
-                    <div class="cari">
+                    <div class="cari ms-auto">
                         <div class="search">
                             <input class="search-input" type="search" placeholder="cari">
                             <button class="search-button"><i class="fas fa-search"></i></button>
@@ -180,82 +207,10 @@
         </div>
     </div>
 
-    <div class="container">
-        <div class="row">
-            <!-- Card 1 -->
-            <div class="col-6">
-                <div class="card">
-                    <img src="img/image1.png" class="image img-fluid" alt="Kopi Good Day">
-                    <div class="card-body">
-                        <h5 class="card-title" style="font-size: 10pt; color: #BA7237;">Kopi Good Day</h5>
-                        <p class="card-text" style="font-size: 15pt; font-weight: bold; color: #7C2B18;">Rp 5.000</p>
-                        <a href="#" class="btn btn-input btn-primary btn-flex">TAMBAH</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Card 2 -->
-            <div class="col-6">
-                <div class="card">
-                    <img src="image_4.png" class="image img-fluid" alt="Teh Panas/Dingin">
-                    <div class="card-body">
-                        <h5 class="card-title" style="font-size: 10pt; color: #BA7237;">Teh Panas/Dingin</h5>
-                        <p class="card-text" style="font-size: 15pt; font-weight: bold; color: #7C2B18;">Rp 4.000</p>
-                        <a href="#" class="btn btn-input btn-primary btn-flex">TAMBAH</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="card">
-                    <img src="image_2.png" class="image img-fluid" alt="Chocolatos Drink">
-                    <div class="card-body">
-                        <h5 class="card-title" style="font-size: 10pt; color: #BA7237;">Chocolatos Drink</h5>
-                        <p class="card-text" style="font-size: 15pt; font-weight: bold; color: #7C2B18;">Rp 5.000</p>
-                        <a href="#" class="btn btn-input btn-primary btn-flex">TAMBAH</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Card 2 -->
-            <div class="col-6">
-                <div class="card">
-                    <img src="image_3.png" class="image img-fluid" alt="Pop Mie Besar">
-                    <div class="card-body">
-                        <h5 class="card-title" style="font-size: 10pt; color: #BA7237;">Pop Mie Besar</h5>
-                        <p class="card-text" style="font-size: 15pt; font-weight: bold; color: #7C2B18;">Rp 7.000</p>
-                        <a href="#" class="btn btn-input btn-primary btn-flex">TAMBAH</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="card" data-selected="false">
-                    <img src="image_6.png" class="image img-fluid" alt="Beng Beng Panas/Dingin">
-                    <div class="card-body">
-                        <h5 class="card-title" style="font-size: 10pt; color: #BA7237;">Beng Beng</h5>
-                        <p class="card-text" style="font-size: 15pt; font-weight: bold; color: #7C2B18;">Rp 5.000</p>
-                        <a href="#" class="btn btn-input btn-primary btn-flex">TAMBAH</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Card 6 -->
-            <div class="col-6">
-                <div class="card">
-                    <img src="image_5.png" class="image img-fluid" alt="Kopi Hitam">
-                    <div class="card-body">
-                        <h5 class="card-title" style="font-size: 10pt; color: #BA7237;">Kopi Hitam</h5>
-                        <p class="card-text" style="font-size: 15pt; font-weight: bold; color: #7C2B18;">Rp 4.000</p>
-                        <a href="#" class="btn btn-input btn-primary btn-flex">TAMBAH</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div id="menu-container" class="row">
+        <!-- Cards akan dimasukkan di sini -->
     </div>
-    <div class="container mt-4">
-        <div class="row">
-            <div class="col-12">
-                <h5></h5>
-                <div id="card-container"></div>
-            </div>
-        </div>
-    </div>
+
 
     <div class="fixed-btn-container">
         <a href="{{ route('pemesanan') }}">
@@ -266,6 +221,12 @@
         </a>
     </div>
 
+    <div id="order-container">
+        <!-- Order cards will be displayed here -->
+    </div>
+
+    <!-- code js -->
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq">
         </script>
@@ -273,11 +234,18 @@
     <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase.js"></script>
     <script>
-        function addOrderCard(title, price, imageSrc) {
-            const cardContainer = document.getElementById('card-container');
-            const newCard = document.createElement('div');
-            newCard.classList.add('card', 'mb-3');
-            newCard.innerHTML = `
+
+        const pesanan = [];
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const orderButtonContainer = document.querySelector('.fixed-btn-container');
+            const cardContainer = document.getElementById('menu-container');
+
+            // Function to add order card
+            function addOrderCard(title, price, imageSrc) {
+                const newCard = document.createElement('div');
+                newCard.classList.add('card', 'mb-3');
+                newCard.innerHTML = `
             <div class="card-body d-flex justify-content-between align-items-center">
                 <div class="text-container">
                     <p class="card-title" style="font-size: 10pt; color: #BA7237;">${title}</p>
@@ -291,62 +259,144 @@
                 <img src="${imageSrc}" class="img-fluid" style="max-width: 100px; height: auto; opacity: 1;">
             </div>
         `;
-            cardContainer.appendChild(newCard);
+                orderButtonContainer.style.display = 'block';
+            }
 
-            // Add event listeners to the new increment and decrement buttons
-            const newIncrementBtn = newCard.querySelector('.increment');
-            const newDecrementBtn = newCard.querySelector('.decrement');
-            const newInput = newCard.querySelector('.input');
+            // Function to handle adding items to the order
+            function handleAddButtonClick(event) {
+                event.preventDefault();
+                const button = event.target.closest('.btn-input');
+                const card = button.closest('.card');
+                const title = card.querySelector('.card-title').innerText;
+                const price = card.querySelector('.card-text').innerText.replace('Rp ', '');
+                const imageSrc = card.querySelector('img').src;
+                addOrderCard(title, price, imageSrc);
 
-            newIncrementBtn.addEventListener('click', () => {
-                newInput.value = parseInt(newInput.value) + 1;
+                // Menyimpan data pesanan ke dalam array
+                const pesananItem = { title, price, imageSrc };
+                pesanan.push(pesananItem);
+                console.log('Data pesanan:', pesanan);
+            }
+
+            // Function to create card HTML
+            function createCard(menuKey, menuData) {
+                return `
+            <div class="col-6" id="${menuKey}">
+                <div class="card">
+                    <img src="${menuData.gambar_menu || 'img/image1.png'}" class="image img-fluid" alt="${menuData.nama_menu}">
+                    <div class="card-body">
+                        <h5 class="card-title" style="font-size: 10pt; color: #BA7237;">${menuData.nama_menu}</h5>
+                        <p class="card-text" style="font-size: 15pt; font-weight: bold; color: #7C2B18;">Rp. ${menuData.harga}</p>
+                        <a href="#" class="btn btn-input btn-primary btn-flex">TAMBAH</a>
+                    </div>
+                </div>
+            </div>`;
+            }
+
+            // Function to add event listeners to "TAMBAH" buttons
+            function addEventListenersToButtons() {
+                const addButtonElements = document.querySelectorAll('.btn-input');
+                addButtonElements.forEach(button => {
+                    button.removeEventListener('click', handleAddButtonClick);
+                    button.addEventListener('click', handleAddButtonClick);
+                });
+            }
+
+            // Initialize Firebase
+            var config = {
+                apiKey: "{{ config('services.firebase.api_key') }}",
+                authDomain: "{{ config('services.firebase.auth_domain') }}",
+                databaseURL: "{{ config('services.firebase.database_url') }}",
+                storageBucket: "{{ config('services.firebase.storage_bucket') }}",
+            };
+            firebase.initializeApp(config);
+            var database = firebase.database();
+
+            // Get category data
+            firebase.database().ref('kategori/').on('value', function (snapshot) {
+                var value = snapshot.val();
+                var kategoriDropdown = $('#kategori-dropdown');
+                kategoriDropdown.empty(); // Clear the dropdown
+
+                $.each(value, function (index, value) {
+                    if (value) {
+                        kategoriDropdown.append('<option value="' + index + '">' + value.nama_kategori + '</option>');
+                    }
+                });
             });
-            newDecrementBtn.addEventListener('click', () => {
-                if (newInput.value > 0) {
-                    newInput.value = parseInt(newInput.value) - 1;
+
+            // Referensi ke data menu di Firebase
+            const menuRef = database.ref('menu');
+
+            // Mendengarkan penambahan data
+            menuRef.on('child_added', (snapshot) => {
+                const menuKey = snapshot.key;
+                const menuData = snapshot.val();
+                console.log('Data yang diterima dari Firebase:', menuData); // Logging untuk debug
+
+                // Tambahkan card baru ke container
+                const menuContainer = document.getElementById('menu-container');
+                menuContainer.innerHTML += createCard(menuKey, menuData);
+
+                // Tambahkan event listener ke tombol "TAMBAH" baru
+                addEventListenersToButtons();
+            });
+
+            // Mendengarkan perubahan data
+            menuRef.on('child_changed', (snapshot) => {
+                const menuKey = snapshot.key;
+                const menuData = snapshot.val();
+                console.log('Data yang diperbarui dari Firebase:', menuData); // Logging untuk debug
+
+                // Perbarui card yang ada
+                const menuCard = document.getElementById(menuKey);
+                if (menuCard) {
+                    menuCard.innerHTML = createCard(menuKey, menuData);
+                    // Tambahkan event listener ke tombol "TAMBAH" yang diperbarui
+                    addEventListenersToButtons();
                 }
+            });
+
+            // Mendengarkan penghapusan data
+            menuRef.on('child_removed', (snapshot) => {
+                const menuKey = snapshot.key;
+                console.log('Data yang dihapus dari Firebase:', menuKey); // Logging untuk debug
+
+                // Hapus card dari container
+                const menuCard = document.getElementById(menuKey);
+                if (menuCard) {
+                    menuCard.remove();
+                }
+            });
+        });
+
+
+        // Function to display order cards
+        function displayOrderCards(pesanan) {
+            const orderContainer = document.getElementById('order-container');
+            orderContainer.innerHTML = ''; // Clear the container
+
+            pesanan.forEach(item => {
+                const card = document.createElement('div');
+                card.classList.add('card', 'mb-3');
+                card.innerHTML = `
+            <div class="card-body d-flex justify-content-between align-items-center">
+                <div class="text-container">
+                    <p class="card-text" style="font-size: 10pt; font-weight: 800; color: #BA7237;">${item.title}</p>
+                    <span class="card-text" style="font-size: 13pt; font-weight: 900; color: #7C2B18; margin-top: 5px;">Rp ${item.price}</span>
+                    <img src="${item.imageSrc}" class="img-fluid" style="max-width: 130px; height: auto; opacity: 1;">
+                </div>
+            </div>
+        `;
+                orderContainer.appendChild(card);
             });
         }
 
+        // Panggil fungsi displayOrderCards saat pesanan berubah atau saat halaman dimuat
         document.addEventListener('DOMContentLoaded', function () {
-            const addButtonElements = document.querySelectorAll('.btn-input');
-            const orderButtonContainer = document.querySelector('.fixed-btn-container');
-
-            addButtonElements.forEach(button => {
-                button.addEventListener('click', function (event) {
-                    event.preventDefault();
-                    const card = button.closest('.card');
-                    const title = card.querySelector('.card-title').innerText;
-                    const price = card.querySelector('.card-text').innerText.replace('Rp ', '');
-                    const imageSrc = card.querySelector('img').src;
-                    addOrderCard(title, price, imageSrc);
-                    orderButtonContainer.style.display = 'block';
-                });
-            });
+            displayOrderCards(pesanan);
         });
 
-        // Initialize Firebase
-        var config = {
-            apiKey: "{{ config('services.firebase.api_key') }}",
-            authDomain: "{{ config('services.firebase.auth_domain') }}",
-            databaseURL: "{{ config('services.firebase.database_url') }}",
-            storageBucket: "{{ config('services.firebase.storage_bucket') }}",
-        };
-        firebase.initializeApp(config);
-        var database = firebase.database();
-
-        // Get Data
-        firebase.database().ref('kategori/').on('value', function (snapshot) {
-            var value = snapshot.val();
-            var kategoriDropdown = $('#kategori-dropdown');
-            kategoriDropdown.empty(); // Clear the dropdown
-
-            $.each(value, function (index, value) {
-                if (value) {
-                    kategoriDropdown.append('<option value="' + index + '">' + value.nama_kategori + '</option>');
-                }
-            });
-        });
 
     </script>
 </body>

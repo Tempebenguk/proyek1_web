@@ -286,7 +286,7 @@
             <div class="col-md-6 col-lg-4">
 
                 <!-- Bagian card -->
-                <div class="card">
+                <!-- <div class="card">
                     <div class="card-body d-flex justify-content-between align-items-center">
                         <div class="text-container">
                             <p class="card-text" style="font-size: 10pt; font-weight: 800; color: #BA7237;">Kopi Good
@@ -314,7 +314,7 @@
                         </div>
                         <img src="kopi.png" class="img-fluid" style="max-width: 130px; height: auto; opacity: 1;">
                     </div>
-                </div>
+                </div> -->
 
 
                 <!-- bagian tambah pesanan -->
@@ -398,6 +398,38 @@
             decrement();
             input.value = get();
         });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const title = urlParams.get('nama_menu');
+            const price = urlParams.get('harga');
+            const imageSrc = urlParams.get('gambar_menu');
+
+            // Gunakan data untuk membuat card baru
+            addOrderCard(title, price, imageSrc);
+        });
+
+        function addOrderCard(title, price, imageSrc) {
+            const newCard = document.createElement('div');
+            newCard.classList.add('card', 'mb-3');
+            newCard.innerHTML = `
+        <div class="card-body d-flex justify-content-between align-items-center">
+            <div class="text-container">
+                <p class="card-title" style="font-size: 10pt; color: #BA7237;">${title}</p>
+                <span class="card-text" style="font-size: 13pt; font-weight: 900; color: #7C2B18; margin-top: 5px;">Rp ${price}</span>
+                <div class="input-group input-group-quantity">
+                    <button class="decrement btn btn-secondary btn-sm">-</button>
+                    <input type="number" class="input form-control" value="1" readonly>
+                    <button class="increment btn btn-secondary btn-sm">+</button>
+                </div>
+            </div>
+            <img src="${imageSrc}" class="img-fluid" style="max-width: 100px; height: auto; opacity: 1;">
+        </div>
+    `;
+            // Tambahkan card ke container
+            const cardContainer = document.getElementById('menu-container');
+            cardContainer.appendChild(newCard);
+        }
     </script>
 </body>
 
