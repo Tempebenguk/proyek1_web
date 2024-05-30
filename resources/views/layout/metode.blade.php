@@ -93,7 +93,7 @@
         <div class="row justify-content-center">
             <div class="col-md-6 col-lg-4">
                 <div class="card">
-                    <a href="#" class="card-link">
+                    <a href="{{ route('pembayaran') }}" class="card-link">
                         <div class="d-flex align-items-center">
                             <img src="dana.png" style="width: 85px; height: 25px; margin-left: 5px;">
                             <span class="card-text ms-3">Dana</span>
@@ -103,7 +103,7 @@
             </div>
             <div class="col-md-6 col-lg-4">
                 <div class="card">
-                    <a href="#" class="card-link">
+                    <a href="{{ route('pembayaran') }}" class="card-link">
                         <div class="d-flex align-items-center">
                             <img src="ovo.png" style="width: 82px; height: 23px; margin-left: 5px;">
                             <span class="card-text ms-3">OVO</span>
@@ -113,7 +113,7 @@
             </div>
             <div class="col-md-6 col-lg-4">
                 <div class="card">
-                    <a href="#" class="card-link">
+                    <a href="{{ route('pembayaran') }}" class="card-link">
                         <div class="d-flex align-items-center">
                             <img src="gopay.png" style="width: 85px; height: 23px; margin-left: 5px;">
                             <span class="card-text ms-3">Gopay</span>
@@ -123,7 +123,7 @@
             </div>
             <div class="col-md-6 col-lg-4">
                 <div class="card">
-                    <a href="#" class="card-link">
+                    <a href="{{ route('pembayaran') }}" class="card-link">
                         <div class="d-flex align-items-center">
                             <img src="shopee.png" style="width: 85px; height: 23px; margin-left: 5px;">
                             <span class="card-text ms-3">Shopeepay</span>

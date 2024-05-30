@@ -31,3 +31,7 @@ Route::get('/pemesanan', function () {
 Route::get('/home', function () {
     return view('layout.home');
 })->name('home');
+
+Route::get('/pembayaran', function () {
+    return view('layout.pembayaran');
+})->name('pembayaran');
