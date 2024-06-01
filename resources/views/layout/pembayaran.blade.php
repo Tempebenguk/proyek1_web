@@ -73,15 +73,37 @@
 </head>
 <body>
     <div class="column">
-        <div class="card" style="margin-top: 5px; width: 330px; height: 50px; text-align: left; padding-left: 13px; line-height: 45px; box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);">
-            <img src="dana.png" style="width: 85px; height: 25px; margin-left: 5px; opacity: 3;">
-            <span class="card-text" style="font-size: 12pt; font-weight: bold; color: #BA7237;  position: absolute; left: 40%; ">Dana</span>
+        <div id="dana" style="display: none;">
+            <div class="card" style="margin-top: 5px; width: 330px; height: 50px; text-align: left; padding-left: 13px; line-height: 45px; box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);">
+                <img src="dana.png" style="width: 85px; height: 25px; margin-left: 5px; opacity: 3;">
+                <span class="card-text" style="font-size: 12pt; font-weight: bold; color: #BA7237;  position: absolute; left: 40%; ">Dana</span>
+            </div>
+            <div class="card" style="margin-top: 70px; width: 330px; height: 350px; text-align: left; padding-left: 13px; line-height: 45px; box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);">
+            </div>
         </div>
-        <div class="card" style="margin-top: 20px; width: 330px; height: 350px; text-align: left; padding-left: 13px; line-height: 45px; box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);">
+        <div id="tunai" style="display: none;">
+            <div class="card" style="margin-top: 5px; width: 330px; height: 50px;">
+                <span class="card-text" style="font-size: 12pt; font-weight: bold; color: #BA7237; position: absolute; left: 40%;">Bayar Tunai</span>
+            </div>
         </div>
-        <div class="d-grid gap-2 col-6 mx-auto" style="position: relative;">
+        <div id="buttonContainer" class="d-grid gap-2 col-6 mx-auto" style="position: relative; display: none;">
             <button class="btn btn-primary btn-pesan" type="button" style="font-size: 9pt; font-weight: bold;">SELESAI</button>
         </div>
     </div>
+
+    <script>
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const method = urlParams.get('method');
+
+            if (method === 'dana') {
+                document.getElementById('dana').style.display = 'block';
+                document.getElementById('buttonContainer').style.display = 'block';
+            } else if (method === 'tunai') {
+                document.getElementById('tunai').style.display = 'block';
+                document.getElementById('buttonContainer').style.display = 'block';
+            }
+        }
+    </script>
 </body>
 </html>

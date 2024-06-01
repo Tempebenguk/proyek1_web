@@ -91,9 +91,9 @@
             <img src="{{ asset('starling.png')}}" class="img-fluid" alt="Logo">
         </div>
         <div class="row justify-content-center">
-            {{-- <div class="col-md-6 col-lg-4">
+            <div class="col-md-6 col-lg-4">
                 <div class="card">
-                    <a href="{{ route('pembayaran') }}" class="card-link">
+                    <a href="{{ route('pembayaran', ['method' => 'dana']) }}" class="card-link">
                         <div class="d-flex align-items-center">
                             <img src="dana.png" style="width: 85px; height: 25px; margin-left: 5px;">
                             <span class="card-text ms-3">Dana</span>
@@ -101,7 +101,7 @@
                     </a>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-4">
+            {{-- <div class="col-md-6 col-lg-4">
                 <div class="card">
                     <a href="{{ route('pembayaran') }}" class="card-link">
                         <div class="d-flex align-items-center">
@@ -133,8 +133,9 @@
             </div> --}}
             <div class="col-md-6 col-lg-4">
                 <div class="card">
-                    <a href="{{ route('pembayaran') }}" class="card-link">
+                    <a href="{{ route('pembayaran', ['method' => 'tunai']) }}" class="card-link">
                         <div class="d-flex align-items-center">
+                            <img src="cash.png" style="width: 50px; height: 45px; margin-left: 5px;">
                             <span class="card-text ms-3">Bayar Tunai</span>
                         </div>
                     </a>
