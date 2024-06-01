@@ -77,7 +77,7 @@
             <img src="dana.png" style="width: 85px; height: 25px; margin-left: 5px; opacity: 3;">
             <span class="card-text" style="font-size: 12pt; font-weight: bold; color: #BA7237;  position: absolute; left: 40%; ">Dana</span>
         </div>
-        <div class="card" style="margin-top: 70px; width: 330px; height: 300px; text-align: left; padding-left: 13px; line-height: 45px; box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);">
+        <div class="card" style="margin-top: 20px; width: 330px; height: 350px; text-align: left; padding-left: 13px; line-height: 45px; box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);">
         </div>
         <div class="d-grid gap-2 col-6 mx-auto" style="position: relative;">
             <button class="btn btn-primary btn-pesan" type="button" style="font-size: 9pt; font-weight: bold;">SELESAI</button>

@@ -91,7 +91,7 @@
             <img src="{{ asset('starling.png')}}" class="img-fluid" alt="Logo">
         </div>
         <div class="row justify-content-center">
-            <div class="col-md-6 col-lg-4">
+            {{-- <div class="col-md-6 col-lg-4">
                 <div class="card">
                     <a href="{{ route('pembayaran') }}" class="card-link">
                         <div class="d-flex align-items-center">
@@ -127,6 +127,15 @@
                         <div class="d-flex align-items-center">
                             <img src="shopee.png" style="width: 85px; height: 23px; margin-left: 5px;">
                             <span class="card-text ms-3">Shopeepay</span>
+                        </div>
+                    </a>
+                </div>
+            </div> --}}
+            <div class="col-md-6 col-lg-4">
+                <div class="card">
+                    <a href="{{ route('pembayaran') }}" class="card-link">
+                        <div class="d-flex align-items-center">
+                            <span class="card-text ms-3">Bayar Tunai</span>
                         </div>
                     </a>
                 </div>
