@@ -19,6 +19,7 @@ Route::get('/pemesanan', [LatihanController::class, 'pemesanan']);
 Route::get('/metode', [LatihanController::class, 'metode']);
 Route::get('/pembayaran', [LatihanController::class, 'pembayaran']);
 Route::get('/menu', [LatihanController::class, 'menu']);
+Route::post('/home', [LatihanController::class, 'sendValue'])->name('send.value');
 
 Route::get('/metode', function () {
     return view('layout.metode');

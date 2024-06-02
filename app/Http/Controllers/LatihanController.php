@@ -20,11 +20,17 @@ class LatihanController extends Controller
         return view('firebase.index', compact('value'));
     }
 
-    public function create()
+    public function sendValue(Request $request)
     {
+        $value = $request->input('value');
+        $timestamp = now()->timestamp;
+        $this->database->getReference('values')->push([
+            'value' => $value,
+            'timestamp' => $timestamp
+        ]);
 
+        return redirect()->route('pemesanan');
     }
-
     public function store()
     {
 
