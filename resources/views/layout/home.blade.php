@@ -507,7 +507,6 @@
     <div id="popup" class="popup">
         <div class="popup-content">
             <!-- <span class="close-btn">&times;</span> -->
-
             <!-- bagian tambah pesanan -->
             <div class="grid-container">
                 <div class="text1">ada tambahan?</div>
@@ -533,20 +532,15 @@
                 </div>
 
                 <!-- bagian button pembayaran -->
-                <a href="{{ route('metode') }}">
-                    <button id="pay-button" class="btn btn-bayar" style="font-family: 'Fredoka', sans-serif; margin-top: 25px; max-width: auto; justify-content: center;
-            align-items: center;">BAYAR
-                        PESANAN
-                        ANDA</button>
-                </a>
+                <input type="number" id="nominal" placeholder="Nominal pembayaran" required>
+                <div class="pay-button">
+                    <button id="pay-button" class="btn btn-bayar" style="font-family: 'Fredoka', sans-serif; margin-top: 25px; max-width: auto; justify-content: center; align-items: center;">BUAT PESANAN</button>
+                </div>
                 <div class="close-btn">
-                    <button id="pay-button" class="btn btn-batal" style="font-family: 'Fredoka', sans-serif; margin-top: 25px; max-width: auto; justify-content: center;
-            align-items: center;">BATAL</button>
+                    <button id="batal" class="btn btn-batal" style="font-family: 'Fredoka', sans-serif; margin-top: 25px; max-width: auto; justify-content: center; align-items: center;">BATAL</button>
                 </div>
             </div>
         </div>
-
-
     </div>
 
     <!-- code js -->
@@ -720,22 +714,21 @@
                 } else {
                     // If card does not exist, create a new card
                     const orderCardHtml = `
-            <div class="card-bawah" data-title="${title}">
-                <div class="card-bawah-body d-flex justify-content-between align-items-center">
-                    <div class="text-container-pesan">
-                        <p class="card-text-pesan" style="font-size: 10pt; font-weight: 800; color: #BA7237;">${title}</p>
-                        <span class="card-text" style="font-size: 13pt; font-weight: 900; color: #7C2B18; margin-top: 5px; margin-bottom: 10px;">Rp. ${price}</span>
-                        <div class="input-group input-group-quantity">
-                            <button id="decrement" onclick="decrementQuantity(this)">-</button>
-                            <input type="number" id="input" value="1" readonly>
-                            <button id="increment" onclick="incrementQuantity(this)">+</button>
+                        <div class="card-bawah" data-title="${title}">
+                            <div class="card-bawah-body d-flex justify-content-between align-items-center">
+                                <div class="text-container-pesan">
+                                    <p class="card-text-pesan" style="font-size: 10pt; font-weight: 800; color: #BA7237;">${title}</p>
+                                    <span class="card-text" style="font-size: 13pt; font-weight: 900; color: #7C2B18; margin-top: 5px; margin-bottom: 10px;">Rp. ${price}</span>
+                                    <div class="input-group input-group-quantity">
+                                        <button id="decrement" onclick="decrementQuantity(this)">-</button>
+                                        <input type="number" id="input" value="1" readonly>
+                                        <button id="increment" onclick="incrementQuantity(this)">+</button>
+                                    </div>
+                                </div>
+                                <img src="${imageSrc}" class="img-fluid" style="max-width: 90px; height: auto; opacity: 1;">
+                            </div>
                         </div>
-                    </div>
-                    <img src="${imageSrc}" class="img-fluid" style="max-width: 90px; height: auto; opacity: 1;">
-                </div>
-            </div>
-        `;
-
+                    `;
                     document.getElementById('pesanan').insertAdjacentHTML('beforeend', orderCardHtml);
 
                     // Add to pesanan array
@@ -785,38 +778,62 @@
 
         // Event listener untuk tombol bayar
         document.getElementById('pay-button').addEventListener('click', function () {
+            // Ambil nilai nominal dari input
+            const paymentInput = document.getElementById('nominal');
+            const payment = parseInt(paymentInput.value);
+
+            // Lakukan validasi apakah nilai nominal sudah dimasukkan
+            if (isNaN(payment) || payment <= 0) {
+                alert('Silakan masukkan nominal pembayaran yang valid.');
+                return;
+            }
+
+            // Lanjutkan dengan proses pembayaran
             const totalPayment = pesanan.reduce((total, item) => total + (item.price * item.quantity), 0);
-            const payment = parseInt(prompt("Masukkan jumlah pembayaran:"));
             const kembalian = payment - totalPayment;
             const date = new Date().toISOString().slice(0, 10);
 
-            const detail_trx = {};
-            pesanan.forEach((item, index) => {
-                detail_trx[`men${index + 1}`] = {
-                    nama_menu: item.title,
-                    harga: item.price,
-                    qty: item.quantity
-                };
-            });
+            // Simpan data transaksi ke Firebase
+            const transactionRef = firebase.database().ref('transaksi');
 
-            const orderData = {
-                detail_trx: detail_trx,
-                total_bayar: totalPayment,
-                tgl_transaksi: date,
-                // status: 1,  // Jika diperlukan
-                // kembalian: kembalian,  // Jika diperlukan
-                // nominal: payment  // Jika diperlukan
-            };
+            transactionRef.once('value').then(snapshot => {
+                const numberOfTransactions = snapshot.numChildren();
+                const nextTransactionId = `trans${numberOfTransactions + 1}`;
 
-            firebase.database().ref('transaksi').push(orderData)
-                .then(() => {
-                    alert('Pesanan berhasil dibayar!');
-                    location.reload();
-                })
-                .catch(error => {
-                    console.error('Error saving order:', error);
+                const detail_trx = {};
+                pesanan.forEach((item, index) => {
+                    const totalItemPrice = item.price * item.quantity; // Harga total untuk satu item
+                    detail_trx[`men${index + 1}`] = {
+                        nama_menu: item.title,
+                        harga: item.price,
+                        qty: item.quantity,
+                        total: totalItemPrice // Harga total untuk satu item
+                    };
                 });
+
+                const orderData = {
+                    detail_trx: detail_trx,
+                    kembalian: kembalian, // Tambahkan kembalian ke data transaksi
+                    nominal: payment, // Tambahkan nominal pembayaran ke data transaksi
+                    status: 1,
+                    tgl_transaksi: date,
+                    total_bayar: totalPayment
+                };
+
+                const updates = {};
+                updates[`transaksi/${nextTransactionId}`] = orderData;
+
+                firebase.database().ref().update(updates)
+                    .then(() => {
+                        alert('Pesanan berhasil dibayar!');
+                        location.reload();
+                    })
+                    .catch(error => {
+                        console.error('Error saving order:', error);
+                    });
+            });
         });
+
 
         document.addEventListener('DOMContentLoaded', function () {
             const popup = document.getElementById('popup');
