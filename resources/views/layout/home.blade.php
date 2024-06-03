@@ -475,7 +475,7 @@
                     <!-- Pencarian -->
                     <div class="cari ms-auto">
                         <div class="search">
-                            <input id="searchInput"class="search-input" type="search" placeholder="cari">
+                            <input id="searchInput" class="search-input" type="search" placeholder="cari">
                             <button id="searchButton" class="search-button"><i class="fas fa-search"></i></button>
                         </div>
                     </div>
@@ -739,6 +739,18 @@
                     `;
                     document.getElementById('pesanan').insertAdjacentHTML('beforeend', orderCardHtml);
 
+                    // Fungsi increment & decrement
+                    const incrementButton = document.getElementById('increment');
+                    incrementButton.addEventListener('click', function () {
+                        incrementQuantity(this);
+                    });
+
+                    // Menambahkan event listener pada tombol decrement
+                    const decrementButton = document.getElementById('decrement');
+                    decrementButton.addEventListener('click', function () {
+                        decrementQuantity(this);
+                    });
+
                     // Add to pesanan array
                     const pesananItem = { title, price: parseInt(price), quantity: 1, imageSrc };
                     pesanan.push(pesananItem);
@@ -857,7 +869,7 @@
                 }
             });
 
-            document.getElementById('searchInput').addEventListener('input', function() {
+            document.getElementById('searchInput').addEventListener('input', function () {
                 const searchTerm = this.value.trim().toLowerCase(); // Dapatkan kata kunci pencarian dan ubah menjadi huruf kecil
                 const cardItems = document.querySelectorAll('.card-item'); // Ambil semua elemen yang ingin difilter
 
