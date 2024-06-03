@@ -799,10 +799,9 @@
 
         // Event listener untuk tombol bayar
         document.getElementById('pay-button').addEventListener('click', function () {
+
             const date = new Date().toISOString().slice(0, 10);
             const transactionRef = firebase.database().ref('transaksi/');
-
-            // Inisialisasi pesanan sebagai array
             let pesananArray = Array.isArray(pesanan) ? pesanan : Object.values(pesanan);
 
             transactionRef.once('value').then(snapshot => {
@@ -810,17 +809,27 @@
                 const nextTransactionId = `trans${numberOfTransactions + 1}`;
 
                 const detail_trx = pesananArray.map((item, index) => ({
-                    [`men${index + 1}`]: {
-                        nama_menu: item.title,
-                        harga: item.price,
-                        qty: item.quantity
-                    }
+                [`men${index + 1}`]: {
+                    nama_menu: item.title,
+                    harga: item.price,
+                    qty: item.quantity
+                }
                 }));
 
+                const total_bayar = detail_trx.reduce((total, item) => total + (item.harga * item.qty), 0);
+                const nominalInput = document.getElementById('nominal');
+                const nominal = nominalInput.valueAsNumber;
+                const kembalian = nominal - total_bayar;
+                const notes = document.querySelector("textarea").value;
+
                 const orderData = {
-                    detail_trx: detail_trx,
-                    status: 1,
-                    tgl_transaksi: date
+                detail_trx: detail_trx,
+                kembalian: kembalian,
+                nominal: nominal,
+                status: 1,
+                tgl_transaksi: date,
+                total_bayar: total_bayar,
+                catatan: notes 
                 };
 
                 console.log(orderData); // Pastikan orderData didefinisikan sebelum digunakan
