@@ -792,60 +792,61 @@
                 addOrderCard(title, price, imageSrc);
 
                 // Menyimpan data pesanan ke dalam array
-                const pesananItem = { title, price: parseInt(price), imageSrc };
+                const pesananItem = { title, price: parseInt(price), imageSrc, quantity: 1 };
                 pesanan.push(pesananItem);
                 console.log('Data pesanan:', pesanan);
             }
-        });
+            // Event listener untuk tombol bayar
+            document.getElementById('pay-button').addEventListener('click', function () {
 
-        // Event listener untuk tombol bayar
-        document.getElementById('pay-button').addEventListener('click', function () {
+                const date = new Date().toISOString().slice(0, 10);
+                const transactionRef = firebase.database().ref('transaksi/');
+                let pesananArray = Array.isArray(pesanan) ? pesanan : Object.values(pesanan);
 
-            const date = new Date().toISOString().slice(0, 10);
-            const transactionRef = firebase.database().ref('transaksi/');
-            let pesananArray = Array.isArray(pesanan) ? pesanan : Object.values(pesanan);
+                transactionRef.once('value').then(snapshot => {
+                    const numberOfTransactions = snapshot.numChildren();
+                    const nextTransactionId = `trans${numberOfTransactions + 1}`;
 
-            transactionRef.once('value').then(snapshot => {
-                const numberOfTransactions = snapshot.numChildren();
-                const nextTransactionId = `trans${numberOfTransactions + 1}`;
-
-                const detail_trx = pesananArray.map((item, index) => ({
-                [`men${index + 1}`]: {
-                    nama_menu: item.title,
-                    harga: item.price,
-                    qty: item.quantity
-                }
-                }));
-
-                const total_bayar = detail_trx.reduce((total, item) => total + (item.harga * item.qty), 0);
-                const nominalInput = document.getElementById('nominal');
-                const nominal = nominalInput.valueAsNumber;
-                const kembalian = nominal - total_bayar;
-                const notes = document.querySelector("textarea").value;
-
-                const orderData = {
-                detail_trx: detail_trx,
-                kembalian: kembalian,
-                nominal: nominal,
-                status: 1,
-                tgl_transaksi: date,
-                total_bayar: total_bayar,
-                catatan: notes 
-                };
-
-                console.log(orderData); // Pastikan orderData didefinisikan sebelum digunakan
-
-                transactionRef.child(nextTransactionId).set(orderData)
-                    .then(() => {
-                        alert('Transaksi berhasil disimpan!');
-                        location.reload();
-                    })
-                    .catch(error => {
-                        console.error('Error saving transaction:', error);
+                    const detail_trx = {};
+                    pesananArray.forEach((item, index) => {
+                        detail_trx[`men${index + 1}`] = {
+                            nama_menu: item.title,
+                            harga: item.price,
+                            qty: item.quantity
+                        };
                     });
-            });
 
+                    const total_bayar = pesananArray.reduce((total, item) => total + (item.price * item.quantity), 0);
+                    const nominalInput = document.getElementById('nominal');
+                    const nominal = nominalInput.valueAsNumber;
+                    const kembalian = nominal - total_bayar;
+                    const notes = document.querySelector("textarea").value;
+
+                    const orderData = {
+                        detail_trx: detail_trx,
+                        kembalian: kembalian,
+                        nominal: nominal,
+                        status: 1,
+                        tgl_transaksi: date,
+                        total_bayar: total_bayar,
+                        catatan: notes 
+                    };
+
+                    console.log(orderData); // Pastikan orderData didefinisikan sebelum digunakan
+
+                    transactionRef.child(nextTransactionId).set(orderData)
+                        .then(() => {
+                            alert('Transaksi berhasil disimpan!');
+                            location.reload();
+                        })
+                        .catch(error => {
+                            console.error('Error saving transaction:', error);
+                        });
+                });
+            });
         });
+
+        
 
         document.addEventListener('DOMContentLoaded', function () {
             const popup = document.getElementById('popup');
