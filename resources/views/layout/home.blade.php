@@ -475,8 +475,8 @@
                     <!-- Pencarian -->
                     <div class="cari ms-auto">
                         <div class="search">
-                            <input class="search-input" type="search" placeholder="cari">
-                            <button class="search-button"><i class="fas fa-search"></i></button>
+                            <input id="searchInput"class="search-input" type="search" placeholder="cari">
+                            <button id="searchButton" class="search-button"><i class="fas fa-search"></i></button>
                         </div>
                     </div>
                 </div>
@@ -823,78 +823,6 @@
                     });
             });
 
-
-
-
-
-            // // if (!Array.isArray(pesanan)) {
-            // //     pesanan = Array.from(pesanan);
-            // // }
-
-            // // // Ambil nilai nominal dari input
-            // // const paymentInput = document.getElementById('nominal');
-            // // const payment = parseInt(paymentInput.value);
-
-            // // // Lakukan validasi apakah nilai nominal sudah dimasukkan
-            // // if (isNaN(payment) || payment <= 0) {
-            // //     alert('Silakan masukkan nominal pembayaran yang valid.');
-            // //     return;
-            // // }
-
-            // // // Lanjutkan dengan proses pembayaran
-            // // const totalPayment = pesanan.reduce((total, item) => total + (item.price * item.quantity), 0);
-            // // const kembalian = payment - totalPayment;
-            // const date = new Date().toISOString().slice(0, 10);
-
-            // // Simpan data transaksi ke Firebase
-            // const transactionRef = firebase.database().ref('transaksi/');
-
-            // transactionRef.once('value').then(snapshot => {
-            //     const numberOfTransactions = snapshot.numChildren();
-            //     const nextTransactionId = `trans${numberOfTransactions + 1}`;
-
-            //     // const detail_trx = {};
-            //     // pesanan.forEach((item, index) => {
-            //     //     const totalItemPrice = item.price * item.quantity; // Harga total untuk satu item
-            //     //     detail_trx[`men${index + 1}`] = {
-            //     //         nama_menu: item.title,
-            //     //         harga: item.price,
-            //     //         qty: item.quantity,
-            //     //         total: totalItemPrice // Harga total untuk satu item
-            //     //     };
-            //     // });
-
-            //     const orderData = {
-            //         // detail_trx: detail_trx,
-            //         // kembalian: kembalian,
-            //         // nominal: payment,
-            //         // status: 1,
-            //         tgl_transaksi: date
-            //         // total_bayar: totalPayment
-            //     };
-
-            //     // Tampilkan orderData di konsol
-            //     console.log(orderData);
-
-            //     // Tampilkan orderData dalam alert
-            //     alert(JSON.stringify(orderData, null, 2));
-
-            //     // Tampilkan orderData di elemen HTML
-            //     document.getElementById('order-data').textContent = JSON.stringify(orderData, null, 2);
-            //     document.getElementById('order-data-container').style.display = 'block';
-
-            //     const updates = {};
-            //     updates[`transaksi/${nextTransactionId}`] = orderData;
-
-            //     firebase.database().ref().update(updates)
-            //         .then(() => {
-            //             alert('Pesanan berhasil dibayar!');
-            //             location.reload();
-            //         })
-            //         .catch(error => {
-            //             console.error('Error saving order:', error);
-            //         });
-            // });
         });
 
         document.addEventListener('DOMContentLoaded', function () {
@@ -902,6 +830,8 @@
             const openBtn = document.getElementById('open-popup-btn');
             const closeBtn = document.querySelector('.close-btn');
             const payBtn = document.querySelector('.pay-button');
+            const searchButton = document.getElementById('searchButton');
+            const searchInput = document.getElementById('searchInput');
 
             // Fungsi untuk membuka popup
             function openPopup() {
@@ -927,30 +857,18 @@
                 }
             });
 
-            // Function to search and filter cards
-            function searchCards() {
-                const searchTerm = searchInput.value.toLowerCase();
-                const cardItems = document.querySelectorAll('.card-item');
+            document.getElementById('searchInput').addEventListener('input', function() {
+                const searchTerm = this.value.trim().toLowerCase(); // Dapatkan kata kunci pencarian dan ubah menjadi huruf kecil
+                const cardItems = document.querySelectorAll('.card-item'); // Ambil semua elemen yang ingin difilter
+
+                // Loop melalui setiap elemen
                 cardItems.forEach(card => {
-                    const title = card.querySelector('.card-title').innerText.toLowerCase();
-                    if (title.includes(searchTerm)) {
-                        card.classList.add('visible');
-                    } else {
-                        card.classList.remove('visible');
-                    }
+                    const title = card.querySelector('.card-title').innerText.toLowerCase(); // Dapatkan teks judul kartu dan ubah menjadi huruf kecil
+                    const isVisible = title.includes(searchTerm); // Periksa apakah judul kartu mengandung kata kunci pencarian
+
+                    // Atur tampilan kartu sesuai dengan hasil pencarian
+                    card.style.display = isVisible ? 'block' : 'none';
                 });
-            }
-
-            // Add event listener to search button
-            searchButton.addEventListener('click', function () {
-                searchCards();
-            });
-
-            // Add event listener to search input to trigger search on Enter key press
-            searchInput.addEventListener('keypress', function (e) {
-                if (e.key === 'Enter') {
-                    searchCards();
-                }
             });
         });
     </script>
