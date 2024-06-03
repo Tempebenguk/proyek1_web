@@ -570,22 +570,103 @@
 
             // Function to add order card
             function addOrderCard(title, price, imageSrc) {
+                const existingCard = document.querySelector(`.card-bawah[data-title="${title}"]`);
+
+                if (existingCard) {
+                    // If card exists, increment the quantity
+                    const quantityInput = existingCard.querySelector('.quantity-input');
+                    quantityInput.value = parseInt(quantityInput.value) + 1;
+                    pesanan.forEach(item => {
+                        if (item.title === title) {
+                            item.quantity += 1;
+                        }
+                    });
+                } else {
+                    // If card does not exist, create a new card
+                    const orderCardHtml = `
+                        <div class="card-bawah" data-title="${title}">
+                            <div class="card-bawah-body d-flex justify-content-between align-items-center">
+                                <div class="text-container-pesan">
+                                    <p class="card-text-pesan" style="font-size: 10pt; font-weight: 800; color: #BA7237;">${title}</p>
+                                    <span class="card-text" style="font-size: 13pt; font-weight: 900; color: #7C2B18; margin-top: 5px; margin-bottom: 10px;">Rp. ${price}</span>
+                                    <div class="input-group input-group-quantity">
+                                        <button class="decrement">-</button>
+                                        <input type="number" class="quantity-input" value="1" readonly>
+                                        <button class="increment">+</button>
+                                    </div>
+                                </div>
+                                <img src="${imageSrc}" class="img-fluid" style="max-width: 90px; height: auto; opacity: 1;">
+                            </div>
+                        </div>
+                    `;
+                    document.getElementById('pesanan').insertAdjacentHTML('beforeend', orderCardHtml);
+
+                    // Add to pesanan array
+                    const pesananItem = { title, price: parseInt(price), quantity: 1, imageSrc };
+                    pesanan.push(pesananItem);
+                }
                 orderButtonContainer.style.display = 'block';
+                console.log('Current pesanan:', pesanan);
+
+                // Attach event listeners to increment and decrement buttons
+                attachQuantityButtonsListeners();
             }
 
-            // Function to handle adding items to the order
+            function attachQuantityButtonsListeners() {
+                document.querySelectorAll('.increment').forEach(button => {
+                    button.removeEventListener('click', handleIncrementClick);
+                    button.addEventListener('click', handleIncrementClick);
+                });
+
+                document.querySelectorAll('.decrement').forEach(button => {
+                    button.removeEventListener('click', handleDecrementClick);
+                    button.addEventListener('click', handleDecrementClick);
+                });
+            }
+
+            function handleIncrementClick(event) {
+                const button = event.target;
+                const quantityInput = button.previousElementSibling;
+                quantityInput.value = parseInt(quantityInput.value) + 1;
+
+                const cardTitle = button.closest('.card-bawah').dataset.title;
+                pesanan.forEach(item => {
+                    if (item.title === cardTitle) {
+                        item.quantity += 1;
+                    }
+                });
+                console.log('Incremented pesanan:', pesanan);
+            }
+
+            function handleDecrementClick(event) {
+                const button = event.target;
+                const quantityInput = button.nextElementSibling;
+                if (parseInt(quantityInput.value) > 1) {
+                    quantityInput.value = parseInt(quantityInput.value) - 1;
+
+                    const cardTitle = button.closest('.card-bawah').dataset.title;
+                    pesanan.forEach(item => {
+                        if (item.title === cardTitle) {
+                            item.quantity -= 1;
+                        }
+                    });
+                } else {
+                    const card = button.closest('.card-bawah');
+                    const cardTitle = card.dataset.title;
+                    pesanan = pesanan.filter(item => item.title !== cardTitle);
+                    card.remove();
+                }
+                console.log('Decremented pesanan:', pesanan);
+            }
+
             function handleAddButtonClick(event) {
                 event.preventDefault();
                 const button = event.target.closest('.btn-input');
                 const card = button.closest('.card');
                 const title = card.querySelector('.card-title').innerText;
-                const price = card.querySelector('.card-text').innerText.replace('Rp ', '');
+                const price = card.querySelector('.card-text').innerText.replace('Rp. ', '');
                 const imageSrc = card.querySelector('img').src;
                 addOrderCard(title, price, imageSrc);
-
-                // Menyimpan data pesanan ke dalam array
-                const pesananItem = { title, price, imageSrc };
-                pesanan.push(pesananItem);
                 console.log('Data pesanan:', pesanan);
             }
 
@@ -611,14 +692,6 @@
                             </div>
                         </div>
                     </div>`;
-
-                function addEventListenersToButtons() {
-                    const addButtonElements = document.querySelectorAll('.btn-input');
-                    addButtonElements.forEach(button => {
-                        button.removeEventListener('click', handleAddButtonClick); // Remove existing listener to avoid duplication
-                        button.addEventListener('click', handleAddButtonClick);
-                    });
-                }
             }
 
             // Function to filter cards based on category
@@ -707,81 +780,6 @@
                 }
             });
 
-            function addOrderCard(title, price, imageSrc) {
-                const existingCard = document.querySelector(`.card-bawah[data-title="${title}"]`);
-
-                if (existingCard) {
-                    // If card exists, increment the quantity
-                    const quantityInput = existingCard.querySelector('#input');
-                    quantityInput.value = parseInt(quantityInput.value) + 1;
-                    pesanan.forEach(item => {
-                        if (item.title === title) {
-                            item.quantity += 1;
-                        }
-                    });
-                } else {
-                    // If card does not exist, create a new card
-                    const orderCardHtml = `
-                        <div class="card-bawah" data-title="${title}">
-                            <div class="card-bawah-body d-flex justify-content-between align-items-center">
-                                <div class="text-container-pesan">
-                                    <p class="card-text-pesan" style="font-size: 10pt; font-weight: 800; color: #BA7237;">${title}</p>
-                                    <span class="card-text" style="font-size: 13pt; font-weight: 900; color: #7C2B18; margin-top: 5px; margin-bottom: 10px;">Rp. ${price}</span>
-                                    <div class="input-group input-group-quantity">
-                                        <button id="decrement" onclick="decrementQuantity(this)">-</button>
-                                        <input type="number" id="input" value="1" readonly>
-                                        <button id="increment" onclick="incrementQuantity(this)">+</button>
-                                    </div>
-                                </div>
-                                <img src="${imageSrc}" class="img-fluid" style="max-width: 90px; height: auto; opacity: 1;">
-                            </div>
-                        </div>
-                    `;
-                    document.getElementById('pesanan').insertAdjacentHTML('beforeend', orderCardHtml);
-
-                    // Fungsi increment & decrement
-                    const incrementButton = document.getElementById('increment');
-                    incrementButton.addEventListener('click', function () {
-                        incrementQuantity(this);
-                    });
-
-                    // Menambahkan event listener pada tombol decrement
-                    const decrementButton = document.getElementById('decrement');
-                    decrementButton.addEventListener('click', function () {
-                        decrementQuantity(this);
-                    });
-
-                    // Add to pesanan array
-                    const pesananItem = { title, price: parseInt(price), quantity: 1, imageSrc };
-                    pesanan.push(pesananItem);
-
-                }
-                orderButtonContainer.style.display = 'block';
-                // console.log('Current pesanan:', pesanan);
-            }
-
-            function incrementQuantity(button) {
-                console.log('Increment button clicked');
-                const quantityInput = button.previousElementSibling;
-                console.log('Current quantity:', quantityInput.value);
-                quantityInput.value = parseInt(quantityInput.value) + 1;
-                console.log('New quantity:', quantityInput.value);
-            }
-
-            function decrementQuantity(button) {
-                console.log('Decrement button clicked');
-                const quantityInput = button.nextElementSibling;
-                console.log('Current quantity:', quantityInput.value);
-                if (parseInt(quantityInput.value) > 1) {
-                    quantityInput.value = parseInt(quantityInput.value) - 1;
-                    console.log('New quantity:', quantityInput.value);
-                } else {
-                    const card = button.closest('.card-bawah');
-                    card.remove();
-                    console.log('Card removed');
-                }
-            }
-
             function handleAddButtonClick(event) {
                 event.preventDefault();
                 const button = event.target.closest('.btn-input');
@@ -790,12 +788,9 @@
                 const price = card.querySelector('.card-text').innerText.replace('Rp. ', '');
                 const imageSrc = card.querySelector('img').src;
                 addOrderCard(title, price, imageSrc);
-
-                // Menyimpan data pesanan ke dalam array
-                const pesananItem = { title, price: parseInt(price), imageSrc, quantity: 1 };
-                pesanan.push(pesananItem);
                 console.log('Data pesanan:', pesanan);
             }
+
             // Event listener untuk tombol bayar
             document.getElementById('pay-button').addEventListener('click', function () {
 
@@ -829,7 +824,7 @@
                         status: 1,
                         tgl_transaksi: date,
                         total_bayar: total_bayar,
-                        catatan: notes 
+                        catatan: notes
                     };
 
                     console.log(orderData); // Pastikan orderData didefinisikan sebelum digunakan
@@ -847,7 +842,6 @@
         });
 
         
-
         document.addEventListener('DOMContentLoaded', function () {
             const popup = document.getElementById('popup');
             const openBtn = document.getElementById('open-popup-btn');
