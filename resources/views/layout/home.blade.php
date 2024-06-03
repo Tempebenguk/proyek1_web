@@ -534,10 +534,13 @@
                 <!-- bagian button pembayaran -->
                 <input type="number" id="nominal" placeholder="Nominal pembayaran" required>
                 <div class="pay-button">
-                    <button id="pay-button" class="btn btn-bayar" style="font-family: 'Fredoka', sans-serif; margin-top: 25px; max-width: auto; justify-content: center; align-items: center;">BUAT PESANAN</button>
+                    <button id="pay-button" class="btn btn-bayar"
+                        style="font-family: 'Fredoka', sans-serif; margin-top: 25px; max-width: auto; justify-content: center; align-items: center;">BUAT
+                        PESANAN</button>
                 </div>
                 <div class="close-btn">
-                    <button id="batal" class="btn btn-batal" style="font-family: 'Fredoka', sans-serif; margin-top: 25px; max-width: auto; justify-content: center; align-items: center;">BATAL</button>
+                    <button id="batal" class="btn btn-batal"
+                        style="font-family: 'Fredoka', sans-serif; margin-top: 25px; max-width: auto; justify-content: center; align-items: center;">BATAL</button>
                 </div>
             </div>
         </div>
@@ -545,20 +548,25 @@
 
     <!-- code js -->
 
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QEFSd3RgcPp3uQQMWLODLVBu1BL2eNTFB5LyKluZAYW6U+G1vM5cCAE9mGJZzjE2" crossorigin="anonymous">
+
+    <!-- Bootstrap JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq" crossorigin="anonymous"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq">
-        </script>
-
+    <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
+
+    <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase.js"></script>
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const orderButtonContainer = document.querySelector('.fixed-btn-container');
             const cardContainer = document.getElementById('menu-container');
-            const pesanan = []; // Array to store order data
+            let pesanan = [];
 
             // Function to add order card
             function addOrderCard(title, price, imageSrc) {
@@ -736,6 +744,7 @@
                     pesanan.push(pesananItem);
                 }
                 orderButtonContainer.style.display = 'block';
+                // console.log('Current pesanan:', pesanan);
             }
 
             function incrementQuantity(button) {
@@ -770,7 +779,7 @@
                 addOrderCard(title, price, imageSrc);
 
                 // Menyimpan data pesanan ke dalam array
-                const pesananItem = { title, price, imageSrc };
+                const pesananItem = { title, price: parseInt(price), imageSrc };
                 pesanan.push(pesananItem);
                 console.log('Data pesanan:', pesanan);
             }
@@ -778,67 +787,121 @@
 
         // Event listener untuk tombol bayar
         document.getElementById('pay-button').addEventListener('click', function () {
-            // Ambil nilai nominal dari input
-            const paymentInput = document.getElementById('nominal');
-            const payment = parseInt(paymentInput.value);
-
-            // Lakukan validasi apakah nilai nominal sudah dimasukkan
-            if (isNaN(payment) || payment <= 0) {
-                alert('Silakan masukkan nominal pembayaran yang valid.');
-                return;
-            }
-
-            // Lanjutkan dengan proses pembayaran
-            const totalPayment = pesanan.reduce((total, item) => total + (item.price * item.quantity), 0);
-            const kembalian = payment - totalPayment;
             const date = new Date().toISOString().slice(0, 10);
+            const transactionRef = firebase.database().ref('transaksi/');
 
-            // Simpan data transaksi ke Firebase
-            const transactionRef = firebase.database().ref('transaksi');
+            // Inisialisasi pesanan sebagai array
+            let pesananArray = Array.isArray(pesanan) ? pesanan : Object.values(pesanan);
 
             transactionRef.once('value').then(snapshot => {
                 const numberOfTransactions = snapshot.numChildren();
                 const nextTransactionId = `trans${numberOfTransactions + 1}`;
 
-                const detail_trx = {};
-                pesanan.forEach((item, index) => {
-                    const totalItemPrice = item.price * item.quantity; // Harga total untuk satu item
-                    detail_trx[`men${index + 1}`] = {
+                const detail_trx = pesananArray.map((item, index) => ({
+                    [`men${index + 1}`]: {
                         nama_menu: item.title,
                         harga: item.price,
-                        qty: item.quantity,
-                        total: totalItemPrice // Harga total untuk satu item
-                    };
-                });
+                        qty: item.quantity
+                    }
+                }));
 
                 const orderData = {
                     detail_trx: detail_trx,
-                    kembalian: kembalian, // Tambahkan kembalian ke data transaksi
-                    nominal: payment, // Tambahkan nominal pembayaran ke data transaksi
                     status: 1,
-                    tgl_transaksi: date,
-                    total_bayar: totalPayment
+                    tgl_transaksi: date
                 };
 
-                const updates = {};
-                updates[`transaksi/${nextTransactionId}`] = orderData;
+                console.log(orderData); // Pastikan orderData didefinisikan sebelum digunakan
 
-                firebase.database().ref().update(updates)
+                transactionRef.child(nextTransactionId).set(orderData)
                     .then(() => {
-                        alert('Pesanan berhasil dibayar!');
+                        alert('Transaksi berhasil disimpan!');
                         location.reload();
                     })
                     .catch(error => {
-                        console.error('Error saving order:', error);
+                        console.error('Error saving transaction:', error);
                     });
             });
-        });
 
+
+
+
+
+            // // if (!Array.isArray(pesanan)) {
+            // //     pesanan = Array.from(pesanan);
+            // // }
+
+            // // // Ambil nilai nominal dari input
+            // // const paymentInput = document.getElementById('nominal');
+            // // const payment = parseInt(paymentInput.value);
+
+            // // // Lakukan validasi apakah nilai nominal sudah dimasukkan
+            // // if (isNaN(payment) || payment <= 0) {
+            // //     alert('Silakan masukkan nominal pembayaran yang valid.');
+            // //     return;
+            // // }
+
+            // // // Lanjutkan dengan proses pembayaran
+            // // const totalPayment = pesanan.reduce((total, item) => total + (item.price * item.quantity), 0);
+            // // const kembalian = payment - totalPayment;
+            // const date = new Date().toISOString().slice(0, 10);
+
+            // // Simpan data transaksi ke Firebase
+            // const transactionRef = firebase.database().ref('transaksi/');
+
+            // transactionRef.once('value').then(snapshot => {
+            //     const numberOfTransactions = snapshot.numChildren();
+            //     const nextTransactionId = `trans${numberOfTransactions + 1}`;
+
+            //     // const detail_trx = {};
+            //     // pesanan.forEach((item, index) => {
+            //     //     const totalItemPrice = item.price * item.quantity; // Harga total untuk satu item
+            //     //     detail_trx[`men${index + 1}`] = {
+            //     //         nama_menu: item.title,
+            //     //         harga: item.price,
+            //     //         qty: item.quantity,
+            //     //         total: totalItemPrice // Harga total untuk satu item
+            //     //     };
+            //     // });
+
+            //     const orderData = {
+            //         // detail_trx: detail_trx,
+            //         // kembalian: kembalian,
+            //         // nominal: payment,
+            //         // status: 1,
+            //         tgl_transaksi: date
+            //         // total_bayar: totalPayment
+            //     };
+
+            //     // Tampilkan orderData di konsol
+            //     console.log(orderData);
+
+            //     // Tampilkan orderData dalam alert
+            //     alert(JSON.stringify(orderData, null, 2));
+
+            //     // Tampilkan orderData di elemen HTML
+            //     document.getElementById('order-data').textContent = JSON.stringify(orderData, null, 2);
+            //     document.getElementById('order-data-container').style.display = 'block';
+
+            //     const updates = {};
+            //     updates[`transaksi/${nextTransactionId}`] = orderData;
+
+            //     firebase.database().ref().update(updates)
+            //         .then(() => {
+            //             alert('Pesanan berhasil dibayar!');
+            //             location.reload();
+            //         })
+            //         .catch(error => {
+            //             console.error('Error saving order:', error);
+            //         });
+            // });
+        });
 
         document.addEventListener('DOMContentLoaded', function () {
             const popup = document.getElementById('popup');
             const openBtn = document.getElementById('open-popup-btn');
             const closeBtn = document.querySelector('.close-btn');
+            const payBtn = document.querySelector('.pay-button');
 
             // Fungsi untuk membuka popup
             function openPopup() {
@@ -855,11 +918,38 @@
 
             // Event listener untuk tombol tutup
             closeBtn.addEventListener('click', closePopup);
+            payBtn.addEventListener('click', closePopup);
 
             // Menutup popup saat klik di luar konten popup
             window.addEventListener('click', function (event) {
                 if (event.target === popup) {
                     closePopup();
+                }
+            });
+
+            // Function to search and filter cards
+            function searchCards() {
+                const searchTerm = searchInput.value.toLowerCase();
+                const cardItems = document.querySelectorAll('.card-item');
+                cardItems.forEach(card => {
+                    const title = card.querySelector('.card-title').innerText.toLowerCase();
+                    if (title.includes(searchTerm)) {
+                        card.classList.add('visible');
+                    } else {
+                        card.classList.remove('visible');
+                    }
+                });
+            }
+
+            // Add event listener to search button
+            searchButton.addEventListener('click', function () {
+                searchCards();
+            });
+
+            // Add event listener to search input to trigger search on Enter key press
+            searchInput.addEventListener('keypress', function (e) {
+                if (e.key === 'Enter') {
+                    searchCards();
                 }
             });
         });
