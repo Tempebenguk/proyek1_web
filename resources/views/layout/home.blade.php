@@ -754,6 +754,7 @@
                     // Add to pesanan array
                     const pesananItem = { title, price: parseInt(price), quantity: 1, imageSrc };
                     pesanan.push(pesananItem);
+
                 }
                 orderButtonContainer.style.display = 'block';
                 // console.log('Current pesanan:', pesanan);
