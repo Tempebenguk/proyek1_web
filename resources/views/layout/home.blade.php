@@ -60,7 +60,7 @@
             align-items: center;
             opacity: 0.25;
             pointer-events: none;
-            z-index: 0;
+            z-index: -1;
         }
 
         .card {
@@ -495,19 +495,17 @@
             box-shadow: none !important;
         }
     </style>
-</head>
-
-<body>
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom mb-3">
         <div class="container-fluid">
             <a class="navbar-brand" href="#" style="font-family: Fredoka, sans-serif; margin-left: 15px;">OUR MENU</a>
         </div>
-        <!-- <div class="logo">
-            <img src="starling.png" alt="Logo">
-        </div> -->
     </nav>
+    <div class="logo">
+        <img src="{{ asset('starling.png')}}" alt="Logo">
+    </div>
+</head>
 
-
+<body>
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md-12">
@@ -593,8 +591,8 @@
                 <div class="card-nominal">
                     <input type="number" id="nominal" required>
                 </div>
-                <div class="pay-button>
-                <div class=" close-btn">
+                <div class="pay-button">
+                <div class="close-btn">
                     <button id="pay-button" class="btn btn-bayar"
                         style="font-family: 'Fredoka', sans-serif; margin-top: 25px; max-width: auto; justify-content: center; align-items: center;">BUAT
                         PESANAN</button>
@@ -632,7 +630,19 @@
 
             // Function to add order card
             function addOrderCard(title, price, imageSrc) {
+                const pesananContainer = document.getElementById('pesanan');
                 const existingCard = document.querySelector(`.card-bawah[data-title="${title}"]`);
+
+                if (!document.getElementById('pesanan-title')) {
+                    const pesananTitleHtml = `
+                    <div id="pesanan-title" style="display: flex; align-items: center; margin: 10px 0;">
+                        <div style="flex-grow: 2; height: 1px; background-color: #7C2B18;"></div>
+                        <span style="padding: 0 10px; font-size: 14pt; font-weight: 600; color: #7C2B18;">Daftar Pesanan Saya</span>
+                        <div style="flex-grow: 2; height: 1px; background-color: #7C2B18;"></div>
+                    </div>
+                    `;
+                    pesananContainer.insertAdjacentHTML('beforebegin', pesananTitleHtml);
+                }
 
                 if (existingCard) {
                     // If card exists, increment the quantity
@@ -717,6 +727,13 @@
                     const cardTitle = card.dataset.title;
                     pesanan = pesanan.filter(item => item.title !== cardTitle);
                     card.remove();
+
+                    if (pesanan.length === 0) {
+                        const pesananTitleElement = document.getElementById('pesanan-title');
+                        if (pesananTitleElement) {
+                            pesananTitleElement.remove();
+                        }
+                    }
                 }
                 console.log('Decremented pesanan:', pesanan);
             }
