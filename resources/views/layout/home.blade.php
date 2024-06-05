@@ -20,9 +20,6 @@
         crossorigin="anonymous"></script>
 
     <!-- Memuat file JavaScript Bootstrap -->
-
-
-
     <style>
         body {
             font-family: "Fredoka", sans-serif;
@@ -257,50 +254,32 @@
             justify-content: left;
         }
 
-        .card-bawah .form-check {
-            margin-top: 7px;
-            margin-right: 20px;
-            margin-left: -12px;
-        }
-
-        .card-bawah .form-check-input {
-            margin-top: 7px;
-            margin-right: 5px;
-            margin-left: -12px;
-        }
-
-        .card-bawah .form-check-label {
-            font-size: 8pt;
-            font-weight: 800;
-            color: #BA7237;
-        }
-
         .card-bawah .input-group-quantity {
             display: flex;
             align-items: center;
             padding-left: 10px;
         }
 
-        .card-bawah #decrement,
-        .card-bawah #increment {
+        .card-bawah .decrement,
+        .card-bawah .increment {
             margin-top: 0px;
             width: 25px;
             height: 25px;
-            margin-left: -12px;
-            margin-right: 10px;
+            margin-left: -10px;
+            margin-right: 0px;
             border: none;
-            border-radius: 3px;
+            border-radius: 0px;
             background-color: #00E432;
             color: #fff;
             cursor: pointer;
         }
 
-        .card-bawah #decrement:hover,
-        .card-bawah #increment:hover {
+        .card-bawah .decrement:hover,
+        .card-bawah .increment:hover {
             border: none;
         }
 
-        .card-bawah #input {
+        .card-bawah .quantity-input {
             padding: 3px;
             width: 30px;
             text-align: center;
@@ -309,7 +288,8 @@
             font-weight: bold;
             background-color: #fff;
             margin-top: 0px;
-            margin-right: 20px;
+
+
         }
 
         .card-bawah .text-container {
@@ -356,31 +336,55 @@
 
         .popup {
             display: none;
-            /* Hidden by default */
             position: fixed;
-            /* Stay in place */
             z-index: 1;
-            /* Sit on top */
             left: 0;
             top: 0;
             width: 100%;
-            /* Full width */
             height: 100%;
-            /* Full height */
             background-color: rgba(0, 0, 0, 0.4);
             justify-content: center;
             align-items: center;
         }
 
+        /* Show popup with zoom and jiggle effect */
+        .popup.show {
+            display: flex;
+        }
+
+        /* Popup content */
         .popup-content {
             background-color: #fff;
-            margin: 35% auto;
-            /* 15% from the top and centered */
+            margin: 0 auto;
+            margin-top: 75px;
             padding: 20px;
             border: 1px solid #888;
-            width: 80%;
-            height: 53%;
+            max-width: 80%;
+            height: 75%;
             border-radius: 7px;
+            transform: scale(0.5);
+            animation: zoomInJiggle 0.5s ease forwards;
+        }
+
+        /* Keyframes for zoom in with jiggle */
+        @keyframes zoomInJiggle {
+            0% {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+
+            60% {
+                transform: scale(1.1);
+                opacity: 1;
+            }
+
+            80% {
+                transform: scale(0.9);
+            }
+
+            100% {
+                transform: scale(1);
+            }
         }
 
         .close-btn {
@@ -435,7 +439,7 @@
             padding: 15px;
             resize: none;
             border: 3px solid #BA7237;
-            border-radius: 9px;
+            border-radius: 5px;
             background-color: #fff;
             color: #000;
             font-size: 12px;
@@ -448,19 +452,61 @@
             outline: none;
             border-color: #BA7237;
         }
+
+        .total-card .card-body {
+            display: flex;
+            justify-content: space-between;
+            align-items: left;
+            max-height: 55px;
+            max-width: auto;
+            border: 10px;
+        }
+
+        .card-total {
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 3px solid #BA7237;
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-nominal {
+            margin-top: 5px;
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+            max-width: 300px;
+            max-height: 50px;
+            border-radius: 5px;
+            border: 3px solid #BA7237;
+            padding: 5px;
+            color: #000;
+        }
+
+        .card-nominal input {
+            width: 100%;
+            border: none;
+            outline: none !important;
+            box-shadow: none !important;
+            font-size: 14pt;
+            color: #00E432;
+        }
+
+        .card-nominal input:focus {
+            outline: none !important;
+            box-shadow: none !important;
+        }
     </style>
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom mb-3">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#" style="font-family: Fredoka, sans-serif;">OUR MENU</a>
+            <a class="navbar-brand" href="#" style="font-family: Fredoka, sans-serif; margin-left: 15px;">OUR MENU</a>
         </div>
+        <!-- <div class="logo">
+            <img src="starling.png" alt="Logo">
+        </div> -->
     </nav>
 
-    <!-- <div class="logo">
-        <img src="starling.png" alt="Logo">
-    </div> -->
 
     <div class="container">
         <div class="row align-items-center">
@@ -531,19 +577,35 @@
                     </script>
                 </div>
 
+                <!-- Bagian Total Pesanan -->
+                <div class="card-total" style="display: flex; align-items: center; justify-content: space-between;">
+                    <p class="card-text" style="font-size: 10pt; font-weight: bold; color: #BA7237; margin: 0;">Total
+                        Pesanan Anda</p>
+                    <span id="total-nominal" class="card-text"
+                        style="font-size: 11pt; font-weight: bold; color: #00E432;">Rp 0</span>
+                </div>
+
                 <!-- bagian button pembayaran -->
-                <input type="number" id="nominal" placeholder="Nominal pembayaran" required>
-                <div class="pay-button">
+                <div style="font-family: 'Fredoka', sans-serif; margin-top: 10px; font-size: 10pt; color: #BA7237;">
+                    Masukkan Nominal
+                    Pembayaran anda
+                </div>
+                <div class="card-nominal">
+                    <input type="number" id="nominal" required>
+                </div>
+                <div class="pay-button>
+                <div class=" close-btn">
                     <button id="pay-button" class="btn btn-bayar"
                         style="font-family: 'Fredoka', sans-serif; margin-top: 25px; max-width: auto; justify-content: center; align-items: center;">BUAT
                         PESANAN</button>
                 </div>
-                <div class="close-btn">
-                    <button id="batal" class="btn btn-batal"
-                        style="font-family: 'Fredoka', sans-serif; margin-top: 25px; max-width: auto; justify-content: center; align-items: center;">BATAL</button>
-                </div>
+            </div>
+            <div class="close-btn">
+                <button id="batal" class="btn btn-batal"
+                    style="font-family: 'Fredoka', sans-serif; margin-top: 25px; max-width: auto; justify-content: center; align-items: center;">BATAL</button>
             </div>
         </div>
+    </div>
     </div>
 
     <!-- code js -->
@@ -595,7 +657,7 @@
                                         <button class="increment">+</button>
                                     </div>
                                 </div>
-                                <img src="${imageSrc}" class="img-fluid" style="max-width: 90px; height: auto; opacity: 1;">
+                                <img src="${imageSrc}" class="img-fluid" style="max-width: 75px; height: auto; opacity: 1;">
                             </div>
                         </div>
                     `;
@@ -841,7 +903,7 @@
             });
         });
 
-        
+
         document.addEventListener('DOMContentLoaded', function () {
             const popup = document.getElementById('popup');
             const openBtn = document.getElementById('open-popup-btn');
