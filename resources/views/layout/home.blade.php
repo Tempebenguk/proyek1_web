@@ -532,8 +532,18 @@
         <!-- Cards akan dimasukkan di sini -->
     </div>
 
+    {{-- <div class="col-md-4 mt-3">
+            <h4>Total:
+                <span class="fload-end"></span>
+            </h4>
+            <hr>
+            <a href="" class="btn btn-warning" id="open-popup-btn" data-bs-toggle="modal"
+            data-bs-target="#exampleModal">Checkout</a>
+    </div> --}}
 
     <div class="fixed-btn-container">
+        <h4>Total: <span id="total-pesanan" class="fload-end"></span></h4>
+        <hr>
         <button id="open-popup-btn" type="button" class="btn btn-pesan" data-bs-toggle="modal"
             data-bs-target="#exampleModal"
             style="font-family: 'Fredoka', sans-serif; font-weight: bold; max-width: 1000px;">
@@ -579,8 +589,7 @@
                 <div class="card-total" style="display: flex; align-items: center; justify-content: space-between;">
                     <p class="card-text" style="font-size: 10pt; font-weight: bold; color: #BA7237; margin: 0;">Total
                         Pesanan Anda</p>
-                    <span id="total-nominal" class="card-text"
-                        style="font-size: 11pt; font-weight: bold; color: #00E432;">Rp 0</span>
+                    <span id="total-nominal" class="card-text" style="font-size: 11pt; font-weight: bold; color: #00E432;">Rp 0</span>
                 </div>
 
                 <!-- bagian button pembayaran -->
@@ -593,7 +602,7 @@
                 </div>
                 <div class="pay-button">
                 <div class="close-btn">
-                    <button id="pay-button" class="btn btn-bayar"
+                    <button id="pay-button" class="btn btn-bayar" href="#"
                         style="font-family: 'Fredoka', sans-serif; margin-top: 25px; max-width: auto; justify-content: center; align-items: center;">BUAT
                         PESANAN</button>
                 </div>
@@ -682,6 +691,7 @@
 
                 // Attach event listeners to increment and decrement buttons
                 attachQuantityButtonsListeners();
+                updateTotalPesanan();
             }
 
             function attachQuantityButtonsListeners() {
@@ -708,6 +718,7 @@
                     }
                 });
                 console.log('Incremented pesanan:', pesanan);
+                updateTotalPesanan();
             }
 
             function handleDecrementClick(event) {
@@ -736,6 +747,7 @@
                     }
                 }
                 console.log('Decremented pesanan:', pesanan);
+                updateTotalPesanan();
             }
 
             function handleAddButtonClick(event) {
@@ -870,6 +882,13 @@
                 console.log('Data pesanan:', pesanan);
             }
 
+            function updateTotalPesanan() {
+                const totalPesanan = pesanan.reduce((total, item) => total + (item.price * item.quantity), 0);
+                const totalPesananElement = document.getElementById('total-pesanan');
+                totalPesananElement.innerText = `${totalPesanan}`;
+            }
+
+
             // Event listener untuk tombol bayar
             document.getElementById('pay-button').addEventListener('click', function () {
 
@@ -910,8 +929,8 @@
 
                     transactionRef.child(nextTransactionId).set(orderData)
                         .then(() => {
-                            alert('Transaksi berhasil disimpan!');
-                            location.reload();
+                            // alert('Transaksi berhasil disimpan!');
+                            window.location.href = "{{ route('metode') }}";
                         })
                         .catch(error => {
                             console.error('Error saving transaction:', error);
@@ -928,6 +947,7 @@
             const payBtn = document.querySelector('.pay-button');
             const searchButton = document.getElementById('searchButton');
             const searchInput = document.getElementById('searchInput');
+
 
             // Fungsi untuk membuka popup
             function openPopup() {
@@ -952,6 +972,11 @@
                     closePopup();
                 }
             });
+
+            document.getElementById('batal').addEventListener('click', function () {
+            closePopup();
+            });
+
 
             document.getElementById('searchInput').addEventListener('input', function () {
                 const searchTerm = this.value.trim().toLowerCase(); // Dapatkan kata kunci pencarian dan ubah menjadi huruf kecil
