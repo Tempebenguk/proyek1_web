@@ -288,8 +288,6 @@
             font-weight: bold;
             background-color: #fff;
             margin-top: 0px;
-
-
         }
 
         .card-bawah .text-container {
@@ -533,17 +531,18 @@
     </div>
 
     {{-- <div class="col-md-4 mt-3">
-            <h4>Total:
-                <span class="fload-end"></span>
-            </h4>
-            <hr>
-            <a href="" class="btn btn-warning" id="open-popup-btn" data-bs-toggle="modal"
+        <h4>Total:
+            <span class="fload-end"></span>
+        </h4>
+        <hr>
+        <a href="" class="btn btn-warning" id="open-popup-btn" data-bs-toggle="modal"
             data-bs-target="#exampleModal">Checkout</a>
     </div> --}}
 
     <div class="fixed-btn-container">
         <h4 style="font-size: 18pt;">Total:
-            <span id="total-pesanan" class="fload-end" style="font-size: 18pt; margin-right: auto;"></span></h4>
+            <span id="total-pesanan" class="fload-end" style="font-size: 18pt; margin-right: auto;"></span>
+        </h4>
         <hr>
         <button id="open-popup-btn" type="button" class="btn btn-pesan" data-bs-toggle="modal"
             data-bs-target="#exampleModal"
@@ -587,10 +586,12 @@
                 </div>
 
                 <!-- Bagian Total Pesanan -->
-                {{-- <div class="card-total" style="display: flex; align-items: center; justify-content: space-between;">
+                {{-- <div class="card-total"
+                    style="display: flex; align-items: center; justify-content: space-between;">
                     <p class="card-text" style="font-size: 10pt; font-weight: bold; color: #BA7237; margin: 0;">Total
                         Pesanan Anda</p>
-                    <span id="total-nominal" class="card-text" style="font-size: 11pt; font-weight: bold; color: #00E432;">Rp 0</span>
+                    <span id="total-nominal" class="card-text"
+                        style="font-size: 11pt; font-weight: bold; color: #00E432;">Rp 0</span>
                 </div> --}}
 
                 <!-- bagian button pembayaran -->
@@ -602,18 +603,18 @@
                     <input type="number" id="nominal" required>
                 </div>
                 <div class="pay-button">
+                    <div class="close-btn">
+                        <button id="pay-button" class="btn btn-bayar" href="#"
+                            style="font-family: 'Fredoka', sans-serif; margin-top: 50px; padding-right: 50px;">BUAT
+                            PESANAN</button>
+                    </div>
+                </div>
                 <div class="close-btn">
-                    <button id="pay-button" class="btn btn-bayar" href="#"
-                        style="font-family: 'Fredoka', sans-serif; margin-top: 50px; padding-right: 50px;">BUAT
-                        PESANAN</button>
+                    <button id="batal" class="btn btn-batal"
+                        style="font-family: 'Fredoka', sans-serif; margin-top: 70px; max-width: auto; justify-content: center; align-items: center;">BATAL</button>
                 </div>
             </div>
-            <div class="close-btn">
-                <button id="batal" class="btn btn-batal"
-                    style="font-family: 'Fredoka', sans-serif; margin-top: 70px; max-width: auto; justify-content: center; align-items: center;">BATAL</button>
-            </div>
         </div>
-    </div>
     </div>
 
     <!-- code js -->
@@ -975,9 +976,8 @@
             });
 
             document.getElementById('batal').addEventListener('click', function () {
-            closePopup();
+                closePopup();
             });
-
 
             document.getElementById('searchInput').addEventListener('input', function () {
                 const searchTerm = this.value.trim().toLowerCase(); // Dapatkan kata kunci pencarian dan ubah menjadi huruf kecil
