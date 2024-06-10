@@ -444,6 +444,82 @@
             font-family: 'Fredoka', sans-serif;
         }
 
+        .struk-container {
+            max-width: 400px;
+            margin: 0 auto;
+            border: 1px solid #000;
+            padding: 20px;
+        }
+
+        .struk-body {
+            margin-top: 5px;
+            margin-bottom: 20px;
+        }
+
+        .struk-item {
+            justify-content: space-between;
+            margin-bottom: 5px;
+            display: flex;
+            padding: 5px 0;
+        }
+
+        .struk-total {
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0px;
+            padding-top: 0px;
+        }
+
+        .struk-detail {
+            justify-content: space-between;
+            margin-top: -13px;
+            margin-left: 0px;
+            text-align: left;
+            flex-basis: 100%;
+        }
+
+        .text-right2 {
+            text-align: right;
+            margin-left: auto;
+            margin-top: 0px;
+        }
+
+        .popup2 {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            justify-content: center;
+            align-items: center;
+            overflow: auto;
+        }
+
+        /* Show popup with zoom and jiggle effect */
+        .popup.show {
+            display: flex;
+        }
+
+        /* Popup content */
+        .popup-content2 {
+            background-color: #fff;
+            margin: 0 auto;
+            margin-top: 75px;
+            margin-bottom: 75px;
+            padding: 20px;
+            border: 1px solid #888;
+            max-width: 80%;
+            height: fit-content;
+            border-radius: 7px;
+            transform: scale(0.5);
+            animation: zoomInJiggle 0.5s ease forwards;
+            overflow: auto;
+        }
+
         textarea:focus {
             outline: none;
             border-color: #BA7237;
@@ -541,6 +617,52 @@
                 <div class="close-btn">
                     <button id="batal" class="btn btn-batal"
                         style="font-family: 'Fredoka', sans-serif; margin-top: 25px; max-width: auto; justify-content: center; align-items: center;">BATAL</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="popup2" class="popup2">
+        <div class="popup-content2">
+            <button id="batal" type="button" style="background: 0; border: 0; padding: 0; margin: 0;">
+                <img id="closeBtn" src="cross.png" alt="Close"
+                    style="vertical-align: middle; width: 40px; height: 40px;">
+            </button>
+            <div class="logo-cross">
+                <img src="{{ asset('success.png')}}" alt="Logo">
+            </div>
+            <div class="text-center" style="font-weight: bold; font-size: 16pt; color: #7C2B18;">
+                <p>Pemesanan Berhasil!</p>
+                <p id="tgl_transaksi" style="font-size: 12pt; color: #7C2B18; margin-top: -12px;">06-08-2024 13.00.00
+                </p>
+                <p id="id-transaksi" style="margin-top: -12px; font-size: 14pt; color: #020202;">123456</p>
+            </div>
+            <div class="struk-container">
+                <div class="struk-body">
+                    <div class="struk-item">
+                        <span></span>
+                        <p class="text-right2" style="margin-top: -25px;"></span>
+                        <div class="struk-detail">
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="struk-total" style="margin-top: -25px;">
+                        <span></span><span class="text-right"></span>
+                    </div>
+                    <div class="struk-total">
+                        <span></span><span class="text-right"></span>
+                    </div>
+                    <div class="struk-total">
+                        <span></span><span class="text-right"></span>
+                    </div>
+                </div>
+
+                <div class="struk-footer">
+                    <p class="text-center"
+                        style="font-size: 10pt; color: #7C2B18; margin-top: 20px; font-weight: bold; ">Terima Kasih</p>
+                    <p class="text-center"
+                        style="font-size: 10pt; color: #7C2B18; margin-top: -8px; font-weight: bold; ">Semoga Harimu
+                        Menyenangkan</p>
                 </div>
             </div>
         </div>
@@ -659,17 +781,6 @@
                 console.log('Decremented pesanan:', pesanan);
             }
 
-            function handleAddButtonClick(event) {
-                event.preventDefault();
-                const button = event.target.closest('.btn-input');
-                const card = button.closest('.card');
-                const title = card.querySelector('.card-title').innerText;
-                const price = card.querySelector('.card-text').innerText.replace('Rp. ', '');
-                const imageSrc = card.querySelector('img').src;
-                addOrderCard(title, price, imageSrc);
-                console.log('Data pesanan:', pesanan);
-            }
-
             // Function to add event listeners to "TAMBAH" buttons
             function addEventListenersToButtons() {
                 const addButtonElements = document.querySelectorAll('.btn-input');
@@ -687,6 +798,7 @@
                             <img src="${menuData.gambar_menu || 'img/image1.png'}" class="image img-fluid" alt="${menuData.nama_menu}">
                             <div class="card-body">
                                 <h5 class="card-title" style="font-size: 10pt; color: #BA7237;">${menuData.nama_menu}</h5>
+                                <h5 class="card-title" style="font-size: 10pt; color: #BA7237;">${menuData.stock}</h5>
                                 <p class="card-text" style="font-size: 15pt; font-weight: bold; color: #7C2B18;">Rp. ${menuData.harga}</p>
                                 <a href="{{ route('send.value') }}" class="btn btn-input btn-primary btn-flex">TAMBAH</a>
                             </div>
@@ -784,10 +896,11 @@
                 event.preventDefault();
                 const button = event.target.closest('.btn-input');
                 const card = button.closest('.card');
+                const menuKey = card.id;
                 const title = card.querySelector('.card-title').innerText;
                 const price = card.querySelector('.card-text').innerText.replace('Rp. ', '');
                 const imageSrc = card.querySelector('img').src;
-                addOrderCard(title, price, imageSrc);
+                addOrderCard(title, price, imageSrc, menuKey);
                 console.log('Data pesanan:', pesanan);
             }
 
@@ -832,7 +945,72 @@
                     transactionRef.child(nextTransactionId).set(orderData)
                         .then(() => {
                             alert('Transaksi berhasil disimpan!');
-                            location.reload();
+                            // location.reload();
+                            const transaksiRef = firebase.database().ref('transaksi/' + nextTransactionId);
+
+                            // Ambil nilai-nilai yang diperlukan dari data transaksi
+                            transaksiRef.once('value', function (snapshot) {
+                                const transaksiData = snapshot.val();
+
+                                // Cek apakah data transaksi tersedia
+                                if (transaksiData) {
+                                    // Mengisi waktu transaksi
+                                    const waktuElemen = document.getElementById('tgl_transaksi');
+                                    waktuElemen.textContent = transaksiData.tgl_transaksi;
+
+                                    // Mengisi ID transaksi
+                                    const idTransaksiElemen = document.getElementById('id-transaksi');
+                                    idTransaksiElemen.textContent = "" + snapshot.key;
+
+                                    // Mengisi detail transaksi
+                                    const strukBody = document.querySelector('.struk-body');
+                                    Object.entries(transaksiData.detail_trx).forEach(([key, value]) => {
+                                        const itemElement = document.createElement('div');
+                                        itemElement.classList.add('struk-item');
+                                        itemElement.innerHTML = `
+                                            <span>${value.nama_menu}</span><span class="text-right">Rp ${value.harga}</span>
+                                            `;
+                                        strukBody.appendChild(itemElement);
+
+                                        const detailElement = document.createElement('div');
+                                        detailElement.classList.add('struk-detail');
+                                        detailElement.innerHTML = `
+                                            <span>${value.qty} x Rp ${value.harga}</span>
+                                            `;
+                                        strukBody.appendChild(detailElement);
+                                    });
+
+                                    // Mengisi total pembayaran
+                                    const totalElemen = document.createElement('div');
+                                    totalElemen.classList.add('struk-total');
+                                    totalElemen.innerHTML = `
+                                        <span>Total</span><span class="text-right2">Rp ${transaksiData.total_bayar}</span>
+                                        `;
+                                    totalElemen.style.borderTop = '1px dashed #000';
+                                    strukBody.appendChild(totalElemen);
+
+                                    // Mengisi jumlah pembayaran
+                                    const bayarElemen = document.createElement('div');
+                                    bayarElemen.classList.add('struk-total');
+                                    bayarElemen.innerHTML = `
+                                        <span>Bayar</span><span class="text-right2">Rp ${transaksiData.nominal}</span>
+                                        `;
+                                    bayarElemen.style.borderTop = '1px dashed #000';
+                                    strukBody.appendChild(bayarElemen);
+
+                                    // Mengisi kembalian
+                                    const kembalianElemen = document.createElement('div');
+                                    kembalianElemen.classList.add('struk-total');
+                                    kembalianElemen.innerHTML = `
+                                        <span>Kembalian</span><span class="text-right2">Rp ${transaksiData.kembalian}</span>
+                                        `;
+                                    kembalianElemen.style.borderTop = '1px dashed #000';
+                                    strukBody.appendChild(kembalianElemen);
+                                } else {
+                                    // Tampilkan pesan kesalahan jika data transaksi tidak tersedia
+                                    alert('Data transaksi tidak tersedia!');
+                                }
+                            });
                         })
                         .catch(error => {
                             console.error('Error saving transaction:', error);
@@ -841,9 +1019,10 @@
             });
         });
 
-        
+
         document.addEventListener('DOMContentLoaded', function () {
             const popup = document.getElementById('popup');
+            const popup2 = document.getElementById('popup2');
             const openBtn = document.getElementById('open-popup-btn');
             const closeBtn = document.querySelector('.close-btn');
             const payBtn = document.querySelector('.pay-button');
@@ -860,12 +1039,23 @@
                 popup.style.display = 'none';
             }
 
+            function openPopup2() {
+                popup2.style.display = 'block';
+            }
+
+            // Fungsi untuk menutup popup
+            function closePopup2() {
+                popup2.style.display = 'none';
+            }
+
             // Event listener untuk tombol buka
             openBtn.addEventListener('click', openPopup);
 
             // Event listener untuk tombol tutup
             closeBtn.addEventListener('click', closePopup);
+
             payBtn.addEventListener('click', closePopup);
+            payBtn.addEventListener('click', openPopup2);
 
             // Menutup popup saat klik di luar konten popup
             window.addEventListener('click', function (event) {
