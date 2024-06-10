@@ -256,12 +256,19 @@
     </div>
     <div id="popup" class="popup">
         <div class="popup-content">
+            <div class="container">
+                <div class="container">
+                    <button id="batal" type="button" style="background: 0; border: 0; padding: 0; margin: 0;">
+                        <img id="closeBtn" src="cross.png" alt="Close" style="vertical-align: middle; width: 40px; height: 40px;">
+                    </button>
+                </div>
+            </div>
             <div class="logo-cross">
                 <img src="{{ asset('success.png')}}" alt="Logo">
             </div>
             <div class="text-center" style="font-weight: bold; font-size: 16pt; color: #7C2B18;">
                 <p>Pemesanan Berhasil!</p>
-                <p id="waktu" style="font-size: 12pt; color: #7C2B18; margin-top: -12px;">06-08-2024 13.00.00</p>
+                <p id="tgl_transaksi" style="font-size: 12pt; color: #7C2B18; margin-top: -12px;">06-08-2024 13.00.00</p>
                 <p id="id-transaksi" style="margin-top: -12px; font-size: 14pt; color: #020202;">123456</p>
             </div>
             <div class="struk-container">
@@ -341,7 +348,7 @@
                 // Cek apakah data transaksi tersedia
                 if (transaksiData) {
                     // Mengisi waktu transaksi
-                    const waktuElemen = document.getElementById('waktu');
+                    const waktuElemen = document.getElementById('tgl_transaksi');
                     waktuElemen.textContent = transaksiData.tgl_transaksi;
 
                     // Mengisi ID transaksi
@@ -403,7 +410,8 @@
         document.addEventListener('DOMContentLoaded', function () {
             const popup = document.getElementById('popup');
             const openBtn = document.getElementById('open-popup-btn');
-            const closeBtn = document.querySelector('.close-btn');
+            const closeBtn = document.getElementById('closeBtn');
+            const batalButton = document.getElementById('batal');
 
             // Fungsi untuk membuka popup
             function openPopup() {
@@ -422,11 +430,8 @@
             closeBtn.addEventListener('click', closePopup);
             payBtn.addEventListener('click', closePopup);
 
-            // Menutup popup saat klik di luar konten popup
-            window.addEventListener('click', function (event) {
-                if (event.target === popup) {
-                    closePopup();
-                }
+            closeBtn.addEventListener('click', function () {
+                closePopup();
             });
         });
     </script>

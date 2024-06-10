@@ -919,7 +919,17 @@
             // Event listener untuk tombol bayar
             document.getElementById('pay-button').addEventListener('click', function () {
 
-                const date = new Date().toISOString().slice(0, 10);
+                const now = new Date();
+                const year = now.getFullYear();
+                const month = String(now.getMonth() + 1).padStart(2, '0'); // tambahkan nol di depan jika bulan < 10
+                const day = String(now.getDate()).padStart(2, '0'); // tambahkan nol di depan jika tanggal < 10
+                const hours = String(now.getHours()).padStart(2, '0'); // tambahkan nol di depan jika jam < 10
+                const minutes = String(now.getMinutes()).padStart(2, '0'); // tambahkan nol di depan jika menit < 10
+                const seconds = String(now.getSeconds()).padStart(2, '0'); // tambahkan nol di depan jika detik < 10
+
+                const date = `${year}-${month}-${day}`;
+                const time = `${hours}:${minutes}:${seconds}`;
+                const dateTime = `${date} ${time}`;
                 // const transactionRef = firebase.database().ref('transaksi/');
                 let pesananArray = Array.isArray(pesanan) ? pesanan : Object.values(pesanan);
 
@@ -943,7 +953,7 @@
                     kembalian: kembalian,
                     nominal: nominal,
                     status: 1,
-                    tgl_transaksi: date,
+                    tgl_transaksi: dateTime,
                     total_bayar: total_bayar,
                     catatan: notes
                 };
