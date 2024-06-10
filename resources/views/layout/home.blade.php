@@ -104,8 +104,7 @@
             color: #fff;
             padding: 5px 15px;
             border-radius: 50px;
-            margin: -14px;
-            width: 250px;
+            width: 350px;
             font-family: 'Fredoka', sans-serif;
 
         }
@@ -117,13 +116,17 @@
             /* border: 1.5px solid #00E432; */
             /* border-color: #7C2B18; */
             color: #fff;
-            padding: 5px;
-            justify-content: center;
-            align-items: center;
+            padding: 5px 5px;
             border-radius: 50px;
-            margin: -13px;
-            width: 250px;
+            width: 350px;
             font-family: 'Fredoka', sans-serif;
+        }
+
+        .pay-button,
+        .close-btn {
+            width: 100%;
+            display: flex;
+            justify-content: center;
         }
 
         .btn-flex {
@@ -575,7 +578,9 @@
             <div class="col-md-6 col-lg-5">
                 <div>
                     <div>
-                        <textarea placeholder="Catatan, misalnya : panas/dingin, sertakan dll..." required></textarea>
+                        <textarea
+                            placeholder="Catatan : sertakan keterangan lokasi, detail pesanan seperti panas/dingin dll ..."
+                            required></textarea>
                     </div>
                     <!-- JavaScript untuk menyesuaikan ketinggian textarea -->
                     <script>
@@ -605,15 +610,15 @@
                 <div class="card-nominal">
                     <input type="number" id="nominal" required>
                 </div>
-                <div class="container">
-                        <div class="pay-button">
-                            <button id="pay-button" class="btn btn-bayar" href="#"
-                                style="font-family: 'Fredoka', sans-serif; margin-top: 20px;">BUAT
-                                PESANAN</button>
-                        </div>
+                <div class="container-button">
+                    <div class="pay-button">
+                        <button id="pay-button" class="btn btn-bayar" href="#"
+                            style="font-family: 'Fredoka', sans-serif; margin-top: 20px;">BUAT
+                            PESANAN</button>
+                    </div>
                     <div class="close-btn">
                         <button id="batal" class="btn btn-batal"
-                            style="font-family: 'Fredoka', sans-serif; margin-top: 30px; ">BATAL</button>
+                            style="font-family: 'Fredoka', sans-serif; margin-top: 20px;">BATAL</button>
                     </div>
                 </div>
             </div>
