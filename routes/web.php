@@ -36,3 +36,7 @@ Route::get('/home', function () {
 Route::get('/pembayaran', function () {
     return view('layout.pembayaran');
 })->name('pembayaran');
+
+Route::get('/struk', function () {
+    return view('layout.struk');
+})->name('struk');
