@@ -103,7 +103,7 @@
             </div>
             <div class="col-md-6 col-lg-4">
                 <div class="card">
-                    <a href="{{ route('pembayaran', ['method' => 'tunai']) }}" class="card-link">
+                    <a id="card" href="{{ route('pembayaran', ['method' => 'tunai']) }}" class="card-link">
                         <div class="d-flex align-items-center">
                             <img src="cash.png" style="width: 50px; height: 45px; margin-left: 5px;">
                             <span class="card-text ms-3">Bayar Tunai</span>
@@ -113,9 +113,93 @@
             </div>
         </div>
     </div>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-OERcA2wY+XniB9jsSFFj3LVHj6hFhIl2rBgG3tvkSwpQf5q2xRM9E3UbELz0d5xz"
         crossorigin="anonymous"></script>
+
+        <script>
+            var config = {
+                apiKey: "{{ config('services.firebase.api_key') }}",
+                authDomain: "{{ config('services.firebase.auth_domain') }}",
+                databaseURL: "{{ config('services.firebase.database_url') }}",
+                storageBucket: "{{ config('services.firebase.storage_bucket') }}",
+            };
+            firebase.initializeApp(config);
+            var database = firebase.database();
+            // Event listener untuk tombol bayar
+            document.getElementById('card').addEventListener('click', function () {
+
+                const transactionRef = firebase.database().ref('transaksi/');
+                const transaksiDataString = localStorage.getItem('orderData');
+                const transaksiData = JSON.parse(transaksiDataString);
+
+                transactionRef.once('value').then(snapshot => {
+                    const numberOfTransactions = snapshot.numChildren();
+                    const nextTransactionId = `trans${numberOfTransactions + 1}`;
+
+                    // const detail_trx = {};
+                    // pesananArray.forEach((item, index) => {
+                    //     detail_trx[`men${index + 1}`] = {
+                    //         nama_menu: item.title,
+                    //         harga: item.price,
+                    //         qty: item.quantity
+                    //     };
+                    // });
+
+                    // const total_bayar = pesananArray.reduce((total, item) => total + (item.price * item.quantity), 0);
+                    // const nominalInput = document.getElementById('nominal');
+                    // const nominal = nominalInput.valueAsNumber;
+                    // const kembalian = nominal - total_bayar;
+                    // const notes = document.querySelector("textarea").value;
+
+                    // const orderData = {
+                    //     detail_trx: detail_trx,
+                    //     kembalian: kembalian,
+                    //     nominal: nominal,
+                    //     status: 1,
+                    //     tgl_transaksi: date,
+                    //     total_bayar: total_bayar,
+                    //     catatan: notes
+                    // };
+
+                    console.log(transaksiData); // Pastikan orderData didefinisikan sebelum digunakan
+
+                    transactionRef.child(nextTransactionId).set(transaksiData)
+                        .then(() => {
+                            alert('Transaksi berhasil disimpan!');
+                        })
+                        .catch(error => {
+                            console.error('Error saving transaction:', error);
+                    });
+                });
+            });
+
+
+            // Ambil data transaksi dari local storage
+            const transaksiDataString = localStorage.getItem('orderData');
+
+            // Parse data transaksi dari string JSON
+            const transaksiData = JSON.parse(transaksiDataString);
+
+            // Gunakan data transaksi sesuai kebutuhan
+            console.log(transaksiData);
+
+            // // Jika data transaksi berhasil diambil, tampilkan pesan berhasil
+            // if (transaksiData) {
+            //     alert('Data transaksi berhasil dimuat!');
+            // } else {
+            //     // Jika tidak berhasil, tampilkan pesan gagal
+            //     alert('Gagal memuat data transaksi!');
+            // }
+
+            // // Hapus data transaksi dari local storage setelah menggunakannya
+            // localStorage.removeItem('orderData');
+        </script>
 </body>
 
 </html>
