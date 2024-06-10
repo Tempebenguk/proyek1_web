@@ -16,7 +16,7 @@
 
         .navbar-brand {
             color: #fff;
-            font-family: 'Fredoka', sans-serif;
+            font-family: 'Fredoka', sans-serif; 
         }
 
         .logo {

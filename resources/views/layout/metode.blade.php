@@ -142,36 +142,13 @@
                     const numberOfTransactions = snapshot.numChildren();
                     const nextTransactionId = `trans${numberOfTransactions + 1}`;
 
-                    // const detail_trx = {};
-                    // pesananArray.forEach((item, index) => {
-                    //     detail_trx[`men${index + 1}`] = {
-                    //         nama_menu: item.title,
-                    //         harga: item.price,
-                    //         qty: item.quantity
-                    //     };
-                    // });
-
-                    // const total_bayar = pesananArray.reduce((total, item) => total + (item.price * item.quantity), 0);
-                    // const nominalInput = document.getElementById('nominal');
-                    // const nominal = nominalInput.valueAsNumber;
-                    // const kembalian = nominal - total_bayar;
-                    // const notes = document.querySelector("textarea").value;
-
-                    // const orderData = {
-                    //     detail_trx: detail_trx,
-                    //     kembalian: kembalian,
-                    //     nominal: nominal,
-                    //     status: 1,
-                    //     tgl_transaksi: date,
-                    //     total_bayar: total_bayar,
-                    //     catatan: notes
-                    // };
-
                     console.log(transaksiData); // Pastikan orderData didefinisikan sebelum digunakan
 
                     transactionRef.child(nextTransactionId).set(transaksiData)
                         .then(() => {
                             alert('Transaksi berhasil disimpan!');
+                            console.log(nextTransactionId);
+                            localStorage.setItem("idtrans", JSON.stringify(nextTransactionId));
                         })
                         .catch(error => {
                             console.error('Error saving transaction:', error);
@@ -188,17 +165,6 @@
 
             // Gunakan data transaksi sesuai kebutuhan
             console.log(transaksiData);
-
-            // // Jika data transaksi berhasil diambil, tampilkan pesan berhasil
-            // if (transaksiData) {
-            //     alert('Data transaksi berhasil dimuat!');
-            // } else {
-            //     // Jika tidak berhasil, tampilkan pesan gagal
-            //     alert('Gagal memuat data transaksi!');
-            // }
-
-            // // Hapus data transaksi dari local storage setelah menggunakannya
-            // localStorage.removeItem('orderData');
         </script>
 </body>
 

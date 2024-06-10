@@ -951,31 +951,6 @@
                 console.log(orderData); // Pastikan orderData didefinisikan sebelum digunakan
                 localStorage.setItem("orderData", JSON.stringify(orderData));
                 window.location.href = "{{ route('metode') }}";
-
-
-                // transactionRef.once('value').then(snapshot => {
-                //     const numberOfTransactions = snapshot.numChildren();
-                //     const nextTransactionId = `trans${numberOfTransactions + 1}`;
-
-
-
-
-
-
-
-
-
-
-                //     transactionRef.child(nextTransactionId).set(orderData)
-                //         .then(() => {
-                //             // alert('Transaksi berhasil disimpan!');
-                //             localStorage.setItem("orderData", JSON.stringify(orderData));
-                //             window.location.href = "{{ route('metode') }}";
-                //         })
-                //         .catch(error => {
-                //             console.error('Error saving transaction:', error);
-                //         });
-                // });
             });
         });
 

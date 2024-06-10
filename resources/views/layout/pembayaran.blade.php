@@ -46,7 +46,16 @@
             opacity: 1;
         }
 
-        .logo {
+        .logo-cross {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .logo-cross img {
+            width: 200px;
+        }
+
+        .logo-starling {
             position: fixed;
             top: 0;
             left: 0;
@@ -97,6 +106,91 @@
             transform: translateX(-50%);
             z-index: 1000;
         }
+
+        .struk-container {
+            max-width: 400px;
+            margin: 0 auto;
+            border: 1px solid #000;
+            padding: 20px;
+        }
+        .struk-body {
+            margin-top: 5px;
+            margin-bottom: 20px;
+        }
+        .struk-item {
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        .struk-total {
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0px;
+            padding-top: 0px;
+        }
+        .struk-detail {
+            justify-content: space-between;
+            margin-top: -13px;
+            margin-left: 0px;
+            text-align: left;
+            flex-basis: 100%;
+        }
+        .text-right {
+            text-align: right;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Show popup with zoom and jiggle effect */
+        .popup.show {
+            display: flex;
+        }
+
+        /* Popup content */
+        .popup-content {
+            background-color: #fff;
+            margin: 0 auto;
+            margin-top: 75px;
+            padding: 20px;
+            border: 1px solid #888;
+            max-width: 80%;
+            height: fit-content;
+            border-radius: 7px;
+            transform: scale(0.5);
+            animation: zoomInJiggle 0.5s ease forwards;
+        }
+
+        /* Keyframes for zoom in with jiggle */
+        @keyframes zoomInJiggle {
+            0% {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+
+            60% {
+                transform: scale(1.1);
+                opacity: 1;
+            }
+
+            80% {
+                transform: scale(0.9);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
     </style>
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom mb-3">
         <div class="container-fluid">
@@ -108,7 +202,7 @@
         style="font-family: 'Fredoka', sans-serif; font-size: 11pt; font-weight: bold; color: #BA7237; padding-left: 20px; margin-top: 20px;">
         <p>Silahkan selesaikan pembayaran anda</p>
     </div>
-    <div class="logo">
+    <div class="logo-starling">
         <img src="{{ asset('starling.png')}}">
     </div>
 </head>
@@ -136,20 +230,68 @@
 
     </div>
     <div class="fixed-btn-container">
-        <div id="buttonContainer" style="position: relative;">
-            <button id="btnSelesai" class="btn btn-primary btn-pesan" type="button"
+        <div id="open-popup-btn" style="position: relative;">
+            <button id="btnSelesai" class="btn btn-primary btn-pesan" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"
                 style="font-family: 'Fredoka', sans-serif; font-weight: bold; max-width: 275px; ">SELESAI</button>
         </div>
     </div>
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <div class="logo-cross">
+                <img src="{{ asset('success.png')}}" alt="Logo">
+            </div>
+            <div class="text-center" style="font-weight: bold; font-size: 16pt; color: #7C2B18;">
+                <p>Pemesanan Berhasil!</p>
+                <p id="waktu" style="font-size: 12pt; color: #7C2B18; margin-top: -12px;">06-08-2024 13.00.00</p>
+                <p id="id-transaksi" style="margin-top: -12px; font-size: 14pt; color: #020202;">123456</p>
+            </div>
+            <div class="struk-container">
+                <div class="struk-body">
+                    <div class="struk-item">
+                        <span></span><p class="text-right" style="margin-top: -25px;"></span>
+                        <div class="struk-detail">
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="struk-total">
+                        <span></span><span class="text-right"></span>
+                    </div>
+                    <div class="struk-total">
+                        <span></span><span class="text-right"></span>
+                    </div>
+                    <div class="struk-total">
+                        <span></span><span class="text-right"></span>
+                    </div>
+                </div>
 
+                <div class="struk-footer">
+                    <p class="text-center" style="font-size: 12pt; color: #7C2B18; margin-top: 50px; font-weight: bold; ">Terima Kasih</p>
+                    <p class="text-center" style="font-size: 12pt; color: #7C2B18; margin-top: -8px; font-weight: bold; ">Semoga Harimu Menyenangkan</p>
+                </div>
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase.js"></script>
     <script>
+        var config = {
+            apiKey: "{{ config('services.firebase.api_key') }}",
+            authDomain: "{{ config('services.firebase.auth_domain') }}",
+            databaseURL: "{{ config('services.firebase.database_url') }}",
+            storageBucket: "{{ config('services.firebase.storage_bucket') }}",
+        };
+        firebase.initializeApp(config);
+        var database = firebase.database();
+
         var btnSelesai = document.getElementById("btnSelesai");
 
-        // Tambahkan event listener
-        btnSelesai.addEventListener("click", function () {
-            // Tampilkan alert
-            alert("Transaksi sedang diproses, silahkan ditunggu :)");
-        });
+        // // Tambahkan event listener
+        // btnSelesai.addEventListener("click", function () {
+        //     // Tampilkan alert
+        //     alert("Transaksi sedang diproses, silahkan ditunggu :)");
+        // });
 
         window.onload = function () {
             const urlParams = new URLSearchParams(window.location.search);
@@ -163,6 +305,106 @@
                 document.getElementById('buttonContainer').style.display = 'block';
             }
         }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Dapatkan referensi ke data transaksi "trans1" dari Firebase Database
+            const transaksiRef = firebase.database().ref('transaksi/trans1');
+
+            // Ambil nilai-nilai yang diperlukan dari data transaksi
+            transaksiRef.once('value', function (snapshot) {
+                const transaksiData = snapshot.val();
+
+                // Cek apakah data transaksi tersedia
+                if (transaksiData) {
+                    // Mengisi waktu transaksi
+                    const waktuElemen = document.getElementById('waktu');
+                    waktuElemen.textContent = transaksiData.tgl_transaksi;
+
+                    // Mengisi ID transaksi
+                    const idTransaksiElemen = document.getElementById('id-transaksi');
+                    idTransaksiElemen.textContent = "" + snapshot.key;
+
+                    // Mengisi detail transaksi
+                    const strukBody = document.querySelector('.struk-body');
+                    Object.entries(transaksiData.detail_trx).forEach(([key, value]) => {
+                        const itemElement = document.createElement('div');
+                        itemElement.classList.add('struk-item');
+                        itemElement.innerHTML = `
+                            <span>${value.nama_menu}</span><span class="text-right">Rp${value.harga}</span>
+                        `;
+                        strukBody.appendChild(itemElement);
+
+                        const detailElement = document.createElement('div');
+                        detailElement.classList.add('struk-detail');
+                        detailElement.innerHTML = `
+                            <span>${value.qty} x Rp${value.harga}</span>
+                        `;
+                        strukBody.appendChild(detailElement);
+                    });
+
+                    // Mengisi total pembayaran
+                    const totalElemen = document.createElement('div');
+                    totalElemen.classList.add('struk-total');
+                    totalElemen.innerHTML = `
+                        <span>Total</span><span class="text-right">Rp${transaksiData.total_bayar}</span>
+                    `;
+                    totalElemen.style.borderTop = '1px dashed #000';
+                    strukBody.appendChild(totalElemen);
+
+                    // Mengisi jumlah pembayaran
+                    const bayarElemen = document.createElement('div');
+                    bayarElemen.classList.add('struk-total');
+                    bayarElemen.innerHTML = `
+                        <span>Bayar</span><span class="text-right">Rp${transaksiData.nominal}</span>
+                    `;
+                    bayarElemen.style.borderTop = '1px dashed #000';
+                    strukBody.appendChild(bayarElemen);
+
+                    // Mengisi kembalian
+                    const kembalianElemen = document.createElement('div');
+                    kembalianElemen.classList.add('struk-total');
+                    kembalianElemen.innerHTML = `
+                        <span>Kembalian</span><span class="text-right">Rp${transaksiData.kembalian}</span>
+                    `;
+                    kembalianElemen.style.borderTop = '1px dashed #000';
+                    strukBody.appendChild(kembalianElemen);
+                } else {
+                    // Tampilkan pesan kesalahan jika data transaksi tidak tersedia
+                    alert('Data transaksi tidak tersedia!');
+                }
+            });
+        });
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const popup = document.getElementById('popup');
+            const openBtn = document.getElementById('open-popup-btn');
+            const closeBtn = document.querySelector('.close-btn');
+
+            // Fungsi untuk membuka popup
+            function openPopup() {
+                popup.style.display = 'block';
+            }
+
+            // Fungsi untuk menutup popup
+            function closePopup() {
+                popup.style.display = 'none';
+            }
+
+            // Event listener untuk tombol buka
+            openBtn.addEventListener('click', openPopup);
+
+            // Event listener untuk tombol tutup
+            closeBtn.addEventListener('click', closePopup);
+            payBtn.addEventListener('click', closePopup);
+
+            // Menutup popup saat klik di luar konten popup
+            window.addEventListener('click', function (event) {
+                if (event.target === popup) {
+                    closePopup();
+                }
+            });
+        });
     </script>
 </body>
 
