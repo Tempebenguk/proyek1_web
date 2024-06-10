@@ -52,7 +52,7 @@
             height: auto;
         }
 
-        .logo {
+        .logo-starling {
             position: fixed;
             top: 0;
             left: 0;
@@ -63,7 +63,7 @@
             align-items: center;
             opacity: 0.25;
             pointer-events: none;
-            z-index: 0;
+            z-index: -1;
         }
 
         .card {
@@ -93,8 +93,9 @@
             /* border-color: #7C2B18; */
             color: #fff;
             padding: 5px 15px;
-            border-radius: 50px;
-            width: 250px;
+            border-radius: 5px;
+            width: 350px;
+            height: 40px;
         }
 
         .btn-bayar {
@@ -281,26 +282,26 @@
             padding-left: 10px;
         }
 
-        .card-bawah #decrement,
-        .card-bawah #increment {
+        .card-bawah .decrement,
+        .card-bawah .increment {
             margin-top: 0px;
             width: 25px;
             height: 25px;
-            margin-left: -12px;
-            margin-right: 10px;
+            margin-left: -10px;
+            margin-right: 0px;
             border: none;
-            border-radius: 3px;
+            border-radius: 0px;
             background-color: #00E432;
             color: #fff;
             cursor: pointer;
         }
 
-        .card-bawah #decrement:hover,
-        .card-bawah #increment:hover {
+        .card-bawah .decrement:hover,
+        .card-bawah .increment:hover {
             border: none;
         }
 
-        .card-bawah #input {
+        .card-bawah .quantity-input {
             padding: 3px;
             width: 30px;
             text-align: center;
@@ -309,7 +310,6 @@
             font-weight: bold;
             background-color: #fff;
             margin-top: 0px;
-            margin-right: 20px;
         }
 
         .card-bawah .text-container {
@@ -525,6 +525,9 @@
             border-color: #BA7237;
         }
     </style>
+    <div class="logo-starling">
+        <img src="{{ asset('starling.png')}}">
+    </div>
 </head>
 
 <body>
@@ -566,9 +569,10 @@
 
 
     <div class="fixed-btn-container">
+        <hr>
         <button id="open-popup-btn" type="button" class="btn btn-pesan" data-bs-toggle="modal"
             data-bs-target="#exampleModal"
-            style="font-family: 'Fredoka', sans-serif; font-weight: bold; max-width: 1000px;">
+            style="font-family: 'Fredoka', sans-serif; font-weight: bold; max-width: 325px;">
             TAMBAH PESANAN
         </button>
     </div>
@@ -686,6 +690,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            const pesananContainer = document.getElementById('pesanan');
             const orderButtonContainer = document.querySelector('.fixed-btn-container');
             const cardContainer = document.getElementById('menu-container');
             let pesanan = [];
@@ -693,6 +698,17 @@
             // Function to add order card
             function addOrderCard(title, price, imageSrc) {
                 const existingCard = document.querySelector(`.card-bawah[data-title="${title}"]`);
+
+                if (!document.getElementById('pesanan-title')) {
+                    const pesananTitleHtml = `
+                        <div id="pesanan-title" style="display: flex; align-items: center; margin: 10px 0;">
+                            <div style="flex-grow: 2; height: 1px; background-color: #7C2B18;"></div>
+                                <span style="padding: 0 10px; font-size: 14pt; font-weight: 600; color: #7C2B18;">Daftar Pesanan Saya</span>
+                            <div style="flex-grow: 2; height: 1px; background-color: #7C2B18;"></div>
+                        </div>
+                    `;
+                    pesananContainer.insertAdjacentHTML('beforebegin', pesananTitleHtml);
+                }
 
                 if (existingCard) {
                     // If card exists, increment the quantity
@@ -727,11 +743,22 @@
                     const pesananItem = { title, price: parseInt(price), quantity: 1, imageSrc };
                     pesanan.push(pesananItem);
                 }
+                if (!document.getElementById('total-container')) {
+                    const totalPesananHtml = `
+                    <div id="total-container" style="margin-top: 25px; margin-left: 5px; color: #7C2B18;">
+                        <h4 style="font-size: 16pt;">Total :
+                            <span id="total-pesanan" class="float-end" style="font-size: 16pt; margin-right: auto; font-weight: bold;"></span>
+                        </h4>
+                    </div>
+                `;
+                    pesananContainer.insertAdjacentHTML('afterend', totalPesananHtml);
+                }
                 orderButtonContainer.style.display = 'block';
                 console.log('Current pesanan:', pesanan);
 
                 // Attach event listeners to increment and decrement buttons
                 attachQuantityButtonsListeners();
+                updateTotalPesanan();
             }
 
             function attachQuantityButtonsListeners() {
@@ -758,6 +785,7 @@
                     }
                 });
                 console.log('Incremented pesanan:', pesanan);
+                updateTotalPesanan();
             }
 
             function handleDecrementClick(event) {
@@ -779,6 +807,7 @@
                     card.remove();
                 }
                 console.log('Decremented pesanan:', pesanan);
+                updateTotalPesanan();
             }
 
             // Function to add event listeners to "TAMBAH" buttons
@@ -891,6 +920,17 @@
                     menuCard.remove();
                 }
             });
+
+            function formatRupiah(number) {
+                return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            }
+
+            function updateTotalPesanan() {
+                const totalPesanan = pesanan.reduce((total, item) => total + (item.price * item.quantity), 0);
+                const formattedTotal = formatRupiah(totalPesanan);
+                const totalPesananElement = document.getElementById('total-pesanan');
+                totalPesananElement.innerText = `Rp ${formattedTotal}`;
+            }
 
             function handleAddButtonClick(event) {
                 event.preventDefault();

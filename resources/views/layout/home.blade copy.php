@@ -539,14 +539,14 @@
         <!-- Cards akan dimasukkan di sini -->
     </div>
 
-    {{-- <div class="col-md-4 mt-3">
+    <div class="col-md-4 mt-3">
         <h4>Total:
             <span class="fload-end"></span>
         </h4>
         <hr>
         <a href="" class="btn btn-warning" id="open-popup-btn" data-bs-toggle="modal"
             data-bs-target="#exampleModal">Checkout</a>
-    </div> --}}
+    </div>
 
     <div class="fixed-btn-container">
 
