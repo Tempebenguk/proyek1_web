@@ -218,7 +218,7 @@
     </nav>
     <div class="text-below-navbar"
         style="font-family: 'Fredoka', sans-serif; font-size: 11pt; font-weight: bold; color: #BA7237; padding-left: 20px; margin-top: 20px;">
-        <p>Silahkan selesaikan pembayaran anda</p>
+        <p>Silahkan tunggu pesanan anda</p>
     </div>
     <div class="logo-starling">
         <img src="{{ asset('starling.png')}}">
@@ -238,13 +238,13 @@
                 style="margin-top: 70px; width: 330px; height: 350px; text-align: left; padding-left: 13px; line-height: 45px; box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);">
             </div>
         </div>
-        <div id="tunai" style="display: none;">
+        <!-- <div id="tunai" style="display: none;">
             <div class="card" style="margin-top: 5px; width: 330px; height: 50px;">
                 <span class="card-text"
                     style="font-size: 12pt; font-weight: bold; color: #BA7237; position: absolute; left: 40%;">Bayar
                     Tunai</span>
             </div>
-        </div>
+        </div> -->
 
     </div>
     <div class="fixed-btn-container">
@@ -256,19 +256,17 @@
     </div>
     <div id="popup" class="popup">
         <div class="popup-content">
-            <div class="container">
-                <div class="container">
-                    <button id="batal" type="button" style="background: 0; border: 0; padding: 0; margin: 0;">
-                        <img id="closeBtn" src="cross.png" alt="Close" style="vertical-align: middle; width: 40px; height: 40px;">
-                    </button>
-                </div>
-            </div>
+            <button id="batal" type="button" style="background: 0; border: 0; padding: 0; margin: 0;">
+                <img id="closeBtn" src="cross.png" alt="Close"
+                    style="vertical-align: middle; width: 40px; height: 40px;">
+            </button>
             <div class="logo-cross">
                 <img src="{{ asset('success.png')}}" alt="Logo">
             </div>
             <div class="text-center" style="font-weight: bold; font-size: 16pt; color: #7C2B18;">
                 <p>Pemesanan Berhasil!</p>
-                <p id="tgl_transaksi" style="font-size: 12pt; color: #7C2B18; margin-top: -12px;">06-08-2024 13.00.00</p>
+                <p id="tgl_transaksi" style="font-size: 12pt; color: #7C2B18; margin-top: -12px;">06-08-2024 13.00.00
+                </p>
                 <p id="id-transaksi" style="margin-top: -12px; font-size: 14pt; color: #020202;">123456</p>
             </div>
             <div class="struk-container">
