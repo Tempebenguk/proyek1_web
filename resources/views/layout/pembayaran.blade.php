@@ -25,6 +25,12 @@
             font-family: "Fredoka", sans-serif;
         }
 
+        #btnMenu {
+            background-color: #ffffff; /* Warna latar belakang putih */
+            color: #BA7237; /* Warna teks */
+            border: 2px solid #BA7237; /* Border berwarna #BA7237 */
+        }
+
         .navbar-custom {
             background-color: #ba7237;
             /* Change background color */
@@ -254,6 +260,12 @@
                 style="font-family: 'Fredoka', sans-serif; font-weight: bold; max-width: 275px; ">SELESAI</button>
         </div>
     </div>
+    <div class="fixed-btn-container">
+        <div id="menu-btn" style="position: relative;">
+            <button id="btnMenu" class="btn btn-primary btn-pesan" type="button"
+                style="font-family: 'Fredoka', sans-serif; font-weight: bold; max-width: 275px; color: #BA7237;" onclick="redirectToMenu()">Kembali Ke Menu</button>
+        </div>
+    </div>
     <div id="popup" class="popup">
         <div class="popup-content">
             <div class="container">
@@ -412,15 +424,38 @@
             const openBtn = document.getElementById('open-popup-btn');
             const closeBtn = document.getElementById('closeBtn');
             const batalButton = document.getElementById('batal');
+            const btnMenu = document.getElementById('btnMenu');
+            document.getElementById("btnMenu").addEventListener("click", redirectToMenu);
+            var menuUrl = "{{ route('home') }}";
+
+            btnMenu.style.display = 'none';
+            function showButton() {
+                btnMenu.style.display = 'block'; // atau 'inline-block'
+            }
 
             // Fungsi untuk membuka popup
             function openPopup() {
                 popup.style.display = 'block';
             }
 
+            btnSelesai.addEventListener('click', function () {
+                // Sembunyikan tombol setelah diklik
+                btnSelesai.style.display = 'none';
+            });
+
             // Fungsi untuk menutup popup
             function closePopup() {
                 popup.style.display = 'none';
+                showButton();
+            }
+            closeBtn.addEventListener('click', closePopup);
+
+            // Event listener untuk tombol batal (jika ada)
+            if (batalButton) {
+                batalButton.addEventListener('click', closePopup);
+            }
+            function redirectToMenu() {
+                window.location.href = menuUrl;
             }
 
             // Event listener untuk tombol buka
