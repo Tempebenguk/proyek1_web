@@ -312,6 +312,12 @@
         </div>
     </div>
 
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QEFSd3RgcPp3uQQMWLODLVBu1BL2eNTFB5LyKluZAYW6U+G1vM5cCAE9mGJZzjE2" crossorigin="anonymous">
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq" crossorigin="anonymous"></script>
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
     <!-- Firebase -->
@@ -348,69 +354,62 @@
         }
 
         document.addEventListener('DOMContentLoaded', function () {
-            // Dapatkan referensi ke data transaksi "trans1" dari Firebase Database
-            const transaksiRef = firebase.database().ref('transaksi/trans1');
+            const transaksiIdString = localStorage.getItem('idtransaksiku');
+            console.log('ID transaksi dari localStorage:', transaksiIdString);
 
-            // Ambil nilai-nilai yang diperlukan dari data transaksi
+            if (!transaksiIdString) {
+                alert('ID transaksi tidak ditemukan di localStorage!');
+                return;
+            }
+
+            const transaksiId = JSON.parse(transaksiIdString);
+            console.log('ID transaksi setelah parsing:', transaksiId);
+
+            if (!transaksiId) {
+                alert('ID transaksi tidak valid!');
+                return;
+            }
+
+            const transaksiRef = firebase.database().ref('transaksi/' + transaksiId);
             transaksiRef.once('value', function (snapshot) {
                 const transaksiData = snapshot.val();
+                console.log('Data transaksi dari Firebase:', transaksiData);
 
-                // Cek apakah data transaksi tersedia
                 if (transaksiData) {
-                    // Mengisi waktu transaksi
-                    const waktuElemen = document.getElementById('tgl_transaksi');
-                    waktuElemen.textContent = transaksiData.tgl_transaksi;
+                    document.getElementById('tgl_transaksi').textContent = transaksiData.tgl_transaksi;
+                    document.getElementById('id-transaksi').textContent = transaksiId;
 
-                    // Mengisi ID transaksi
-                    const idTransaksiElemen = document.getElementById('id-transaksi');
-                    idTransaksiElemen.textContent = "" + snapshot.key;
-
-                    // Mengisi detail transaksi
                     const strukBody = document.querySelector('.struk-body');
                     Object.entries(transaksiData.detail_trx).forEach(([key, value]) => {
                         const itemElement = document.createElement('div');
                         itemElement.classList.add('struk-item');
-                        itemElement.innerHTML = `
-                            <span>${value.nama_menu}</span><span class="text-right">Rp ${value.harga}</span>
-                        `;
+                        itemElement.innerHTML = `<span>${value.nama_menu}</span><span class="text-right">Rp ${value.harga}</span>`;
                         strukBody.appendChild(itemElement);
 
                         const detailElement = document.createElement('div');
                         detailElement.classList.add('struk-detail');
-                        detailElement.innerHTML = `
-                            <span>${value.qty} x Rp ${value.harga}</span>
-                        `;
+                        detailElement.innerHTML = `<span>${value.qty} x Rp ${value.harga}</span>`;
                         strukBody.appendChild(detailElement);
                     });
 
-                    // Mengisi total pembayaran
                     const totalElemen = document.createElement('div');
                     totalElemen.classList.add('struk-total');
-                    totalElemen.innerHTML = `
-                        <span>Total</span><span class="text-right">Rp ${transaksiData.total_bayar}</span>
-                    `;
+                    totalElemen.innerHTML = `<span>Total</span><span class="text-right">Rp ${transaksiData.total_bayar}</span>`;
                     totalElemen.style.borderTop = '1px dashed #000';
                     strukBody.appendChild(totalElemen);
 
-                    // Mengisi jumlah pembayaran
                     const bayarElemen = document.createElement('div');
                     bayarElemen.classList.add('struk-total');
-                    bayarElemen.innerHTML = `
-                        <span>Bayar</span><span class="text-right">Rp ${transaksiData.nominal}</span>
-                    `;
+                    bayarElemen.innerHTML = `<span>Bayar</span><span class="text-right">Rp ${transaksiData.nominal}</span>`;
                     bayarElemen.style.borderTop = '1px dashed #000';
                     strukBody.appendChild(bayarElemen);
 
-                    // Mengisi kembalian
                     const kembalianElemen = document.createElement('div');
                     kembalianElemen.classList.add('struk-total');
-                    kembalianElemen.innerHTML = `
-                        <span>Kembalian</span><span class="text-right">Rp ${transaksiData.kembalian}</span>
-                    `;
+                    kembalianElemen.innerHTML = `<span>Kembalian</span><span class="text-right">Rp ${transaksiData.kembalian}</span>`;
                     kembalianElemen.style.borderTop = '1px dashed #000';
                     strukBody.appendChild(kembalianElemen);
                 } else {
-                    // Tampilkan pesan kesalahan jika data transaksi tidak tersedia
                     alert('Data transaksi tidak tersedia!');
                 }
             });
@@ -430,6 +429,7 @@
             function showButton() {
                 btnMenu.style.display = 'block'; // atau 'inline-block'
             }
+
 
             // Fungsi untuk membuka popup
             function openPopup() {
@@ -453,7 +453,7 @@
                 batalButton.addEventListener('click', closePopup);
             }
             function redirectToMenu() {
-                window.location.href = menuUrl;
+                window.location.href = 'https://www.google.co.id';
             }
 
             // Event listener untuk tombol buka
@@ -461,12 +461,17 @@
 
             // Event listener untuk tombol tutup
             closeBtn.addEventListener('click', closePopup);
-            payBtn.addEventListener('click', closePopup);
+            // payBtn.addEventListener('click', closePopup);
 
             closeBtn.addEventListener('click', function () {
                 closePopup();
             });
         });
+
+
+        const transaksiIdString = localStorage.getItem('idtransaksiku');
+        const transaksiId = JSON.parse(transaksiIdString);
+        console.log(transaksiId);
     </script>
 </body>
 

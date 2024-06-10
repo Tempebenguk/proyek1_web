@@ -113,11 +113,17 @@
             </div>
         </div>
     </div>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QEFSd3RgcPp3uQQMWLODLVBu1BL2eNTFB5LyKluZAYW6U+G1vM5cCAE9mGJZzjE2" crossorigin="anonymous">
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq" crossorigin="anonymous"></script>
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
-
     <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-OERcA2wY+XniB9jsSFFj3LVHj6hFhIl2rBgG3tvkSwpQf5q2xRM9E3UbELz0d5xz"
         crossorigin="anonymous"></script>
@@ -135,7 +141,7 @@
             document.getElementById('card').addEventListener('click', function () {
 
                 const transactionRef = firebase.database().ref('transaksi/');
-                const transaksiDataString = localStorage.getItem('orderData');
+                const transaksiDataString = localStorage.getItem('data1');
                 const transaksiData = JSON.parse(transaksiDataString);
 
                 transactionRef.once('value').then(snapshot => {
@@ -148,7 +154,7 @@
                         .then(() => {
                             alert('Transaksi berhasil disimpan!');
                             console.log(nextTransactionId);
-                            localStorage.setItem("idtrans", JSON.stringify(nextTransactionId));
+                            localStorage.setItem("idtransaksiku", JSON.stringify(nextTransactionId));
                         })
                         .catch(error => {
                             console.error('Error saving transaction:', error);
@@ -158,7 +164,7 @@
 
 
             // Ambil data transaksi dari local storage
-            const transaksiDataString = localStorage.getItem('orderData');
+            const transaksiDataString = localStorage.getItem('data1');
 
             // Parse data transaksi dari string JSON
             const transaksiData = JSON.parse(transaksiDataString);
