@@ -20,6 +20,11 @@
         crossorigin="anonymous"></script>
 
     <style>
+        head,
+        body {
+            font-family: "Fredoka", sans-serif;
+        }
+
         .navbar-custom {
             background-color: #ba7237;
             /* Change background color */
@@ -52,7 +57,8 @@
         }
 
         .logo-cross img {
-            width: 200px;
+            max-width: 150px;
+            opacity: 1;
         }
 
         .logo-starling {
@@ -113,14 +119,19 @@
             border: 1px solid #000;
             padding: 20px;
         }
+
         .struk-body {
             margin-top: 5px;
             margin-bottom: 20px;
         }
+
         .struk-item {
             justify-content: space-between;
             margin-bottom: 5px;
+            display: flex;
+            padding: 5px 0;
         }
+
         .struk-total {
             font-weight: bold;
             display: flex;
@@ -128,6 +139,7 @@
             margin-top: 0px;
             padding-top: 0px;
         }
+
         .struk-detail {
             justify-content: space-between;
             margin-top: -13px;
@@ -135,8 +147,11 @@
             text-align: left;
             flex-basis: 100%;
         }
+
         .text-right {
             text-align: right;
+            margin-left: auto;
+            margin-top: 0px;
         }
 
         .popup {
@@ -150,6 +165,7 @@
             background-color: rgba(0, 0, 0, 0.4);
             justify-content: center;
             align-items: center;
+            overflow: auto;
         }
 
         /* Show popup with zoom and jiggle effect */
@@ -162,6 +178,7 @@
             background-color: #fff;
             margin: 0 auto;
             margin-top: 75px;
+            margin-bottom: 75px;
             padding: 20px;
             border: 1px solid #888;
             max-width: 80%;
@@ -169,6 +186,7 @@
             border-radius: 7px;
             transform: scale(0.5);
             animation: zoomInJiggle 0.5s ease forwards;
+            overflow: auto;
         }
 
         /* Keyframes for zoom in with jiggle */
@@ -231,7 +249,8 @@
     </div>
     <div class="fixed-btn-container">
         <div id="open-popup-btn" style="position: relative;">
-            <button id="btnSelesai" class="btn btn-primary btn-pesan" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"
+            <button id="btnSelesai" class="btn btn-primary btn-pesan" type="button" data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
                 style="font-family: 'Fredoka', sans-serif; font-weight: bold; max-width: 275px; ">SELESAI</button>
         </div>
     </div>
@@ -248,12 +267,13 @@
             <div class="struk-container">
                 <div class="struk-body">
                     <div class="struk-item">
-                        <span></span><p class="text-right" style="margin-top: -25px;"></span>
+                        <span></span>
+                        <p class="text-right" style="margin-top: -25px;"></span>
                         <div class="struk-detail">
                             <span></span>
                         </div>
                     </div>
-                    <div class="struk-total">
+                    <div class="struk-total" style="margin-top: -25px;">
                         <span></span><span class="text-right"></span>
                     </div>
                     <div class="struk-total">
@@ -265,9 +285,13 @@
                 </div>
 
                 <div class="struk-footer">
-                    <p class="text-center" style="font-size: 12pt; color: #7C2B18; margin-top: 50px; font-weight: bold; ">Terima Kasih</p>
-                    <p class="text-center" style="font-size: 12pt; color: #7C2B18; margin-top: -8px; font-weight: bold; ">Semoga Harimu Menyenangkan</p>
+                    <p class="text-center"
+                        style="font-size: 10pt; color: #7C2B18; margin-top: 20px; font-weight: bold; ">Terima Kasih</p>
+                    <p class="text-center"
+                        style="font-size: 10pt; color: #7C2B18; margin-top: -8px; font-weight: bold; ">Semoga Harimu
+                        Menyenangkan</p>
                 </div>
+            </div>
         </div>
     </div>
 
@@ -330,14 +354,14 @@
                         const itemElement = document.createElement('div');
                         itemElement.classList.add('struk-item');
                         itemElement.innerHTML = `
-                            <span>${value.nama_menu}</span><span class="text-right">Rp${value.harga}</span>
+                            <span>${value.nama_menu}</span><span class="text-right">Rp ${value.harga}</span>
                         `;
                         strukBody.appendChild(itemElement);
 
                         const detailElement = document.createElement('div');
                         detailElement.classList.add('struk-detail');
                         detailElement.innerHTML = `
-                            <span>${value.qty} x Rp${value.harga}</span>
+                            <span>${value.qty} x Rp ${value.harga}</span>
                         `;
                         strukBody.appendChild(detailElement);
                     });
@@ -346,7 +370,7 @@
                     const totalElemen = document.createElement('div');
                     totalElemen.classList.add('struk-total');
                     totalElemen.innerHTML = `
-                        <span>Total</span><span class="text-right">Rp${transaksiData.total_bayar}</span>
+                        <span>Total</span><span class="text-right">Rp ${transaksiData.total_bayar}</span>
                     `;
                     totalElemen.style.borderTop = '1px dashed #000';
                     strukBody.appendChild(totalElemen);
@@ -355,7 +379,7 @@
                     const bayarElemen = document.createElement('div');
                     bayarElemen.classList.add('struk-total');
                     bayarElemen.innerHTML = `
-                        <span>Bayar</span><span class="text-right">Rp${transaksiData.nominal}</span>
+                        <span>Bayar</span><span class="text-right">Rp ${transaksiData.nominal}</span>
                     `;
                     bayarElemen.style.borderTop = '1px dashed #000';
                     strukBody.appendChild(bayarElemen);
@@ -364,7 +388,7 @@
                     const kembalianElemen = document.createElement('div');
                     kembalianElemen.classList.add('struk-total');
                     kembalianElemen.innerHTML = `
-                        <span>Kembalian</span><span class="text-right">Rp${transaksiData.kembalian}</span>
+                        <span>Kembalian</span><span class="text-right">Rp ${transaksiData.kembalian}</span>
                     `;
                     kembalianElemen.style.borderTop = '1px dashed #000';
                     strukBody.appendChild(kembalianElemen);

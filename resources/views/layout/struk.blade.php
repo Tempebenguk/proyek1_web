@@ -16,7 +16,7 @@
 
         .navbar-brand {
             color: #fff;
-            font-family: 'Fredoka', sans-serif; 
+            font-family: 'Fredoka', sans-serif;
         }
 
         .logo {
@@ -53,6 +53,7 @@
         .card-link:hover {
             text-decoration: none;
         }
+
         .btn-container {
             position: absolute;
             bottom: 20px;
@@ -78,14 +79,17 @@
             border: 1px solid #000;
             padding: 20px;
         }
+
         .struk-body {
             margin-top: 5px;
             margin-bottom: 20px;
         }
+
         .struk-item {
             justify-content: space-between;
             margin-bottom: 5px;
         }
+
         .struk-total {
             font-weight: bold;
             display: flex;
@@ -94,6 +98,7 @@
             margin-top: 10px;
             padding-top: 10px;
         }
+
         .struk-detail {
             justify-content: space-between;
             margin-top: -13px;
@@ -101,10 +106,10 @@
             text-align: left;
             flex-basis: 100%;
         }
+
         .text-right {
             text-align: right;
         }
-
     </style>
 </head>
 
@@ -113,7 +118,8 @@
         <div class="container-fluid">
             <a class="navbar-brand" href="#" style="color: #030303;">
                 <button type="button" style="background: 0; border: 0; padding: 0; margin: 0;">
-                    <img src="cross.png" alt="Transaksi Saya" style="vertical-align: middle; margin-right: 5px; width: 30px; height: 30px;">
+                    <img src="cross.png" alt="Transaksi Saya"
+                        style="vertical-align: middle; margin-right: 5px; width: 30px; height: 30px;">
                 </button>
                 Transaksi Saya
             </a>
@@ -130,12 +136,13 @@
     <div class="struk-container">
         <div class="struk-body">
             <div class="struk-item">
-                <span>Item 1</span><p class="text-right" style="margin-top: -25px;">Rp20.000</span>
+                <span>Item 1</span>
+                <p class="text-right" style="margin-top: -25px;">Rp20.000</span>
                 <div class="struk-detail">
                     <span>1 x Rp20.000</span>
                 </div>
             </div>
-            <div class="struk-total">
+            <div class="struk-total" style="margin-top: 100px;">
                 <span>Total</span><span class="text-right">Rp20.000</span>
             </div>
             <div class="struk-total">
@@ -147,16 +154,18 @@
         </div>
 
         <div class="struk-footer">
-            <p class="text-center" style="font-size: 12pt; color: #7C2B18; margin-top: 50px; font-weight: bold; ">Terima Kasih</p>
-            <p class="text-center" style="font-size: 12pt; color: #7C2B18; margin-top: -8px; font-weight: bold; ">Semoga Harimu Menyenangkan</p>
+            <p class="text-center" style="font-size: 12pt; color: #7C2B18; margin-top: 50px; font-weight: bold; ">Terima
+                Kasih</p>
+            <p class="text-center" style="font-size: 12pt; color: #7C2B18; margin-top: -8px; font-weight: bold; ">Semoga
+                Harimu Menyenangkan</p>
         </div>
-    {{-- <div class="btn-container">
-        <button class="btn btn-pesan" type="button">Kembali Ke Menu</button>
-    </div> --}}
+        {{-- <div class="btn-container">
+            <button class="btn btn-pesan" type="button">Kembali Ke Menu</button>
+        </div> --}}
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-OERcA2wY+XniB9jsSFFj3LVHj6hFhIl2rBgG3tvkSwpQf5q2xRM9E3UbELz0d5xz"
-        crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-OERcA2wY+XniB9jsSFFj3LVHj6hFhIl2rBgG3tvkSwpQf5q2xRM9E3UbELz0d5xz"
+            crossorigin="anonymous"></script>
 </body>
 
 </html>
