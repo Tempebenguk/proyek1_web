@@ -122,50 +122,50 @@
         integrity="sha384-OERcA2wY+XniB9jsSFFj3LVHj6hFhIl2rBgG3tvkSwpQf5q2xRM9E3UbELz0d5xz"
         crossorigin="anonymous"></script>
 
-        <script>
-            var config = {
-                apiKey: "{{ config('services.firebase.api_key') }}",
-                authDomain: "{{ config('services.firebase.auth_domain') }}",
-                databaseURL: "{{ config('services.firebase.database_url') }}",
-                storageBucket: "{{ config('services.firebase.storage_bucket') }}",
-            };
-            firebase.initializeApp(config);
-            var database = firebase.database();
-            // Event listener untuk tombol bayar
-            document.getElementById('card').addEventListener('click', function () {
+    <script>
+        var config = {
+            apiKey: "{{ config('services.firebase.api_key') }}",
+            authDomain: "{{ config('services.firebase.auth_domain') }}",
+            databaseURL: "{{ config('services.firebase.database_url') }}",
+            storageBucket: "{{ config('services.firebase.storage_bucket') }}",
+        };
+        firebase.initializeApp(config);
+        var database = firebase.database();
+        // Event listener untuk tombol bayar
+        document.getElementById('card').addEventListener('click', function () {
 
-                const transactionRef = firebase.database().ref('transaksi/');
-                const transaksiDataString = localStorage.getItem('orderData');
-                const transaksiData = JSON.parse(transaksiDataString);
-
-                transactionRef.once('value').then(snapshot => {
-                    const numberOfTransactions = snapshot.numChildren();
-                    const nextTransactionId = `trans${numberOfTransactions + 1}`;
-
-                    console.log(transaksiData); // Pastikan orderData didefinisikan sebelum digunakan
-
-                    transactionRef.child(nextTransactionId).set(transaksiData)
-                        .then(() => {
-                            alert('Transaksi berhasil disimpan!');
-                            console.log(nextTransactionId);
-                            localStorage.setItem("idtrans", JSON.stringify(nextTransactionId));
-                        })
-                        .catch(error => {
-                            console.error('Error saving transaction:', error);
-                    });
-                });
-            });
-
-
-            // Ambil data transaksi dari local storage
+            const transactionRef = firebase.database().ref('transaksi/');
             const transaksiDataString = localStorage.getItem('orderData');
-
-            // Parse data transaksi dari string JSON
             const transaksiData = JSON.parse(transaksiDataString);
 
-            // Gunakan data transaksi sesuai kebutuhan
-            console.log(transaksiData);
-        </script>
+            transactionRef.once('value').then(snapshot => {
+                const numberOfTransactions = snapshot.numChildren();
+                const nextTransactionId = `trans${numberOfTransactions + 1}`;
+
+                console.log(transaksiData); // Pastikan orderData didefinisikan sebelum digunakan
+
+                transactionRef.child(nextTransactionId).set(transaksiData)
+                    .then(() => {
+                        alert('Transaksi berhasil disimpan!');
+                        console.log(nextTransactionId);
+                        localStorage.setItem("idtrans", JSON.stringify(nextTransactionId));
+                    })
+                    .catch(error => {
+                        console.error('Error saving transaction:', error);
+                    });
+            });
+        });
+
+
+        // Ambil data transaksi dari local storage
+        const transaksiDataString = localStorage.getItem('orderData');
+
+        // Parse data transaksi dari string JSON
+        const transaksiData = JSON.parse(transaksiDataString);
+
+        // Gunakan data transaksi sesuai kebutuhan
+        console.log(transaksiData);
+    </script>
 </body>
 
 </html>
