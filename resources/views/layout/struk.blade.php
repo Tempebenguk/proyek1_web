@@ -17,7 +17,6 @@
         .navbar-brand {
             color: #fff;
             font-family: 'Fredoka', sans-serif;
-            font-weight: bold;
         }
 
         .logo {
@@ -72,24 +71,88 @@
         body {
             background-color: #f8f9fa;
         }
+
+        .struk-container {
+            max-width: 400px;
+            margin: 0 auto;
+            border: 1px solid #000;
+            padding: 20px;
+        }
+        .struk-body {
+            margin-top: 5px;
+            margin-bottom: 20px;
+        }
+        .struk-item {
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        .struk-total {
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px dashed #000;
+            margin-top: 10px;
+            padding-top: 10px;
+        }
+        .struk-detail {
+            justify-content: space-between;
+            margin-top: -13px;
+            margin-left: 0px;
+            text-align: left;
+            flex-basis: 100%;
+        }
+        .text-right {
+            text-align: right;
+        }
+
     </style>
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom mb-3">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#" style="color: #030303;">Transaksi Saya</a>
+            <a class="navbar-brand" href="#" style="color: #030303;">
+                <button type="button" style="background: 0; border: 0; padding: 0; margin: 0;">
+                    <img src="cross.png" alt="Transaksi Saya" style="vertical-align: middle; margin-right: 5px; width: 30px; height: 30px;">
+                </button>
+                Transaksi Saya
+            </a>
         </div>
     </nav>
     <div class="logo">
         <img src="{{ asset('success.png')}}" alt="Logo">
     </div>
     <div class="text-center" style="font-weight: bold; font-size: 16pt; color: #7C2B18;">
-        <p>Pembayaran Berhasil!</p>
+        <p>Pemesanan Berhasil!</p>
+        <p id="waktu" style="font-size: 12pt; color: #7C2B18; margin-top: -12px;">06-08-2024 13.00.00</p>
+        <p id="id-transaksi" style="margin-top: -12px; font-size: 14pt; color: #020202;">123456</p>
     </div>
-    <div class="btn-container">
+    <div class="struk-container">
+        <div class="struk-body">
+            <div class="struk-item">
+                <span>Item 1</span><p class="text-right" style="margin-top: -25px;">Rp20.000</span>
+                <div class="struk-detail">
+                    <span>1 x Rp20.000</span>
+                </div>
+            </div>
+            <div class="struk-total">
+                <span>Total</span><span class="text-right">Rp20.000</span>
+            </div>
+            <div class="struk-total">
+                <span>Bayar</span><span class="text-right">Rp30.000</span>
+            </div>
+            <div class="struk-total">
+                <span>Kembalian</span><span class="text-right">Rp10.000</span>
+            </div>
+        </div>
+
+        <div class="struk-footer">
+            <p class="text-center" style="font-size: 12pt; color: #7C2B18; margin-top: 50px; font-weight: bold; ">Terima Kasih</p>
+            <p class="text-center" style="font-size: 12pt; color: #7C2B18; margin-top: -8px; font-weight: bold; ">Semoga Harimu Menyenangkan</p>
+        </div>
+    {{-- <div class="btn-container">
         <button class="btn btn-pesan" type="button">Kembali Ke Menu</button>
-    </div>
+    </div> --}}
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-OERcA2wY+XniB9jsSFFj3LVHj6hFhIl2rBgG3tvkSwpQf5q2xRM9E3UbELz0d5xz"
