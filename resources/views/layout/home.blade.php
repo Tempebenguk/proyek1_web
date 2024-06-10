@@ -90,8 +90,9 @@
             /* border-color: #7C2B18; */
             color: #fff;
             padding: 5px 15px;
-            border-radius: 0px;
+            border-radius: 5px;
             width: 350px;
+            height: 40px;
         }
 
         .btn-bayar {
@@ -103,8 +104,10 @@
             color: #fff;
             padding: 5px 15px;
             border-radius: 50px;
+            margin: -14px;
             width: 250px;
             font-family: 'Fredoka', sans-serif;
+
         }
 
         .btn-batal {
@@ -114,8 +117,11 @@
             /* border: 1.5px solid #00E432; */
             /* border-color: #7C2B18; */
             color: #fff;
-            padding: 5px 15px;
+            padding: 5px;
+            justify-content: center;
+            align-items: center;
             border-radius: 50px;
+            margin: -13px;
             width: 250px;
             font-family: 'Fredoka', sans-serif;
         }
@@ -358,7 +364,7 @@
             padding: 20px;
             border: 1px solid #888;
             max-width: 80%;
-            height: 75%;
+            height: 63%;
             border-radius: 7px;
             transform: scale(0.5);
             animation: zoomInJiggle 0.5s ease forwards;
@@ -540,13 +546,11 @@
     </div> --}}
 
     <div class="fixed-btn-container">
-        <h4 style="font-size: 18pt;">Total:
-            <span id="total-pesanan" class="fload-end" style="font-size: 18pt; margin-right: auto;"></span>
-        </h4>
+
         <hr>
         <button id="open-popup-btn" type="button" class="btn btn-pesan" data-bs-toggle="modal"
             data-bs-target="#exampleModal"
-            style="font-family: 'Fredoka', sans-serif; font-weight: bold; max-width: 1000px;">
+            style="font-family: 'Fredoka', sans-serif; font-weight: bold; max-width: 325px;">
             TAMBAH PESANAN
         </button>
     </div>
@@ -571,8 +575,7 @@
             <div class="col-md-6 col-lg-5">
                 <div>
                     <div>
-                        <textarea placeholder="Catatan, misalnya : panas/dingin, gulanya sedikit dll..."
-                            required></textarea>
+                        <textarea placeholder="Catatan, misalnya : panas/dingin, sertakan dll..." required></textarea>
                     </div>
                     <!-- JavaScript untuk menyesuaikan ketinggian textarea -->
                     <script>
@@ -602,16 +605,16 @@
                 <div class="card-nominal">
                     <input type="number" id="nominal" required>
                 </div>
-                <div class="pay-button">
-                    <div class="close-btn">
+                <div class="container">
+                    <div class="pay-button">
                         <button id="pay-button" class="btn btn-bayar" href="#"
-                            style="font-family: 'Fredoka', sans-serif; margin-top: 50px; padding-right: 50px;">BUAT
+                            style="font-family: 'Fredoka', sans-serif; margin-top: 20px;">BUAT
                             PESANAN</button>
                     </div>
-                </div>
-                <div class="close-btn">
-                    <button id="batal" class="btn btn-batal"
-                        style="font-family: 'Fredoka', sans-serif; margin-top: 70px; max-width: auto; justify-content: center; align-items: center;">BATAL</button>
+                    <div class="close-btn">
+                        <button id="batal" class="btn btn-batal"
+                            style="font-family: 'Fredoka', sans-serif; margin-top: 30px; ">BATAL</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -646,11 +649,11 @@
 
                 if (!document.getElementById('pesanan-title')) {
                     const pesananTitleHtml = `
-                    <div id="pesanan-title" style="display: flex; align-items: center; margin: 10px 0;">
-                        <div style="flex-grow: 2; height: 1px; background-color: #7C2B18;"></div>
-                        <span style="padding: 0 10px; font-size: 14pt; font-weight: 600; color: #7C2B18;">Daftar Pesanan Saya</span>
-                        <div style="flex-grow: 2; height: 1px; background-color: #7C2B18;"></div>
-                    </div>
+                        <div id="pesanan-title" style="display: flex; align-items: center; margin: 10px 0;">
+                            <div style="flex-grow: 2; height: 1px; background-color: #7C2B18;"></div>
+                                <span style="padding: 0 10px; font-size: 14pt; font-weight: 600; color: #7C2B18;">Daftar Pesanan Saya</span>
+                            <div style="flex-grow: 2; height: 1px; background-color: #7C2B18;"></div>
+                        </div>
                     `;
                     pesananContainer.insertAdjacentHTML('beforebegin', pesananTitleHtml);
                 }
@@ -667,27 +670,39 @@
                 } else {
                     // If card does not exist, create a new card
                     const orderCardHtml = `
-                        <div class="card-bawah" data-title="${title}">
-                            <div class="card-bawah-body d-flex justify-content-between align-items-center">
-                                <div class="text-container-pesan">
-                                    <p class="card-text-pesan" style="font-size: 10pt; font-weight: 800; color: #BA7237;">${title}</p>
-                                    <span class="card-text" style="font-size: 13pt; font-weight: 900; color: #7C2B18; margin-top: 5px; margin-bottom: 10px;">Rp. ${price}</span>
-                                    <div class="input-group input-group-quantity">
-                                        <button class="decrement">-</button>
-                                        <input type="number" class="quantity-input" value="1" readonly>
-                                        <button class="increment">+</button>
-                                    </div>
-                                </div>
-                                <img src="${imageSrc}" class="img-fluid" style="max-width: 75px; height: auto; opacity: 1;">
-                            </div>
+            <div class="card-bawah" data-title="${title}">
+                <div class="card-bawah-body d-flex justify-content-between align-items-center">
+                    <div class="text-container-pesan">
+                        <p class="card-text-pesan" style="font-size: 10pt; font-weight: 800; color: #BA7237;">${title}</p>
+                        <span class="card-text" style="font-size: 13pt; font-weight: 900; color: #7C2B18; margin-top: 5px; margin-bottom: 10px;">Rp. ${price}</span>
+                        <div class="input-group input-group-quantity">
+                            <button class="decrement">-</button>
+                            <input type="number" class="quantity-input" value="1" readonly>
+                            <button class="increment">+</button>
                         </div>
-                    `;
-                    document.getElementById('pesanan').insertAdjacentHTML('beforeend', orderCardHtml);
+                    </div>
+                    <img src="${imageSrc}" class="img-fluid" style="max-width: 75px; height: auto; opacity: 1;">
+                </div>
+            </div>
+        `;
+                    pesananContainer.insertAdjacentHTML('beforeend', orderCardHtml);
 
                     // Add to pesanan array
                     const pesananItem = { title, price: parseInt(price), quantity: 1, imageSrc };
                     pesanan.push(pesananItem);
                 }
+
+                if (!document.getElementById('total-container')) {
+                    const totalPesananHtml = `
+                    <div id="total-container" style="margin-top: 25px; margin-left: 5px; color: #7C2B18;">
+                        <h4 style="font-size: 16pt;">Total :
+                            <span id="total-pesanan" class="float-end" style="font-size: 16pt; margin-right: auto; font-weight: bold;"></span>
+                        </h4>
+                    </div>
+                `;
+                    pesananContainer.insertAdjacentHTML('afterend', totalPesananHtml);
+                }
+
                 orderButtonContainer.style.display = 'block';
                 console.log('Current pesanan:', pesanan);
 
@@ -695,6 +710,7 @@
                 attachQuantityButtonsListeners();
                 updateTotalPesanan();
             }
+
 
             function attachQuantityButtonsListeners() {
                 document.querySelectorAll('.increment').forEach(button => {
@@ -884,12 +900,16 @@
                 console.log('Data pesanan:', pesanan);
             }
 
-            function updateTotalPesanan() {
-                const totalPesanan = pesanan.reduce((total, item) => total + (item.price * item.quantity), 0);
-                const totalPesananElement = document.getElementById('total-pesanan');
-                totalPesananElement.innerText = `Rp. ${totalPesanan}`;
+            function formatRupiah(number) {
+                return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
             }
 
+            function updateTotalPesanan() {
+                const totalPesanan = pesanan.reduce((total, item) => total + (item.price * item.quantity), 0);
+                const formattedTotal = formatRupiah(totalPesanan);
+                const totalPesananElement = document.getElementById('total-pesanan');
+                totalPesananElement.innerText = `Rp ${formattedTotal}`;
+            }
 
             // Event listener untuk tombol bayar
             document.getElementById('pay-button').addEventListener('click', function () {
