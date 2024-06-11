@@ -389,7 +389,7 @@
             padding: 20px;
             border: 1px solid #888;
             width: 80%;
-            height: 53%;
+            height: 63%;
             border-radius: 7px;
         }
 
@@ -939,7 +939,7 @@
                 kategoriDropdown.empty(); // Clear the dropdown
 
                 kategoriDropdown.append(
-                '<option value="all">Kategori</option>'); // Tambahkan opsi untuk semua kategori
+                    '<option value="all">Kategori</option>'); // Tambahkan opsi untuk semua kategori
 
                 $.each(value, function(index, value) {
                     if (value) {
@@ -1117,25 +1117,26 @@
                                                         .database()
                                                         .ref(
                                                             `menu/${menuKey}`
-                                                            )
+                                                        )
                                                         .update({
                                                                 stock: newStock
                                                             },
                                                             function(
                                                                 error
-                                                                ) {
+                                                            ) {
                                                                 if (
-                                                                    error) {
+                                                                    error
+                                                                    ) {
                                                                     console
                                                                         .error(
                                                                             'Error updating stock:',
                                                                             error
-                                                                            );
+                                                                        );
                                                                 } else {
                                                                     console
                                                                         .log(
                                                                             `Stock for ${itemName} updated to ${newStock}`
-                                                                            );
+                                                                        );
                                                                 }
                                                             });
                                                 });
@@ -1282,16 +1283,16 @@
 
             document.getElementById('searchInput').addEventListener('input', function() {
                 const searchTerm = this.value.trim()
-            .toLowerCase(); // Dapatkan kata kunci pencarian dan ubah menjadi huruf kecil
+                    .toLowerCase(); // Dapatkan kata kunci pencarian dan ubah menjadi huruf kecil
                 const cardItems = document.querySelectorAll(
-                '.card-item'); // Ambil semua elemen yang ingin difilter
+                    '.card-item'); // Ambil semua elemen yang ingin difilter
 
                 // Loop melalui setiap elemen
                 cardItems.forEach(card => {
                     const title = card.querySelector('.card-title').innerText
-                .toLowerCase(); // Dapatkan teks judul kartu dan ubah menjadi huruf kecil
+                        .toLowerCase(); // Dapatkan teks judul kartu dan ubah menjadi huruf kecil
                     const isVisible = title.includes(
-                    searchTerm); // Periksa apakah judul kartu mengandung kata kunci pencarian
+                        searchTerm); // Periksa apakah judul kartu mengandung kata kunci pencarian
 
                     // Atur tampilan kartu sesuai dengan hasil pencarian
                     card.style.display = isVisible ? 'block' : 'none';
