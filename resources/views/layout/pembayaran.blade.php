@@ -426,14 +426,9 @@
             var menuUrl = "{{ route('home') }}";
 
             btnMenu.style.display = 'none';
+
             function showButton() {
                 btnMenu.style.display = 'block'; // atau 'inline-block'
-            }
-
-
-            // Fungsi untuk membuka popup
-            function openPopup() {
-                popup.style.display = 'block';
             }
 
             btnSelesai.addEventListener('click', function () {
@@ -446,6 +441,12 @@
                 popup.style.display = 'none';
                 showButton();
             }
+
+            // Fungsi untuk membuka popup
+            function openPopup() {
+            popup.style.display = 'block';
+            }
+            
             closeBtn.addEventListener('click', closePopup);
 
             // Event listener untuk tombol batal (jika ada)
