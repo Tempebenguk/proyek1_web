@@ -14,12 +14,12 @@ use App\Http\Controllers\LatihanController;
 |
 */
 
-Route::get('/home', [LatihanController::class, 'home']);
+Route::get('/', [LatihanController::class, 'home']);
 Route::get('/pemesanan', [LatihanController::class, 'pemesanan']);
 Route::get('/metode', [LatihanController::class, 'metode']);
 Route::get('/pembayaran', [LatihanController::class, 'pembayaran']);
 Route::get('/menu', [LatihanController::class, 'menu']);
-Route::post('/home', [LatihanController::class, 'sendValue'])->name('send.value');
+Route::post('/', [LatihanController::class, 'sendValue'])->name('send.value');
 
 Route::get('/metode', function () {
     return view('layout.metode');
@@ -29,7 +29,7 @@ Route::get('/pemesanan', function () {
     return view('layout.pemesanan');
 })->name('pemesanan');
 
-Route::get('/home', function () {
+Route::get('/', function () {
     return view('layout.home');
 })->name('home');
 
